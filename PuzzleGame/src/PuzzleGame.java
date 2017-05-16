@@ -5,6 +5,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.util.Calendar;
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
@@ -27,6 +29,8 @@ import javax.swing.SpinnerNumberModel;
 
 public class PuzzleGame extends JFrame{
 
+    private Board board;
+    
     /**
      * @param args
      */
@@ -40,20 +44,24 @@ public class PuzzleGame extends JFrame{
     }
     
     public PuzzleGame() {
-
+	this.board = new Board();
         initUI();
     }
 
     private void initUI() {
 
         createLayout();
-
+        add(board);
+        board.revalidate();
+        board.repaint();
+        
         setSize(400, 400);
         setTitle("Puzzle Game");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         
         addKeyListener(new BoardAdapter());
+        
     }
 
     private void createLayout(JComponent... arg) {
