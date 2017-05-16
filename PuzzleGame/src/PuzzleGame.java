@@ -3,6 +3,8 @@ import java.awt.Container;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.util.Calendar;
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
@@ -46,9 +48,12 @@ public class PuzzleGame extends JFrame{
 
         createLayout();
 
+        setSize(400, 400);
         setTitle("Puzzle Game");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
+        
+        addKeyListener(new BoardAdapter());
     }
 
     private void createLayout(JComponent... arg) {
@@ -59,19 +64,37 @@ public class PuzzleGame extends JFrame{
         pack();
     }
 
-    private class ButtonListener1 implements ActionListener {
+    class BoardAdapter extends KeyAdapter {
+	    
+	    @Override
+	    public void keyPressed(KeyEvent e) {
 
-        @Override
-        public void actionPerformed(ActionEvent e) {
-           
-        }
-    }
+	        int keycode = e.getKeyCode();
 
-    private class ButtonListener2 implements ActionListener {
-
-        @Override
-        public void actionPerformed(ActionEvent e) {
-          
-        }
-    }
+	        switch (keycode) {
+	            
+	        case KeyEvent.VK_LEFT:
+	            
+	            break;
+	            
+	        case KeyEvent.VK_RIGHT:
+	            
+	            break;
+	            
+	        case KeyEvent.VK_DOWN:
+	            
+	            break;
+	            
+	        case KeyEvent.VK_UP:
+	            
+	            break;
+	            
+	        case KeyEvent.VK_SPACE:
+	            
+	            break;
+	        }
+	    }
+	}
+    
 }
+
