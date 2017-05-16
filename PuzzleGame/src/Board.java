@@ -63,12 +63,13 @@ public class Board extends JPanel  {
 		    newBoard[y][x] = new Wall(x, y);
 		}
 	}
-	 newBoard[5][5] = new Player(5, 5);
+	 newBoard[5][5] = new Player(5, 5, 1);
 	
 	return newBoard;
     }
     
     public boolean MovePlayer(int player, int direction) {
+	
 	
 	return false;
     }

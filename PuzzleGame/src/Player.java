@@ -4,9 +4,11 @@
  * 
  */
 public class Player extends Tile{
-
-    public Player(int x, int y) {
+    private int playerNumber;
+    
+    public Player(int x, int y, int playerNumber) {
 	super(x, y);
+	this.playerNumber = playerNumber;
 	setText("1");
 	// TODO Auto-generated constructor stub
     }

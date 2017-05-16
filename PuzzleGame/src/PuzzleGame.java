@@ -82,7 +82,7 @@ public class PuzzleGame extends JFrame{
 	        switch (keycode) {
 	            
 	        case KeyEvent.VK_LEFT:
-	            
+	            board.MovePlayer(1, 1);
 	            break;
 	            
 	        case KeyEvent.VK_RIGHT:
