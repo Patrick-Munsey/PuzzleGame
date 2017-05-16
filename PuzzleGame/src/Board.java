@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.util.HashMap;
 
 import javax.swing.GroupLayout;
 import javax.swing.JLabel;
@@ -20,6 +21,7 @@ public class Board extends JPanel  {
     private Tile[][] board;
     private int boardWidth;
     private int boardHeight;
+    private HashMap<Integer, Player> players;
     
     /**
      * @param size
@@ -58,10 +60,17 @@ public class Board extends JPanel  {
 	
 	for(int y = 0; y < boardHeight; y++){
 		for(int x = 0; x < boardWidth; x++){
-		    newBoard[y][x] = new Tile(x, y);
+		    newBoard[y][x] = new Wall(x, y);
 		}
 	}
+	 newBoard[5][5] = new Player(5, 5);
+	
 	return newBoard;
+    }
+    
+    public boolean MovePlayer(int player, int direction) {
+	
+	return false;
     }
     
 
