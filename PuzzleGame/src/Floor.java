@@ -8,13 +8,13 @@ import javax.swing.JLabel;
 public class Floor extends Tile{
 
     public Floor(int x, int y) {
-	super(x,y);
-	updateLabel();
+		super(x,y);
+		updateLabel();
     }
 
     @Override
     public void updateLabel() {
-	label.setText("#");
+    	label.setText("#");
     }
     
 }
