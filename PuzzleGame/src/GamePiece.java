@@ -10,7 +10,6 @@ public class GamePiece {
     private int y;
     
     public GamePiece() {
-	
     }
     
     public boolean movePiece(Board board, Direction direction) {

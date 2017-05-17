@@ -19,8 +19,7 @@ class Tile extends JLabel{
     public boolean isMoveable() {
 	return false;
     }
-        
-    
+         
     public void placeGamePiece(GamePiece gamepiece) {	
     }
     

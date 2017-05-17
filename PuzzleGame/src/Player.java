@@ -8,9 +8,9 @@ import javax.swing.JLabel;
 public class Player extends GamePiece{
     private PlayerNumber playerNumber;
     
+
     public Player(PlayerNumber playerNumber) {
-	super();
-	this.playerNumber = playerNumber;
+		this.playerNumber = playerNumber;
     }
 
     @Override

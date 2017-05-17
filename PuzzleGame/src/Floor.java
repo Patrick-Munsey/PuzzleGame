@@ -28,7 +28,6 @@ public class Floor extends Tile{
 	else {
 	    this.setText(".");
 	}
-	
     }
     
     public void placeGamePiece(GamePiece gamepiece) {

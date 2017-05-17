@@ -29,14 +29,14 @@ public class Board extends JPanel  {
      * @param size
      */
     public Board() {
-	this.boardWidth = 0;
-	this.boardHeight = 0;
-	board = new Tile[boardHeight][boardWidth];
-	players = new  HashMap<PlayerNumber, Player>();
-	
-	initPlayer(PlayerNumber.Player1);
-	initBoard(Difficulty.EASY, 1);
-	initUI();
+		this.boardWidth = 0;
+		this.boardHeight = 0;
+		board = new Tile[boardHeight][boardWidth];
+		players = new  HashMap<PlayerNumber, Player>();
+		
+		initPlayer(PlayerNumber.Player1);
+		initBoard(Difficulty.EASY, 1);
+		initUI();
     }
 
     private void initUI() {	
@@ -48,17 +48,21 @@ public class Board extends JPanel  {
 		    this.add(board[y][x]);
 		}
 	}
-	setFocusable(true);  
+		setFocusable(true);  
     }
     
     private void refreshUI() {
-	this.revalidate();
-        this.repaint();
+		this.revalidate();
+	        this.repaint();
     }
     
     public boolean MovePlayer(PlayerNumber playernumber, Direction direction) {
 	players.get(playernumber).movePiece(this, direction);
-	return false;
+	return true;
+    }
+    
+    public boolean isMoveable() {
+    	return false;
     }
     
     public boolean MovePiece(int x, int y, Direction direction) {
@@ -110,58 +114,58 @@ public class Board extends JPanel  {
     }
     
     private void initBoard(Difficulty difficulty, int levelNumber) {
-	wipeBoard();
-	switch(difficulty) {
-	case EASY:
-	    switch(levelNumber) {
-	    	case 1:
-	    	    initLevelE1();
-	    	    return;
-	    	case 2:
-	    	    initLevelE2();
-	    	    return;
-	    	case 3:
-	    	    initLevelE3();
-	    	    return;
-	    	default:
-	    	    System.out.println("Invalid level");
-	    	    return;
-	    }
-	case MEDIUM:
-	    switch(levelNumber) {
-	    	case 1:
-	    	    initLevelM1();
-	    	    return;
-	    	case 2:
-	    	    initLevelM2();
-	    	    return;
-	    	case 3:
-	    	    initLevelM3();
-	    	    return;
-	    	default:
-	    	    System.out.println("Invalid level");
-	    	    return;
-	    }
-	case HARD:
-	    switch(levelNumber) {
-	    	case 1:
-	    	    initLevelH1();
-	    	    return;
-	    	case 2:
-	    	    initLevelH2();
-	    	    return;
-	    	case 3:
-	    	    initLevelH3();
-	    	    return;
-	    	default:
-	    	    System.out.println("Invalid level");
-	    	    return;
-	    }
-	default:
-	    System.out.println("Invalid difficulty");
-	    return;   
-	}
-	
+		wipeBoard();
+			switch(difficulty) {
+			case EASY:
+			    switch(levelNumber) {
+			    	case 1:
+			    	    initLevelE1();
+			    	    return;
+			    	case 2:
+			    	    initLevelE2();
+			    	    return;
+			    	case 3:
+			    	    initLevelE3();
+			    	    return;
+			    	default:
+			    	    System.out.println("Invalid level");
+			    	    return;
+			    }
+			case MEDIUM:
+			    switch(levelNumber) {
+			    	case 1:
+			    	    initLevelM1();
+			    	    return;
+			    	case 2:
+			    	    initLevelM2();
+			    	    return;
+			    	case 3:
+			    	    initLevelM3();
+			    	    return;
+			    	default:
+			    	    System.out.println("Invalid level");
+			    	    return;
+			    }
+			case HARD:
+			    switch(levelNumber) {
+			    	case 1:
+			    	    initLevelH1();
+			    	    return;
+			    	case 2:
+			    	    initLevelH2();
+			    	    return;
+			    	case 3:
+			    	    initLevelH3();
+			    	    return;
+			    	default:
+			    	    System.out.println("Invalid level");
+			    	    return;
+			    }
+			default:
+			    System.out.println("Invalid difficulty");
+			    return;   
+		}
+		
     }
     
     private void initLevelE1() {
@@ -267,12 +271,12 @@ public class Board extends JPanel  {
     }
     
     private void wipeBoard() {
-	this.boardWidth = 0;
-	this.boardHeight = 0;
-	for(int y = 0; y < boardHeight; y++){
-		for(int x = 0; x < boardWidth; x++){
-		    board[y][x] = null;
+		this.boardWidth = 0;
+		this.boardHeight = 0;
+		for(int y = 0; y < boardHeight; y++){
+			for(int x = 0; x < boardWidth; x++){
+			    board[y][x] = null;
+			}
 		}
-	}
     }
 }

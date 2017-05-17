@@ -35,7 +35,7 @@ public class PuzzleGame extends JFrame{
      * @param args
      */
     public static void main(String[] args) {
-	System.out.println("Hello World!\n");
+    	System.out.println("Hello World!\n");
 	
 	       EventQueue.invokeLater(() -> {
 		   PuzzleGame puzzlegame = new PuzzleGame();
@@ -44,8 +44,8 @@ public class PuzzleGame extends JFrame{
     }
     
     public PuzzleGame() {
-	this.board = new Board();
-        initUI();
+		this.board = new Board();
+	    initUI();
     }
 
     private void initUI() {

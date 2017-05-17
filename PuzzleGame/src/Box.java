@@ -8,7 +8,6 @@ import javax.swing.JLabel;
 public class Box extends GamePiece{
 
     public Box() {
-	
     }
 
     @Override

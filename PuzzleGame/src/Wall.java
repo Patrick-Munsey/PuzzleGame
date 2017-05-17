@@ -7,7 +7,6 @@ import javax.swing.JLabel;
  */
 public class Wall extends Tile {
 
-    
     public Wall() {
 	super();
     }
