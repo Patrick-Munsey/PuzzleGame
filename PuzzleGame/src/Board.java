@@ -20,8 +20,6 @@ import javax.swing.Timer;
  */
 public class Board extends JPanel  {
     
-
-    
     private Tile[][] board;
     private int boardWidth;
     private int boardHeight;
@@ -47,7 +45,7 @@ public class Board extends JPanel  {
 	
 	for(int y = 0; y < boardHeight; y++){
 		for(int x = 0; x < boardWidth; x++){
-		    this.add(board[y][x].label);
+		    this.add(board[y][x]);
 		}
 	}
 	setFocusable(true);  
@@ -59,34 +57,7 @@ public class Board extends JPanel  {
     }
     
     public boolean MovePlayer(PlayerNumber playernumber, Direction direction) {
-	Player player = players.get(playernumber);
-	int x1 = player.getX();
-	int y1 = player.getY();
-	int x2 = x1;
-	int y2 = y1;
-	
-	switch(direction) {
-	case UP:
-	    y2 = y2 + 1;
-	    break;
-	case DOWN:
-	    y2 = y2 - 1;
-	    break;
-	case LEFT:
-	    x2 = x2 - 1;
-	    break;
-	case RIGHT:
-	    x2 = x2 + 1;
-	    break;
-	default:
-	    return false;
-	}
-	
-	Tile tempTile = board[y1][x1];
-	board[y1][x1] = board[y2][x2];
-	board[y2][x2] = tempTile;
-	board[y1][x1].swapWith(board[y2][x2]);
-	return true;
+	return false;
     }
     
     public boolean isMoveable() {
@@ -94,19 +65,10 @@ public class Board extends JPanel  {
 	
 	
 	return false;
-    }
-    
-    public void swapTiles(int x1, int y1, int x2, int y2) {
-	Tile tempTile = board[y1][x1];
-	board[y1][x1] = board[y2][x2];
-	board[y2][x2] = tempTile;
-	board[y1][x1].swapWith(board[y2][x2]);
-    }
-    
-    
+    } 
     
     public void initPlayer(PlayerNumber playerNumber) {
-	Player newPlayer = new Player(0,0,playerNumber);
+	Player newPlayer = new Player(playerNumber);
 	players.put(playerNumber, newPlayer);
     }
     
@@ -171,11 +133,12 @@ public class Board extends JPanel  {
 	board = new Tile[boardHeight][boardWidth];
    	for(int y = 0; y < boardHeight; y++){
    		for(int x = 0; x < boardWidth; x++){
-   		    board[y][x] = new Wall(x, y);
+   		    board[y][x] = new Wall();
    		}
    	}
-   	board[2][2] = players.get(PlayerNumber.Player1);
-   	
+   	board[2][2] = new Floor();
+   	board[2][3] = new Floor();
+   	board[2][3].placeGamePiece(players.get(PlayerNumber.Player1));
     }
     
     private void initLevelE2() {
@@ -184,7 +147,7 @@ public class Board extends JPanel  {
 	board = new Tile[boardHeight][boardWidth];
    	for(int y = 0; y < boardHeight; y++){
    		for(int x = 0; x < boardWidth; x++){
-   		    board[y][x] = new Wall(x, y);
+   		 board[y][x] = new Wall();
    		}
    	}
     }
@@ -195,7 +158,7 @@ public class Board extends JPanel  {
 	board = new Tile[boardHeight][boardWidth];
    	for(int y = 0; y < boardHeight; y++){
    		for(int x = 0; x < boardWidth; x++){
-   		    board[y][x] = new Wall(x, y);
+   		    board[y][x] = new Wall();
    		}
    	}
     }
@@ -206,7 +169,7 @@ public class Board extends JPanel  {
 	board = new Tile[boardHeight][boardWidth];
    	for(int y = 0; y < boardHeight; y++){
    		for(int x = 0; x < boardWidth; x++){
-   		    board[y][x] = new Wall(x, y);
+   		    board[y][x] = new Wall();
    		}
    	}
     }
@@ -217,7 +180,7 @@ public class Board extends JPanel  {
 	board = new Tile[boardHeight][boardWidth];
    	for(int y = 0; y < boardHeight; y++){
    		for(int x = 0; x < boardWidth; x++){
-   		    board[y][x] = new Wall(x, y);
+   		    board[y][x] = new Wall();
    		}
    	}
     }
@@ -228,7 +191,7 @@ public class Board extends JPanel  {
 	board = new Tile[boardHeight][boardWidth];
    	for(int y = 0; y < boardHeight; y++){
    		for(int x = 0; x < boardWidth; x++){
-   		    board[y][x] = new Wall(x, y);
+   		    board[y][x] = new Wall();
    		}
    	}
     }
@@ -239,7 +202,7 @@ public class Board extends JPanel  {
 	board = new Tile[boardHeight][boardWidth];
    	for(int y = 0; y < boardHeight; y++){
    		for(int x = 0; x < boardWidth; x++){
-   		    board[y][x] = new Wall(x, y);
+   		    board[y][x] = new Wall();
    		}
    	}
     }
@@ -250,7 +213,7 @@ public class Board extends JPanel  {
 	board = new Tile[boardHeight][boardWidth];
    	for(int y = 0; y < boardHeight; y++){
    		for(int x = 0; x < boardWidth; x++){
-   		    board[y][x] = new Wall(x, y);
+   		    board[y][x] = new Wall();
    		}
    	}
     }
@@ -261,7 +224,7 @@ public class Board extends JPanel  {
 	board = new Tile[boardHeight][boardWidth];
    	for(int y = 0; y < boardHeight; y++){
    		for(int x = 0; x < boardWidth; x++){
-   		    board[y][x] = new Wall(x, y);
+   		    board[y][x] = new Wall();
    		}
    	}
     }

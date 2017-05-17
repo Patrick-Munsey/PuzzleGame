@@ -1,13 +1,19 @@
+import javax.swing.JLabel;
+
 /**
  * @authors:	Patrick Munsey
  * zID: 	z5020841
  * 
  */
-public class Box extends Tile{
+public class Box extends GamePiece{
 
-    public Box(int x, int y) {
-	super(x, y);
-	// TODO Auto-generated constructor stub
+    public Box() {
+	
     }
 
+    @Override
+    public void updateLabel(JLabel label) {
+	label.setText("B");
+    }
+    
 }

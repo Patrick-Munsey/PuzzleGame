@@ -6,15 +6,40 @@ import javax.swing.JLabel;
  * 
  */
 public class Floor extends Tile{
+    private GamePiece gamepiece;
+    
+    public Floor() {
+	super();
+    }
 
-    public Floor(int x, int y) {
-	super(x,y);
-	updateLabel();
+    @Override
+    public boolean moveable() {
+	return super.moveable();
     }
 
     @Override
     public void updateLabel() {
-	label.setText("#");
+	if(gamepiece != null) {
+	    gamepiece.updateLabel(this);
+	}
+	else {
+	    this.setText(".");
+	}
+	
     }
     
+    public void placeGamePiece(GamePiece gamepiece) {
+	this.gamepiece = gamepiece;
+	updateLabel();
+    }
+    
+    public GamePiece removeGamePiece() {
+	GamePiece retGamePiece = this.gamepiece;
+	this.gamepiece = null;
+	updateLabel();
+	return retGamePiece;
+    }
+    
+
+
 }

@@ -8,15 +8,15 @@ import javax.swing.JLabel;
 public class Wall extends Tile {
 
     
-    public Wall(int x, int y) {
-	super(x,y);
-	updateLabel();
-	// TODO Auto-generated constructor stub
+    public Wall() {
+	super();
     }
 
     @Override
     public void updateLabel() {
-	label.setText("2");
+	this.setText("#");
     }
+
+
 
 }

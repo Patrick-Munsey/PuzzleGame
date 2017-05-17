@@ -1,22 +1,23 @@
+import javax.swing.JLabel;
+
 /**
  * @authors:	Patrick Munsey
  * zID: 	z5020841
  * 
  */
-public class Player extends Tile{
+public class Player extends GamePiece{
     private PlayerNumber playerNumber;
     
-    public Player(int x, int y, PlayerNumber playerNumber) {
-	super(x, y);
+    public Player(PlayerNumber playerNumber) {
+	super();
 	this.playerNumber = playerNumber;
-	updateLabel();
-	// TODO Auto-generated constructor stub
     }
 
     @Override
-    public void updateLabel() {
-	label.setText("1");
+    public void updateLabel(JLabel label) {
+	label.setText("P");
     }
+
     
 
     
