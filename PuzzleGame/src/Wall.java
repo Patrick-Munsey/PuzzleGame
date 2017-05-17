@@ -10,14 +10,13 @@ public class Wall extends Tile {
     
     public Wall(int x, int y) {
 	super(x,y);
-	setText("0");
+	updateLabel();
 	// TODO Auto-generated constructor stub
     }
 
     @Override
-    public int getType() {
-	// TODO Auto-generated method stub
-	return 2;
+    public void updateLabel() {
+	label.setText("2");
     }
 
 }

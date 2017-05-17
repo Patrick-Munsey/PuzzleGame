@@ -25,7 +25,7 @@ public class Board extends JPanel  {
     private Tile[][] board;
     private int boardWidth;
     private int boardHeight;
-    private HashMap<Integer, Player> players;
+    private HashMap<PlayerNumber, Player> players;
     
     /**
      * @param size
@@ -34,9 +34,9 @@ public class Board extends JPanel  {
 	this.boardWidth = 0;
 	this.boardHeight = 0;
 	board = new Tile[boardHeight][boardWidth];
-	players = new  HashMap<Integer, Player>();
+	players = new  HashMap<PlayerNumber, Player>();
 	
-	initPlayer(1);
+	initPlayer(PlayerNumber.Player1);
 	initBoard(Difficulty.EASY, 1);
 	initUI();
     }
@@ -47,17 +47,50 @@ public class Board extends JPanel  {
 	
 	for(int y = 0; y < boardHeight; y++){
 		for(int x = 0; x < boardWidth; x++){
-		    this.add(board[y][x]);
+		    this.add(board[y][x].label);
 		}
 	}
 	setFocusable(true);  
     }
     
+    private void refreshUI() {
+	this.revalidate();
+        this.repaint();
+    }
     
-
+    public boolean MovePlayer(PlayerNumber playernumber, Direction direction) {
+	Player player = players.get(playernumber);
+	int x1 = player.getX();
+	int y1 = player.getY();
+	int x2 = x1;
+	int y2 = y1;
+	
+	switch(direction) {
+	case UP:
+	    y2 = y2 + 1;
+	    break;
+	case DOWN:
+	    y2 = y2 - 1;
+	    break;
+	case LEFT:
+	    x2 = x2 - 1;
+	    break;
+	case RIGHT:
+	    x2 = x2 + 1;
+	    break;
+	default:
+	    return false;
+	}
+	
+	Tile tempTile = board[y1][x1];
+	board[y1][x1] = board[y2][x2];
+	board[y2][x2] = tempTile;
+	board[y1][x1].swapWith(board[y2][x2]);
+	return true;
+    }
     
-    
-    public boolean MovePlayer(int player, int direction) {
+    public boolean isMoveable() {
+	
 	
 	
 	return false;
@@ -67,19 +100,12 @@ public class Board extends JPanel  {
 	Tile tempTile = board[y1][x1];
 	board[y1][x1] = board[y2][x2];
 	board[y2][x2] = tempTile;
+	board[y1][x1].swapWith(board[y2][x2]);
     }
     
-    private void wipeBoard() {
-	this.boardWidth = 0;
-	this.boardHeight = 0;
-	for(int y = 0; y < boardHeight; y++){
-		for(int x = 0; x < boardWidth; x++){
-		    board[y][x] = null;
-		}
-	}
-    }
     
-    public void initPlayer(int playerNumber) {
+    
+    public void initPlayer(PlayerNumber playerNumber) {
 	Player newPlayer = new Player(0,0,playerNumber);
 	players.put(playerNumber, newPlayer);
     }
@@ -148,7 +174,7 @@ public class Board extends JPanel  {
    		    board[y][x] = new Wall(x, y);
    		}
    	}
-   	board[2][2] = players.get(1);
+   	board[2][2] = players.get(PlayerNumber.Player1);
    	
     }
     
@@ -238,5 +264,15 @@ public class Board extends JPanel  {
    		    board[y][x] = new Wall(x, y);
    		}
    	}
+    }
+    
+    private void wipeBoard() {
+	this.boardWidth = 0;
+	this.boardHeight = 0;
+	for(int y = 0; y < boardHeight; y++){
+		for(int x = 0; x < boardWidth; x++){
+		    board[y][x] = null;
+		}
+	}
     }
 }

@@ -9,7 +9,12 @@ public class Floor extends Tile{
 
     public Floor(int x, int y) {
 	super(x,y);
-	setText("0");
+	updateLabel();
     }
 
+    @Override
+    public void updateLabel() {
+	label.setText("#");
+    }
+    
 }
