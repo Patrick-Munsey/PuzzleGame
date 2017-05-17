@@ -44,8 +44,8 @@ public class PuzzleGame extends JFrame{
     }
     
     public PuzzleGame() {
-	this.board = new Board();
-        initUI();
+		this.board = new Board();
+	    initUI();
     }
 
     private void initUI() {

@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
+import java.util.Iterator;
 
 import javax.swing.GroupLayout;
 import javax.swing.JLabel;
@@ -27,11 +28,11 @@ public class Board extends JPanel  {
      * @param size
      */
     public Board() {
-	this.boardWidth = 10;
-	this.boardHeight = 10;
-	
-	board = createNewBoard();
-	initUI();
+		this.boardWidth = 10;
+		this.boardHeight = 10;
+		
+		board = createNewBoard();
+		initUI();
     }
 
     private void initUI() {	
@@ -56,16 +57,16 @@ public class Board extends JPanel  {
     }
     
     private Tile[][] createNewBoard() {
-	Tile[][] newBoard = new Tile[boardHeight][boardWidth];
-	
-	for(int y = 0; y < boardHeight; y++){
-		for(int x = 0; x < boardWidth; x++){
-		    newBoard[y][x] = new Wall(x, y);
+		Tile[][] newBoard = new Tile[boardHeight][boardWidth];
+		
+		for(int y = 0; y < boardHeight; y++){
+			for(int x = 0; x < boardWidth; x++){
+			    newBoard[y][x] = new Wall(x, y);
+			}
 		}
-	}
-	 newBoard[5][5] = new Player(5, 5, 1);
-	
-	return newBoard;
+		 newBoard[5][5] = new Player(5, 5, 1);
+		
+		return newBoard;
     }
     
     public boolean MovePlayer(int player, int direction) {
