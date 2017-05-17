@@ -13,8 +13,6 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-
-
 /**
  * @authors:	Patrick Munsey
  * zID: 	z5020841
@@ -22,9 +20,7 @@ import javax.swing.Timer;
  */
 public class Board extends JPanel  {
     
-    public enum Difficulty {
-	EASY, MEDIUM, HARD
-    }
+
     
     private Tile[][] board;
     private int boardWidth;
@@ -95,13 +91,13 @@ public class Board extends JPanel  {
 	    switch(levelNumber) {
 	    	case 1:
 	    	    initLevelE1();
-	    	    break;
+	    	    return;
 	    	case 2:
 	    	    initLevelE2();
-	    	    break;
+	    	    return;
 	    	case 3:
 	    	    initLevelE3();
-	    	    break;
+	    	    return;
 	    	default:
 	    	    System.out.println("Invalid level");
 	    	    return;
@@ -110,34 +106,32 @@ public class Board extends JPanel  {
 	    switch(levelNumber) {
 	    	case 1:
 	    	    initLevelM1();
-	    	    break;
+	    	    return;
 	    	case 2:
 	    	    initLevelM2();
-	    	    break;
+	    	    return;
 	    	case 3:
 	    	    initLevelM3();
-	    	    break;
+	    	    return;
 	    	default:
 	    	    System.out.println("Invalid level");
 	    	    return;
 	    }
-	    break;
 	case HARD:
 	    switch(levelNumber) {
 	    	case 1:
 	    	    initLevelH1();
-	    	    break;
+	    	    return;
 	    	case 2:
 	    	    initLevelH2();
-	    	    break;
+	    	    return;
 	    	case 3:
 	    	    initLevelH3();
-	    	    break;
+	    	    return;
 	    	default:
 	    	    System.out.println("Invalid level");
 	    	    return;
 	    }
-	    break;
 	default:
 	    System.out.println("Invalid difficulty");
 	    return;   
