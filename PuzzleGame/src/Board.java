@@ -47,14 +47,7 @@ public class Board extends JPanel  {
 	setFocusable(true);  
     }
     
-    private int squareWidth() {
-	return (int) getSize().getWidth() / boardWidth; 
-    }
-    
-    private int squareHeight() {
-	return (int) getSize().getHeight() / boardHeight;
-    }
-    
+
     private Tile[][] createNewBoard() {
 	Tile[][] newBoard = new Tile[boardHeight][boardWidth];
 	
