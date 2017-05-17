@@ -57,14 +57,51 @@ public class Board extends JPanel  {
     }
     
     public boolean MovePlayer(PlayerNumber playernumber, Direction direction) {
+	players.get(playernumber).movePiece(this, direction);
 	return false;
     }
     
-    public boolean isMoveable() {
+    public boolean MovePiece(int x, int y, Direction direction) {
+	GamePiece gamepiece = board[y][x].removeGamePiece();
+	if(gamepiece == null) {
+	    return false;
+	}
 	
+	switch(direction) {
+	case UP:
+	    if(board[y+1][x].isMoveable()) {
+		board[y+1][x].placeGamePiece(gamepiece);
+		return true;
+	    }
+	    break;
+	case DOWN:
+	    if(board[y-1][x].isMoveable()) {
+		board[y-1][x].placeGamePiece(gamepiece);
+		return true;
+	    }
+	    break;
+	case LEFT:
+	    if(board[y][x-1].isMoveable()) {
+		board[y][x-1].placeGamePiece(gamepiece);
+		return true;
+	    }
+	    break;
+	case RIGHT:
+	    if(board[y][x+1].isMoveable()) {
+		board[y][x+1].placeGamePiece(gamepiece);
+		return true;
+	    }
+	    break;
+	default:
+	    break;
+	}
 	
-	
+	board[y][x].placeGamePiece(gamepiece);
 	return false;
+    }
+    
+    public boolean isMoveable(int x, int y) {	
+	return board[y][x].isMoveable();
     } 
     
     public void initPlayer(PlayerNumber playerNumber) {

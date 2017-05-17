@@ -16,7 +16,7 @@ class Tile extends JLabel{
 	this.setText("0");
     }
     
-    public boolean moveable() {
+    public boolean isMoveable() {
 	return false;
     }
         

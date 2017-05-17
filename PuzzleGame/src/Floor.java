@@ -13,8 +13,11 @@ public class Floor extends Tile{
     }
 
     @Override
-    public boolean moveable() {
-	return super.moveable();
+    public boolean isMoveable() {
+	if(gamepiece == null) {
+	    return true;
+	}
+	return false;
     }
 
     @Override
@@ -40,6 +43,6 @@ public class Floor extends Tile{
 	return retGamePiece;
     }
     
-
+    
 
 }
