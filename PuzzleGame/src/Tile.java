@@ -5,14 +5,18 @@ import javax.swing.JLabel;
  * zID: 	z5020841
  * 
  */
-public class Tile extends JLabel{
+class Tile extends JLabel{
     private int x;
     private int y;
     
     public Tile(int x, int y) {
+	super();
 	this.x = x;
 	this.y = y;
-	
+    }
+    
+    public int getType() {
+	return 0;
     }
    
     

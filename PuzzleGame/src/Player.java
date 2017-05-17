@@ -13,4 +13,11 @@ public class Player extends Tile{
 	// TODO Auto-generated constructor stub
     }
 
+    @Override
+    public int getType() {
+	// TODO Auto-generated method stub
+	return 1;
+    }
+
+    
 }

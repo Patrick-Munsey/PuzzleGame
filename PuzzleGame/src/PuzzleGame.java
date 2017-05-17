@@ -51,7 +51,7 @@ public class PuzzleGame extends JFrame{
     private void initUI() {
 
         createLayout();
-        add(board);
+        this.add(board);
         board.revalidate();
         board.repaint();
         
