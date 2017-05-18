@@ -39,9 +39,9 @@ public class PuzzleGame extends JFrame{
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         
-        //setup the Menu bar and add it to the JFrame
-        JMenuBar menuBar = new JMenuBar();
+        //setup the JMenu items (buttons etc)
 	JMenuItem newGameMenuItem = new JMenuItem("New Game");
+	newGameMenuItem.setMnemonic(KeyEvent.VK_N);
 	newGameMenuItem.setToolTipText("Start a new game");
 	newGameMenuItem.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
@@ -75,33 +75,27 @@ public class PuzzleGame extends JFrame{
 		}
 	});
 	JMenuItem instructionsMenuItem = new JMenuItem("Instructions");
-	instructionsMenuItem.setMnemonic(KeyEvent.VK_C);
+	instructionsMenuItem.setMnemonic(KeyEvent.VK_I);
 	instructionsMenuItem.setToolTipText("Instructions");
 	instructionsMenuItem.addActionListener(new ActionListener() {
 		public void actionPerformed(ActionEvent e) {
 		    System.out.println("instructions button pressed");
 		}
 	});
+	
+	//add all of the Jmenu items to the Menu bar
+        JMenuBar menuBar = new JMenuBar();
 	JMenu game = new JMenu("Game");
-	game.setMnemonic(KeyEvent.VK_G);
 	game.add(newGameMenuItem);
 	game.add(optionsMenuItem);
 	game.add(exitMenuItem);
 	menuBar.add(game);
 	JMenu help = new JMenu("Help");
-	help.setMnemonic(KeyEvent.VK_H);
 	help.add(instructionsMenuItem);
 	help.add(aboutMenuItem);
 	menuBar.add(help);
 	menuBar.add(Box.createHorizontalGlue());
-	//JMenu timerdisplay = new JMenu(gameTimer.toString());
-	//gameTimer.restart();
-	//gameTimer.setTimeDisplay(timerdisplay);
-	//timerdisplay.update(getGraphics());
-	//menuBar.add(timerdisplay);
 	setJMenuBar(menuBar);
-        
-        
     }
 
     private void createLayout(JComponent... arg) {
