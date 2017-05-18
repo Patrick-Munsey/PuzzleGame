@@ -36,10 +36,10 @@ public class PuzzleGame extends JFrame{
      */
     public static void main(String[] args) {
 	
-	       EventQueue.invokeLater(() -> {
-		   PuzzleGame puzzlegame = new PuzzleGame();
-		   puzzlegame.setVisible(true);
-	        });
+	EventQueue.invokeLater(() -> {
+	    PuzzleGame puzzlegame = new PuzzleGame();
+	    puzzlegame.setVisible(true);
+	});
     }
     
     public PuzzleGame() {
@@ -58,8 +58,6 @@ public class PuzzleGame extends JFrame{
         setTitle("Puzzle Game");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        
-       
         
     }
 

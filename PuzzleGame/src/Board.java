@@ -187,7 +187,6 @@ public class Board extends JPanel  {
 			    System.out.println("Invalid difficulty");
 			    return;   
 		}
-		
     }
     
     private void initLevelE1() {
