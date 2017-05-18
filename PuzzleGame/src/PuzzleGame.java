@@ -1,51 +1,24 @@
 import javax.swing.JFrame;
 import java.awt.Container;
 import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.util.Calendar;
-import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
-import static javax.swing.GroupLayout.Alignment.BASELINE;
-import static javax.swing.GroupLayout.DEFAULT_SIZE;
-import static javax.swing.GroupLayout.PREFERRED_SIZE;
-import javax.swing.JButton;
 import javax.swing.JComponent;
-import javax.swing.JLabel;
-import javax.swing.JSpinner;
-import static javax.swing.LayoutStyle.ComponentPlacement.RELATED;
-import javax.swing.SpinnerModel;
-import javax.swing.SpinnerNumberModel;
+
 
 /**
  * @authors: 	Patrick Munsey
  * zID: 	z5020841
  * 
  */
-
+@SuppressWarnings("serial")
 public class PuzzleGame extends JFrame{
-
     private Board board;
-    
-    /**
-     * @param args
-     */
-    public static void main(String[] args) {
-	
-	EventQueue.invokeLater(() -> {
-	    PuzzleGame puzzlegame = new PuzzleGame();
-	    puzzlegame.setVisible(true);
-	});
-    }
-    
+
     public PuzzleGame() {
-		this.board = new Board();
-	    initUI();
+	this.board = new Board();
+	initUI();
     }
+
 
     private void initUI() {
 
@@ -62,14 +35,18 @@ public class PuzzleGame extends JFrame{
     }
 
     private void createLayout(JComponent... arg) {
-
-        Container pane = getContentPane();
-        GroupLayout gl = new GroupLayout(pane);
-
-        pack();
+	
     }
-
     
-    
+    /**
+     * @param args
+     */
+    public static void main(String[] args) {
+	
+	EventQueue.invokeLater(() -> {
+	    PuzzleGame puzzlegame = new PuzzleGame();
+	    puzzlegame.setVisible(true);
+	});
+    }
 }
 

@@ -28,7 +28,7 @@ public class Board extends JPanel  {
     private LinkedList<Goal> goals;
     
     /**
-     * @param size
+     * 
      */
     public Board() {
 		this.boardWidth = 0;
@@ -42,6 +42,9 @@ public class Board extends JPanel  {
 		initUI();
     }
 
+    /**
+     * 
+     */
     private void initUI() {	
 	this.setLayout(new GridLayout(boardHeight, boardWidth));
 	this.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
@@ -54,20 +57,37 @@ public class Board extends JPanel  {
 		setFocusable(true);  
     }
     
+    /**
+     * 
+     */
     private void refreshUI() {
 		this.revalidate();
 	        this.repaint();
     }
     
+    /**
+     * @param playernumber
+     * @param direction
+     * @return
+     */
     public boolean MovePlayer(PlayerNumber playernumber, Direction direction) {
 	players.get(playernumber).movePiece(this, direction);
 	return true;
     }
     
+    /**
+     * @return
+     */
     public boolean isMoveable() {
     	return false;
     }
     
+    /**
+     * @param x
+     * @param y
+     * @param direction
+     * @return
+     */
     public boolean MovePiece(int x, int y, Direction direction) {
 	GamePiece gamepiece = board[y][x].removeGamePiece();
 	if(gamepiece == null) {
@@ -111,45 +131,84 @@ public class Board extends JPanel  {
 	return false;
     }
     
+    /**
+     * @param x
+     * @param y
+     * @return
+     */
     public boolean isMoveable(int x, int y) {	
 	return board[y][x].isMoveable();
     } 
     
+    /**
+     * @param playerNumber
+     * @param x
+     * @param y
+     */
     public void initPlayer(PlayerNumber playerNumber, int x, int y) {
 	Player newPlayer = new Player(playerNumber);
 	players.put(playerNumber, newPlayer);
 	placeGamePiece(newPlayer, x, y);
     }
     
+    /**
+     * @param x
+     * @param y
+     */
     public void initBox(int x, int y) {
 	Box newBox = new Box();
 	placeGamePiece(newBox, x, y);
     }
     
+    /**
+     * @param x
+     * @param y
+     */
     public void initGoal(int x, int y) {
 	Goal newGoal = new Goal();
 	goals.add(newGoal);
 	board[y][x].placeGoal(newGoal);
     }
     
+    /**
+     * @param x
+     * @param y
+     */
     public void initWall(int x, int y) {
 	board[y][x] = new Wall(x,y);
     }
     
+    /**
+     * @param x
+     * @param y
+     */
     public void initFloor(int x, int y) {
 	board[y][x] = new Floor(x,y);
     }
     
+    /**
+     * @param gamepiece
+     * @param x
+     * @param y
+     */
     public void placeGamePiece(GamePiece gamepiece, int x, int y) {
 	board[y][x].placeGamePiece(gamepiece);
     }
     
+    /**
+     * @param x
+     * @param y
+     */
     public void clearTile(int x, int y) {
 	board[y][x].removeGoal();
 	board[y][x].removeGamePiece();
 	board[y][x] = null;
     }
     
+    /**
+     * @param difficulty
+     * @param levelNumber
+     */
     private void initBoard(Difficulty difficulty, int levelNumber) {
 		wipeBoard();
 			switch(difficulty) {
@@ -204,6 +263,9 @@ public class Board extends JPanel  {
 		}
     }
     
+    /**
+     * 
+     */
     private void initLevelE1() {
 	this.boardWidth = 5;
 	this.boardHeight = 5;
@@ -223,6 +285,9 @@ public class Board extends JPanel  {
 	initGoal(1,2);
     }
     
+    /**
+     * 
+     */
     private void initLevelE2() {
 	this.boardWidth = 5;
 	this.boardHeight = 5;
@@ -234,6 +299,9 @@ public class Board extends JPanel  {
    	}
     }
     
+    /**
+     * 
+     */
     private void initLevelE3() {
 	this.boardWidth = 5;
 	this.boardHeight = 5;
@@ -245,6 +313,9 @@ public class Board extends JPanel  {
    	}
     }
     
+    /**
+     * 
+     */
     private void initLevelM1() {
 	this.boardWidth = 8;
 	this.boardHeight = 8;
@@ -256,6 +327,9 @@ public class Board extends JPanel  {
    	}
     }
     
+    /**
+     * 
+     */
     private void initLevelM2() {
 	this.boardWidth = 8;
 	this.boardHeight = 8;
@@ -267,6 +341,9 @@ public class Board extends JPanel  {
    	}
     }
     
+    /**
+     * 
+     */
     private void initLevelM3() {
 	this.boardWidth = 8;
 	this.boardHeight = 8;
@@ -278,6 +355,9 @@ public class Board extends JPanel  {
    	}
     }
     
+    /**
+     * 
+     */
     private void initLevelH1() {
 	this.boardWidth = 10;
 	this.boardHeight = 10;
@@ -289,6 +369,9 @@ public class Board extends JPanel  {
    	}
     }
     
+    /**
+     * 
+     */
     private void initLevelH2() {
 	this.boardWidth = 10;
 	this.boardHeight = 10;
@@ -300,6 +383,9 @@ public class Board extends JPanel  {
    	}
     }
     
+    /**
+     * 
+     */
     private void initLevelH3() {
 	this.boardWidth = 10;
 	this.boardHeight = 10;
@@ -311,6 +397,9 @@ public class Board extends JPanel  {
    	}
     }
     
+    /**
+     * 
+     */
     private void wipeBoard() {
 		this.boardWidth = 0;
 		this.boardHeight = 0;
@@ -321,6 +410,11 @@ public class Board extends JPanel  {
 		}
     }
     
+    /**
+     * @authors: 	Patrick Munsey
+     * zID: 	z5020841
+     * 
+     */
     class BoardAdapter extends KeyAdapter {
 	    
 	    @Override

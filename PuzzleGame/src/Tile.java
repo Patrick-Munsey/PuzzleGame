@@ -9,6 +9,10 @@ class Tile extends JLabel{
     protected int x;
     protected int y;
     
+    /**
+     * @param x
+     * @param y
+     */
     public Tile(int x, int y) {
 	super();
 	this.x = x;
@@ -16,24 +20,42 @@ class Tile extends JLabel{
 	updateLabel();
     }
     
+    /**
+     * 
+     */
     public void updateLabel() {
 	this.setText("0");
     }
     
+    /**
+     * @return
+     */
     public boolean isMoveable() {
 	return false;
     }
          
+    /**
+     * @param gamepiece
+     */
     public void placeGamePiece(GamePiece gamepiece) {	
     }
     
+    /**
+     * @return
+     */
     public GamePiece removeGamePiece() {
 	return null;
     }
     
+    /**
+     * @param goal
+     */
     public void placeGoal(Goal goal) {
     }
     
+    /**
+     * 
+     */
     public void removeGoal() {
     }
     

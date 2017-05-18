@@ -9,9 +9,17 @@ public class GamePiece {
     private int x;
     private int y;
     
+    /**
+     * 
+     */
     public GamePiece() {
     }
     
+    /**
+     * @param board
+     * @param direction
+     * @return
+     */
     public boolean movePiece(Board board, Direction direction) {
 	
 	switch(direction) {
@@ -61,11 +69,18 @@ public class GamePiece {
 	return false;
     }
     
+    /**
+     * @param x
+     * @param y
+     */
     public void placePiece(int x, int y) {
 	this.x = x;
 	this.y = y;
     }
     
+    /**
+     * @param label
+     */
     public void updateLabel(JLabel label) {
 	label.setText("GP");
     }

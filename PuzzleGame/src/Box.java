@@ -7,9 +7,15 @@ import javax.swing.JLabel;
  */
 public class Box extends GamePiece{
 
+    /**
+     * 
+     */
     public Box() {
     }
 
+    /* (non-Javadoc)
+     * @see GamePiece#updateLabel(javax.swing.JLabel)
+     */
     @Override
     public void updateLabel(JLabel label) {
 	label.setText("B");
