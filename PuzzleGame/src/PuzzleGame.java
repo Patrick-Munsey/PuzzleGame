@@ -97,7 +97,12 @@ public class PuzzleGame extends JFrame{
       		{
       			@Override
       			public void actionPerformed(ActionEvent e) {
-      				// display the game info
+      				JOptionPane.showMessageDialog(board, 
+      						"<html><center><b>Information</b></center><br>" + 
+      						"This game was created a bunch of students " +
+      						"so you shoudl be impressed!. <br><br><center><b>Happy playing!</b></center></html>"
+                            
+      						,"Rules", JOptionPane.PLAIN_MESSAGE);
       			}
       			
       		});
