@@ -6,9 +6,13 @@ import javax.swing.JLabel;
  * 
  */
 class Tile extends JLabel{
+    protected int x;
+    protected int y;
     
-    public Tile() {
+    public Tile(int x, int y) {
 	super();
+	this.x = x;
+	this.y = y;
 	updateLabel();
     }
     

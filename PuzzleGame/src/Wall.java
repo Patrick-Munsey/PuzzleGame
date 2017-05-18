@@ -7,8 +7,8 @@ import javax.swing.JLabel;
  */
 public class Wall extends Tile {
 
-    public Wall() {
-	super();
+    public Wall(int x, int y) {
+	super(x,y);
     }
 
     @Override

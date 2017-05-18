@@ -8,8 +8,8 @@ import javax.swing.JLabel;
 public class Floor extends Tile{
     private GamePiece gamepiece;
     
-    public Floor() {
-	super();
+    public Floor(int x, int y) {
+	super(x,y);
     }
 
     @Override
@@ -32,6 +32,7 @@ public class Floor extends Tile{
     
     public void placeGamePiece(GamePiece gamepiece) {
 	this.gamepiece = gamepiece;
+	gamepiece.placePiece(this.x, this.y);
 	updateLabel();
     }
     
