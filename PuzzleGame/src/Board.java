@@ -126,7 +126,12 @@ public class Board extends JPanel  {
 	board[y][x] = new Floor(x,y);
     }
     
+    public void placeGamePiece(GamePiece gamepiece, int x, int y) {
+	board[y][x].placeGamePiece(gamepiece);
+    }
+    
     public void clearTile(int x, int y) {
+	board[y][x].removeGamePiece();
 	board[y][x] = null;
     }
     
@@ -199,8 +204,8 @@ public class Board extends JPanel  {
    	initFloor(3,2);
    	initFloor(3,3);
 
-   	board[2][2].placeGamePiece(new Box());
-   	board[2][3].placeGamePiece(players.get(PlayerNumber.Player1));
+   	placeGamePiece(new Box(), 2, 2);
+   	placeGamePiece(players.get(PlayerNumber.Player1),3,2);
     }
     
     private void initLevelE2() {
