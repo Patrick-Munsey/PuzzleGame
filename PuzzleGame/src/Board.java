@@ -58,8 +58,9 @@ public class Board extends JPanel  {
 		setFocusable(true);  
     }
     
+
     /**
-     * 
+     * @author Patrick Munsey, z5020841
      */
     private void refreshUI() {
 		this.revalidate();
@@ -68,6 +69,7 @@ public class Board extends JPanel  {
     
 
     /**
+     * @author Patrick Munsey, z5020841
      * @param playernumber
      * @param direction
      * @return true if player was moved successfully
@@ -78,6 +80,7 @@ public class Board extends JPanel  {
     }
     
     /**
+     * @author Patrick Munsey, z5020841
      * @return true if a GamePiece can move to this tile
      */
     public boolean isMoveable() {
@@ -85,6 +88,7 @@ public class Board extends JPanel  {
     }
     
     /**
+     * @author Patrick Munsey, z5020841
      * @param x
      * @param y
      * @param direction
@@ -134,6 +138,7 @@ public class Board extends JPanel  {
     }
     
     /**
+     * @author Patrick Munsey, z5020841
      * @param x
      * @param y
      * @return true if the tile is able to be occupied by a GamePiece
@@ -143,6 +148,7 @@ public class Board extends JPanel  {
     } 
     
     /**
+     * @author Patrick Munsey, z5020841
      * @param playerNumber
      * @param x
      * @param y
@@ -154,6 +160,7 @@ public class Board extends JPanel  {
     }
     
     /**
+     * @author Patrick Munsey, z5020841
      * @param x
      * @param y
      */
@@ -163,6 +170,7 @@ public class Board extends JPanel  {
     }
     
     /**
+     * @author Patrick Munsey, z5020841
      * @param x
      * @param y
      */
@@ -173,6 +181,7 @@ public class Board extends JPanel  {
     }
     
     /**
+     * @author Patrick Munsey, z5020841
      * @param x
      * @param y
      */
@@ -181,6 +190,7 @@ public class Board extends JPanel  {
     }
     
     /**
+     * @author Patrick Munsey, z5020841
      * @param x
      * @param y
      */
@@ -189,6 +199,7 @@ public class Board extends JPanel  {
     }
     
     /**
+     * @author Patrick Munsey, z5020841
      * @param gamepiece
      * @param x
      * @param y
@@ -198,6 +209,7 @@ public class Board extends JPanel  {
     }
     
     /**
+     * @author Patrick Munsey, z5020841
      * @param x
      * @param y
      */
@@ -208,11 +220,12 @@ public class Board extends JPanel  {
     }
     
     /**
+     * @author Patrick Munsey, z5020841
      * @param difficulty
      * @param levelNumber
      */
     private void initBoard(Difficulty difficulty, int levelNumber) {
-		wipeBoard();
+    	wipeBoard();
 			switch(difficulty) {
 			case EASY:
 			    switch(levelNumber) {
@@ -266,7 +279,7 @@ public class Board extends JPanel  {
     }
     
     /**
-     * 
+     * @author Patrick Munsey, z5020841
      */
     private void initLevelE1() {
 	this.boardWidth = 5;
@@ -277,6 +290,7 @@ public class Board extends JPanel  {
    		    initWall(x,y);
    		}
    	}
+   	
    	initFloor(1,2);
    	initFloor(2,2);
    	initFloor(3,2);
@@ -288,7 +302,7 @@ public class Board extends JPanel  {
     }
     
     /**
-     * 
+     * @author Patrick Munsey, z5020841
      */
     private void initLevelE2() {
 	this.boardWidth = 5;
@@ -302,7 +316,7 @@ public class Board extends JPanel  {
     }
     
     /**
-     * 
+     * @author Patrick Munsey, z5020841
      */
     private void initLevelE3() {
 	this.boardWidth = 5;
@@ -316,7 +330,7 @@ public class Board extends JPanel  {
     }
     
     /**
-     * 
+     * @author Patrick Munsey, z5020841
      */
     private void initLevelM1() {
 	this.boardWidth = 8;
@@ -330,7 +344,7 @@ public class Board extends JPanel  {
     }
     
     /**
-     * 
+     * @author Patrick Munsey, z5020841
      */
     private void initLevelM2() {
 	this.boardWidth = 8;
@@ -344,7 +358,7 @@ public class Board extends JPanel  {
     }
     
     /**
-     * 
+     * @author Patrick Munsey, z5020841
      */
     private void initLevelM3() {
 	this.boardWidth = 8;
@@ -372,7 +386,7 @@ public class Board extends JPanel  {
     }
     
     /**
-     * 
+     * @author Patrick Munsey, z5020841
      */
     private void initLevelH2() {
 	this.boardWidth = 10;
@@ -386,7 +400,7 @@ public class Board extends JPanel  {
     }
     
     /**
-     * 
+     * @author Patrick Munsey, z5020841
      */
     private void initLevelH3() {
 	this.boardWidth = 10;
@@ -400,7 +414,7 @@ public class Board extends JPanel  {
     }
     
     /**
-     * 
+     * @author Patrick Munsey, z5020841
      */
     private void wipeBoard() {
 		this.boardWidth = 0;
@@ -413,8 +427,18 @@ public class Board extends JPanel  {
     }
     
     /**
-     * @authors: 	Patrick Munsey
-     * zID: 	z5020841
+     * @author James Doldissen
+     * Restart the current level
+     */
+    public void restart()
+    {
+    	wipeBoard();
+    	initBoard(Difficulty.EASY, 1);
+    	updateUI();
+    }
+
+    /**
+     * @author Patrick Munsey, z5020841
      * 
      */
     class BoardAdapter extends KeyAdapter {
