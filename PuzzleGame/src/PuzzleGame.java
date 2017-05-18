@@ -35,7 +35,6 @@ public class PuzzleGame extends JFrame{
      * @param args
      */
     public static void main(String[] args) {
-    	System.out.println("Hello World!\n");
 	
 	       EventQueue.invokeLater(() -> {
 		   PuzzleGame puzzlegame = new PuzzleGame();
@@ -60,7 +59,7 @@ public class PuzzleGame extends JFrame{
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         
-        addKeyListener(new BoardAdapter());
+       
         
     }
 
@@ -72,33 +71,7 @@ public class PuzzleGame extends JFrame{
         pack();
     }
 
-    class BoardAdapter extends KeyAdapter {
-	    
-	    @Override
-	    public void keyPressed(KeyEvent e) {
-
-	        int keycode = e.getKeyCode();
-
-	        switch (keycode) {
-	            
-	        case KeyEvent.VK_LEFT:
-	            board.MovePlayer(PlayerNumber.Player1, Direction.LEFT);
-	            break;
-	            
-	        case KeyEvent.VK_RIGHT:
-	            board.MovePlayer(PlayerNumber.Player1, Direction.RIGHT);
-	            break;
-	            
-	        case KeyEvent.VK_DOWN:
-	            board.MovePlayer(PlayerNumber.Player1, Direction.DOWN);
-	            break;
-	            
-	        case KeyEvent.VK_UP:
-	            board.MovePlayer(PlayerNumber.Player1, Direction.UP);
-	            break;
-	        }
-	    }
-	}
+    
     
 }
 

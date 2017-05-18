@@ -33,6 +33,7 @@ public class Board extends JPanel  {
 		this.boardHeight = 0;
 		board = new Tile[boardHeight][boardWidth];
 		players = new  HashMap<PlayerNumber, Player>();
+		addKeyListener(new BoardAdapter());
 		
 		initPlayer(PlayerNumber.Player1);
 		initBoard(Difficulty.EASY, 1);
@@ -296,4 +297,36 @@ public class Board extends JPanel  {
 			}
 		}
     }
+    
+    class BoardAdapter extends KeyAdapter {
+	    
+	    @Override
+	    public void keyPressed(KeyEvent e) {
+
+	        int keycode = e.getKeyCode();
+
+	        switch (keycode) {
+	            
+	        case KeyEvent.VK_LEFT:
+	            MovePlayer(PlayerNumber.Player1, Direction.LEFT);
+	            System.out.println("moving player left\n");
+	            break;
+	            
+	        case KeyEvent.VK_RIGHT:
+	            MovePlayer(PlayerNumber.Player1, Direction.RIGHT);
+	            System.out.println("moving player right\n");
+	            break;
+	            
+	        case KeyEvent.VK_DOWN:
+	            MovePlayer(PlayerNumber.Player1, Direction.DOWN);
+	            System.out.println("moving player down\n");
+	            break;
+	            
+	        case KeyEvent.VK_UP:
+	            MovePlayer(PlayerNumber.Player1, Direction.UP);
+	            System.out.println("moving player up\n");
+	            break;
+	        }
+	    }
+	}
 }
