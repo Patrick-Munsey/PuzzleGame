@@ -212,7 +212,7 @@ public class Board extends JPanel  {
      * @param levelNumber
      */
     private void initBoard(Difficulty difficulty, int levelNumber) {
-		wipeBoard();
+    	wipeBoard();
 			switch(difficulty) {
 			case EASY:
 			    switch(levelNumber) {
@@ -277,6 +277,7 @@ public class Board extends JPanel  {
    		    initWall(x,y);
    		}
    	}
+   	
    	initFloor(1,2);
    	initFloor(2,2);
    	initFloor(3,2);
@@ -410,6 +411,17 @@ public class Board extends JPanel  {
 			    clearTile(x,y);
 			}
 		}
+    }
+    
+    /**
+     * @author James Doldissen
+     * Restart the current level
+     */
+    public void restart()
+    {
+    	wipeBoard();
+    	initBoard(Difficulty.EASY, 1);
+    	updateUI();
     }
     
     /**
