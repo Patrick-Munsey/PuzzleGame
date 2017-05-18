@@ -31,4 +31,10 @@ class Tile extends JLabel{
 	return null;
     }
     
+    public void placeGoal(Goal goal) {
+    }
+    
+    public void removeGoal() {
+    }
+    
 }

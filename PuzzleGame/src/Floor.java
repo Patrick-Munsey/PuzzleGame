@@ -7,6 +7,7 @@ import javax.swing.JLabel;
  */
 public class Floor extends Tile{
     private GamePiece gamepiece;
+    private Goal goal;
     
     public Floor(int x, int y) {
 	super(x,y);
@@ -26,13 +27,19 @@ public class Floor extends Tile{
 	    gamepiece.updateLabel(this);
 	}
 	else {
-	    this.setText(".");
+	    if(goal != null) {
+		this.setText("[]");
+	    }
+	    else {
+		 this.setText(".");
+	    }  
 	}
     }
     
     public void placeGamePiece(GamePiece gamepiece) {
 	this.gamepiece = gamepiece;
 	gamepiece.placePiece(this.x, this.y);
+	
 	updateLabel();
     }
     
@@ -43,6 +50,15 @@ public class Floor extends Tile{
 	return retGamePiece;
     }
     
+    public void placeGoal(Goal goal) {
+	this.goal = goal;
+	updateLabel();
+    }
+    
+    public void removeGoal() {
+	this.goal = null;
+	updateLabel();
+    }
     
 
 }

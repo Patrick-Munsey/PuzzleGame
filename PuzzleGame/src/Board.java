@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
+import java.util.LinkedList;
 
 import javax.swing.GroupLayout;
 import javax.swing.JComponent;
@@ -24,6 +25,7 @@ public class Board extends JPanel  {
     private int boardWidth;
     private int boardHeight;
     private HashMap<PlayerNumber, Player> players;
+    private LinkedList<Goal> goals;
     
     /**
      * @param size
@@ -33,9 +35,9 @@ public class Board extends JPanel  {
 		this.boardHeight = 0;
 		board = new Tile[boardHeight][boardWidth];
 		players = new  HashMap<PlayerNumber, Player>();
+		goals =  new LinkedList<Goal>();
 		addKeyListener(new BoardAdapter());
 		
-		initPlayer(PlayerNumber.Player1);
 		initBoard(Difficulty.EASY, 1);
 		initUI();
     }
@@ -113,9 +115,21 @@ public class Board extends JPanel  {
 	return board[y][x].isMoveable();
     } 
     
-    public void initPlayer(PlayerNumber playerNumber) {
+    public void initPlayer(PlayerNumber playerNumber, int x, int y) {
 	Player newPlayer = new Player(playerNumber);
 	players.put(playerNumber, newPlayer);
+	placeGamePiece(newPlayer, x, y);
+    }
+    
+    public void initBox(int x, int y) {
+	Box newBox = new Box();
+	placeGamePiece(newBox, x, y);
+    }
+    
+    public void initGoal(int x, int y) {
+	Goal newGoal = new Goal();
+	goals.add(newGoal);
+	board[y][x].placeGoal(newGoal);
     }
     
     public void initWall(int x, int y) {
@@ -131,6 +145,7 @@ public class Board extends JPanel  {
     }
     
     public void clearTile(int x, int y) {
+	board[y][x].removeGoal();
 	board[y][x].removeGamePiece();
 	board[y][x] = null;
     }
@@ -203,8 +218,9 @@ public class Board extends JPanel  {
    	initFloor(3,2);
    	initFloor(3,3);
 
-   	placeGamePiece(new Box(), 2, 2);
-   	placeGamePiece(players.get(PlayerNumber.Player1),3,2);
+	initPlayer(PlayerNumber.Player1, 3, 2);
+	initBox(2,2);
+	initGoal(1,2);
     }
     
     private void initLevelE2() {
