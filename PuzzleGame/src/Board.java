@@ -194,9 +194,12 @@ public class Board extends JPanel  {
    		    initWall(x,y);
    		}
    	}
+   	initFloor(1,2);
    	initFloor(2,2);
    	initFloor(3,2);
    	initFloor(3,3);
+
+   	board[2][2].placeGamePiece(new Box());
    	board[2][3].placeGamePiece(players.get(PlayerNumber.Player1));
     }
     
