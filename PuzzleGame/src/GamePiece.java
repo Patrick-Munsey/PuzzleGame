@@ -1,8 +1,8 @@
 import javax.swing.JLabel;
 
 /**
- * @authors: 	Patrick Munsey
- * zID: 	z5020841
+ * @author Patrick Munsey
+ * zID: z5020841
  * 
  */
 public class GamePiece {
@@ -18,7 +18,7 @@ public class GamePiece {
     /**
      * @param board
      * @param direction
-     * @return
+     * @return true is the GamePiece was moved correctly
      */
     public boolean movePiece(Board board, Direction direction) {
 	

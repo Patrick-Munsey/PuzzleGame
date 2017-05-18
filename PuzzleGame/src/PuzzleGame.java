@@ -5,9 +5,10 @@ import javax.swing.GroupLayout;
 import javax.swing.JComponent;
 
 
+
 /**
- * @authors: 	Patrick Munsey
- * zID: 	z5020841
+ * @author Patrick Munsey
+ * zID: z5020841
  * 
  */
 @SuppressWarnings("serial")
@@ -42,11 +43,8 @@ public class PuzzleGame extends JFrame{
      * @param args
      */
     public static void main(String[] args) {
-	
-	EventQueue.invokeLater(() -> {
 	    PuzzleGame puzzlegame = new PuzzleGame();
 	    puzzlegame.setVisible(true);
-	});
     }
 }
 

@@ -1,8 +1,9 @@
 import javax.swing.JLabel;
 
+
 /**
- * @authors:	Patrick Munsey
- * zID: 	z5020841
+ * @author Patrick Munsey
+ * zID: z5020841
  * 
  */
 class Tile extends JLabel{
@@ -28,7 +29,7 @@ class Tile extends JLabel{
     }
     
     /**
-     * @return
+     * @return true if the Tile is able to be occupied by a GamePiece
      */
     public boolean isMoveable() {
 	return false;
@@ -41,7 +42,7 @@ class Tile extends JLabel{
     }
     
     /**
-     * @return
+     * @return the GamePiece from the tile
      */
     public GamePiece removeGamePiece() {
 	return null;

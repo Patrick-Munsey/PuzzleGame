@@ -1,10 +1,6 @@
 /**
- * 
- */
-
-/**
- * @authors: 	Patrick Munsey
- * zID: 	z5020841
+ * @author Patrick Munsey
+ * zID: z5020841
  * 
  */
 public class Goal {

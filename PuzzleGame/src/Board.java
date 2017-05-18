@@ -14,9 +14,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+
 /**
- * @authors:	Patrick Munsey
- * zID: 	z5020841
+ * @author Patrick Munsey
+ * zID: z5020841
  * 
  */
 public class Board extends JPanel  {
@@ -65,10 +66,11 @@ public class Board extends JPanel  {
 	        this.repaint();
     }
     
+
     /**
      * @param playernumber
      * @param direction
-     * @return
+     * @return true if player was moved successfully
      */
     public boolean MovePlayer(PlayerNumber playernumber, Direction direction) {
 	players.get(playernumber).movePiece(this, direction);
@@ -76,7 +78,7 @@ public class Board extends JPanel  {
     }
     
     /**
-     * @return
+     * @return true if a GamePiece can move to this tile
      */
     public boolean isMoveable() {
     	return false;
@@ -86,7 +88,7 @@ public class Board extends JPanel  {
      * @param x
      * @param y
      * @param direction
-     * @return
+     * @return true if GamePiece was moved successfully
      */
     public boolean MovePiece(int x, int y, Direction direction) {
 	GamePiece gamepiece = board[y][x].removeGamePiece();
@@ -134,7 +136,7 @@ public class Board extends JPanel  {
     /**
      * @param x
      * @param y
-     * @return
+     * @return true if the tile is able to be occupied by a GamePiece
      */
     public boolean isMoveable(int x, int y) {	
 	return board[y][x].isMoveable();
