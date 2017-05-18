@@ -46,7 +46,7 @@ public class Board extends JPanel  {
 	
 	for(int y = 0; y < boardHeight; y++){
 		for(int x = 0; x < boardWidth; x++){
-		    this.add(board[y][x]);
+		    this.add(board[boardWidth-1-y][x]);//labels have to be added from top to bottom not bottom to top so reverse board y index
 		}
 	}
 		setFocusable(true);  
