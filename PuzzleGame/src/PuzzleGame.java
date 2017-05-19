@@ -89,7 +89,7 @@ public class PuzzleGame extends JFrame{
         JMenuItem restartMenuItem = new JMenuItem("Restart");
         restartMenuItem.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT); 
         restartMenuItem.setMnemonic(KeyEvent.VK_R);
-        restartMenuItem.setToolTipText("Instructions");
+        restartMenuItem.setToolTipText("Restart Game");
         restartMenuItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
         	System.out.println("Restart button pressed");
