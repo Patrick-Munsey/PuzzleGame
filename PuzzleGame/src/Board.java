@@ -279,26 +279,81 @@ public class Board extends JPanel  {
     }
     
     /**
+     * Method which translates string representations of levels into the board
+     * @author Denny Dien
+     * @param level
+     */
+    private void initLevel(Level level) {
+    	
+    	// Set up the level
+		Iterator<String> itr = level.getLevel().iterator();
+		int row = 0;
+		while (itr.hasNext()) {	
+			String temp = (String) itr.next(); // read the string
+			for (int col = 0, n = temp.length(); col < n ; col++) { 
+				char symbol = temp.charAt(col); // get each char from the string
+				this.createObject(symbol, row, col); // create an object
+				System.out.print(symbol);
+			}
+			System.out.println();
+			row++;
+		}
+    	
+    }
+    
+    /**
+     * Method which initialises game objects based on their allocated symbol
+     * @author Denny Dien
+     * @param symbol
+     * @param row
+     * @param col
+     */
+    public void createObject(char symbol, int row, int col) {
+		String objectType = TileID.getTileID(symbol);
+		
+		if (objectType.equals("Wall")) {
+			this.initWall(row, col);
+		} else if (objectType.equals("Empty")) {
+			this.initFloor(row, col);
+		} else if (objectType.equals("Box")) {
+			this.initBox(row, col);
+		} else if (objectType.equals("Goal")) {
+			this.initGoal(row, col);
+		} else if (objectType.equals("Player")) {
+			this.initPlayer(PlayerNumber.Player1, row, col);
+		} 
+	}
+    
+    /**
      * 
      */
     private void initLevelE1() {
-	this.boardWidth = 5;
-	this.boardHeight = 5;
-	board = new Tile[boardHeight][boardWidth];
-   	for(int y = 0; y < boardHeight; y++){
-   		for(int x = 0; x < boardWidth; x++){
-   		    initWall(x,y);
-   		}
-   	}
-   	
-   	initFloor(1,2);
-   	initFloor(2,2);
-   	initFloor(3,2);
-   	initFloor(3,3);
-
-	initPlayer(PlayerNumber.Player1, 3, 2);
-	initBox(2,2);
-	initGoal(1,2);
+		
+    	Level level = new Level();
+		level.addRow("#####"); // 0
+		level.addRow("##.##"); // 1
+		level.addRow("##$##"); // 2
+		level.addRow("##@##"); // 3
+		level.addRow("#####"); // 4
+		initLevel(level);
+    	
+    	/*this.boardWidth = 5;
+		this.boardHeight = 5;
+		board = new Tile[boardHeight][boardWidth];
+	   	for(int y = 0; y < boardHeight; y++){
+	   		for(int x = 0; x < boardWidth; x++){
+	   		    initWall(x,y);
+	   		}
+	   	}
+	   	
+	   	initFloor(1,2);
+	   	initFloor(2,2);
+	   	initFloor(3,2);
+	   	initFloor(3,3);
+	
+		initPlayer(PlayerNumber.Player1, 3, 2);
+		initBox(2,2);
+		initGoal(1,2);*/
     }
     
     /**
