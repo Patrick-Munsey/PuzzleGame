@@ -39,7 +39,10 @@ public class Board extends JPanel  {
 		goals =  new LinkedList<Goal>();
 		addKeyListener(new BoardAdapter());
 		
-		initBoard(Difficulty.EASY, 1);
+		//initBoard(Difficulty.EASY, 1);
+		//initBoard(Difficulty.EASY, 2);
+		initBoard(Difficulty.MEDIUM, 1);
+    	//initBoard(Difficulty.MEDIUM, 3);
 		initUI();
     }
 
@@ -305,14 +308,33 @@ public class Board extends JPanel  {
      * 
      */
     private void initLevelE2() {
-	this.boardWidth = 5;
-	this.boardHeight = 5;
+	this.boardWidth = 6;
+	this.boardHeight = 6;
 	board = new Tile[boardHeight][boardWidth];
    	for(int y = 0; y < boardHeight; y++){
    		for(int x = 0; x < boardWidth; x++){
    		    initWall(x,y);
    		}
    	}
+   	initFloor(1,2);
+   	initFloor(1,3);
+   	initFloor(1,4);
+   	initFloor(2,1);
+   	initFloor(2,2);
+   	initFloor(2,3);
+   	initFloor(2,4);
+   	initFloor(3,2);
+   	initFloor(3,3);
+   	initFloor(4,1);
+   	initFloor(4,2);
+   	initFloor(4,3);
+   	initFloor(4,4);
+   	
+   	initPlayer(PlayerNumber.Player1, 1, 4);
+   	
+   	initBox(2,3);
+   	
+   	initGoal(4,1);
     }
     
     /**
@@ -341,6 +363,35 @@ public class Board extends JPanel  {
    		    initWall(x,y);
    		}
    	}
+   	
+   	initFloor(1,1);
+   	initFloor(1,2);
+   	initFloor(1,3);
+   	initFloor(1,4);
+   	initFloor(1,5);
+   	initFloor(1,6);
+   	initFloor(2,1);
+   	initFloor(2,4);
+   	initFloor(3,1);
+   	initFloor(3,4);
+   	initFloor(4,1);
+   	initFloor(4,4);
+   	initFloor(5,1);
+   	initFloor(5,4);
+   	initFloor(6,1);
+   	initFloor(6,2);
+   	initFloor(6,3);
+   	initFloor(6,4);
+   	initFloor(6,5);
+   	
+   	initPlayer(PlayerNumber.Player1, 1, 6);
+   	
+   	initBox(2,4);
+   	initBox(6,2);
+   	
+   	initGoal(6,4);
+   	initGoal(6,5);
+   	
     }
     
     /**
@@ -369,6 +420,41 @@ public class Board extends JPanel  {
    		    initWall(x,y);
    		}
    	}
+   	initFloor(1,1);
+   	initFloor(1,2);
+   	initFloor(1,3);
+   	initFloor(1,4);
+   	initFloor(1,5);
+   	initFloor(1,6);
+   	initFloor(2,1);
+   	initFloor(2,2);
+   	initFloor(2,6);
+   	initFloor(3,2);
+   	initFloor(3,3);
+   	initFloor(3,4);
+   	initFloor(3,6);
+   	initFloor(4,2);
+   	initFloor(4,3);
+   	initFloor(4,6);
+   	initFloor(5,1);
+   	initFloor(5,2);
+   	initFloor(5,3);
+   	initFloor(5,6);
+   	initFloor(6,1);
+   	initFloor(6,2);
+   	initFloor(6,3);
+   	initFloor(6,4);
+   	initFloor(6,5);
+   	initFloor(6,6);
+   	
+   	initPlayer(PlayerNumber.Player1, 1, 6);
+   	
+   	initBox(2, 2);
+   	initBox(5, 2);
+   	
+   	initGoal(3,4);
+   	initGoal(4,3);
+   	
     }
     
     /**
@@ -435,7 +521,10 @@ public class Board extends JPanel  {
     public void restart()
     {
     	wipeBoard();
-    	initBoard(Difficulty.EASY, 1);
+    	//initBoard(Difficulty.EASY, 1);
+    	//initBoard(Difficulty.EASY, 2);
+    	initBoard(Difficulty.MEDIUM, 1);
+    	//initBoard(Difficulty.MEDIUM, 3);
     	updateUI();
     }
     
