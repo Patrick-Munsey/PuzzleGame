@@ -29,7 +29,7 @@ public class Board extends JPanel  {
     private LinkedList<Goal> goals;
     
     /**
-     * 
+     * @author Patrick Munsey, z5020841
      */
     public Board() {
 		this.boardWidth = 0;
@@ -44,7 +44,7 @@ public class Board extends JPanel  {
     }
 
     /**
-     * 
+     * @author Patrick Munsey, z5020841
      */
     private void initUI() {	
 	this.setLayout(new GridLayout(boardHeight, boardWidth));
@@ -59,7 +59,7 @@ public class Board extends JPanel  {
     }
     
     /**
-     * 
+     * @author Patrick Munsey, z5020841
      */
     private void refreshUI() {
 		this.revalidate();
@@ -68,6 +68,7 @@ public class Board extends JPanel  {
     
 
     /**
+     * @author Patrick Munsey, z5020841
      * @param playernumber
      * @param direction
      * @return true if player was moved successfully
@@ -78,6 +79,7 @@ public class Board extends JPanel  {
     }
     
     /**
+     * @author Patrick Munsey, z5020841
      * @return true if a GamePiece can move to this tile
      */
     public boolean isMoveable() {
@@ -85,6 +87,7 @@ public class Board extends JPanel  {
     }
     
     /**
+     * @author Patrick Munsey, z5020841
      * @param x
      * @param y
      * @param direction
@@ -134,6 +137,7 @@ public class Board extends JPanel  {
     }
     
     /**
+     * @author Patrick Munsey, z5020841
      * @param x
      * @param y
      * @return true if the tile is able to be occupied by a GamePiece
@@ -143,6 +147,7 @@ public class Board extends JPanel  {
     } 
     
     /**
+     * @author Patrick Munsey, z5020841
      * @param playerNumber
      * @param x
      * @param y
@@ -154,6 +159,7 @@ public class Board extends JPanel  {
     }
     
     /**
+     * @author Patrick Munsey, z5020841
      * @param x
      * @param y
      */
@@ -163,6 +169,7 @@ public class Board extends JPanel  {
     }
     
     /**
+     * @author Patrick Munsey, z5020841
      * @param x
      * @param y
      */
@@ -173,6 +180,7 @@ public class Board extends JPanel  {
     }
     
     /**
+     * @author Patrick Munsey, z5020841
      * @param x
      * @param y
      */
@@ -181,6 +189,7 @@ public class Board extends JPanel  {
     }
     
     /**
+     * @author Patrick Munsey, z5020841
      * @param x
      * @param y
      */
@@ -189,6 +198,7 @@ public class Board extends JPanel  {
     }
     
     /**
+     * @author Patrick Munsey, z5020841
      * @param gamepiece
      * @param x
      * @param y
@@ -198,6 +208,7 @@ public class Board extends JPanel  {
     }
     
     /**
+     * @author Patrick Munsey, z5020841
      * @param x
      * @param y
      */
@@ -207,7 +218,9 @@ public class Board extends JPanel  {
 	board[y][x] = null;
     }
     
+
     /**
+     * @author Patrick Munsey, z5020841
      * @param difficulty
      * @param levelNumber
      */
@@ -386,8 +399,9 @@ public class Board extends JPanel  {
    	}
     }
     
+
     /**
-     * 
+     *
      */
     private void initLevelH3() {
 	this.boardWidth = 10;
@@ -400,6 +414,7 @@ public class Board extends JPanel  {
    	}
     }
     
+
     /**
      * 
      */
@@ -427,6 +442,12 @@ public class Board extends JPanel  {
     /**
      * @authors: 	Patrick Munsey
      * zID: 	z5020841
+=======
+
+    /**
+     * @author Patrick Munsey
+     * zID: z5020841
+>>>>>>> refs/remotes/origin/Patrick
      * 
      */
     class BoardAdapter extends KeyAdapter {

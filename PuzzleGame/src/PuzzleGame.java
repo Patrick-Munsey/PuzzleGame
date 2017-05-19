@@ -4,6 +4,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
+import java.awt.ComponentOrientation;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -38,90 +39,9 @@ public class PuzzleGame extends JFrame{
         setTitle("Puzzle Game");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        
-        JMenuBar the_menu = new JMenuBar();
-        JMenu file = new JMenu("File");
-      
-        JMenuItem restart = new JMenuItem("Restart");
-        restart.addActionListener(new ActionListener()
-    		{
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					// restart the game
-					System.out.println("restarting");
-					board.restart(); //TODO this is not restarting the game
-				}
-    		});
-        
-        // options is a menu itself, then we'll make a submenu of options
-        JMenu options = new JMenu("Options");
-        JMenuItem sound = new JMenuItem("Sound");
-        sound.addActionListener(new ActionListener()
-        	{
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					System.out.println("toggle sound");
-				}
-        			
-        	});
-        options.add(sound);
-       
-        JMenuItem exit = new JMenuItem("Exit");
-        exit.addActionListener(new ActionListener()
-			{
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					System.exit(0);
-				}
-			
-			});
-        
-        JMenu help = new JMenu("Help");
-        JMenuItem rules = new JMenuItem("Rules");
-        rules.addActionListener(new ActionListener()
-      		{
-      			@Override
-      			public void actionPerformed(ActionEvent e) {
-      				JOptionPane.showMessageDialog(board, 
-      						"<html><center><b>Warehouse Boss</b></center><br>" + 
-      						"You are a warehouse boss. Your task is to " +
-      						"push the boxes to the right place. <br><br><center><b>Good luck</b></center></html>"
-                            
-      						,"Rules", JOptionPane.PLAIN_MESSAGE);
-      			}
-      			
-      		});
-    
-        JMenuItem about = new JMenuItem("About");
-        about.addActionListener(new ActionListener()
-      		{
-      			@Override
-      			public void actionPerformed(ActionEvent e) {
-      				JOptionPane.showMessageDialog(board, 
-      						"<html><center><b>Information</b></center><br>" + 
-      						"This game was created a bunch of students " +
-      						"so you shoudl be impressed!. <br><br><center><b>Happy playing!</b></center></html>"
-                            
-      						,"Rules", JOptionPane.PLAIN_MESSAGE);
-      			}
-      			
-      		});
-        
-        file.add(restart);
-        file.add(options);
-        file.add(exit);
-        
-        help.add(rules);
-        help.add(about);
-        
-        the_menu.add(file);
-        the_menu.add(help);
-        
-        the_menu.add(Box.createHorizontalGlue());
-        setJMenuBar(the_menu);
-        
+
         //setup the JMenu items (buttons etc)
-        /*JMenuItem newGameMenuItem = new JMenuItem("New Game");
+        JMenuItem newGameMenuItem = new JMenuItem("New Game");
         newGameMenuItem.setMnemonic(KeyEvent.VK_N);
         newGameMenuItem.setToolTipText("Start a new game");
         newGameMenuItem.addActionListener(new ActionListener() {
@@ -165,6 +85,17 @@ public class PuzzleGame extends JFrame{
         	System.out.println("instructions button pressed");
             }
         });
+        
+        JMenuItem restartMenuItem = new JMenuItem("Restart");
+        restartMenuItem.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT); 
+        restartMenuItem.setMnemonic(KeyEvent.VK_R);
+        restartMenuItem.setToolTipText("Instructions");
+        restartMenuItem.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent e) {
+        	System.out.println("Restart button pressed");
+        	board.restart(); //TODO this is not restarting the game
+            }
+        });
 
         //add all of the Jmenu items to the Menu bar
         JMenuBar menuBar = new JMenuBar();
@@ -178,7 +109,18 @@ public class PuzzleGame extends JFrame{
         help.add(aboutMenuItem);
         menuBar.add(help);
         menuBar.add(Box.createHorizontalGlue());
-        setJMenuBar(menuBar);*/
+        menuBar.add(restartMenuItem);
+
+        
+        /*
+	JMenu timerdisplay = new JMenu(gameTimer.toString());
+	gameTimer.restart();
+	gameTimer.setTimeDisplay(timerdisplay);
+	timerdisplay.update(getGraphics());
+	menuBar.add(timerdisplay);
+	*/
+        setJMenuBar(menuBar);
+
     }
     
     /**
@@ -189,4 +131,3 @@ public class PuzzleGame extends JFrame{
 	    puzzlegame.setVisible(true);
     }
 }
-
