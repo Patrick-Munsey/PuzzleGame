@@ -5,6 +5,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
 import java.awt.ComponentOrientation;
+import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
@@ -22,6 +23,7 @@ import javax.swing.JComponent;
 @SuppressWarnings("serial")
 public class PuzzleGame extends JFrame{
     private Board board;
+    private Frame the_frame = this;
 
     public PuzzleGame() {
 	this.board = new Board();
@@ -55,7 +57,8 @@ public class PuzzleGame extends JFrame{
         optionsMenuItem.setToolTipText("Change game options");
         optionsMenuItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-        	System.out.println("Options button pressed");
+            	OptionsDialog options = new OptionsDialog(the_frame);
+            	options.setVisible(true);
             }
         });
 
@@ -64,7 +67,7 @@ public class PuzzleGame extends JFrame{
         exitMenuItem.setToolTipText("Exit application");
         exitMenuItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-        	System.out.println("Exit button pressed");
+            	System.exit(0);
             }
         });
         
@@ -73,7 +76,8 @@ public class PuzzleGame extends JFrame{
         aboutMenuItem.setToolTipText("About");
         aboutMenuItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-        	System.out.println("About button pressed");
+            	AboutDialog about = new AboutDialog(the_frame);
+            	about.setVisible(true);
             }
         });
         
@@ -82,7 +86,8 @@ public class PuzzleGame extends JFrame{
         instructionsMenuItem.setToolTipText("Instructions");
         instructionsMenuItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-        	System.out.println("instructions button pressed");
+	        	InstructionsDialog instructions = new InstructionsDialog(the_frame);
+	        	instructions.setVisible(true);
             }
         });
         
