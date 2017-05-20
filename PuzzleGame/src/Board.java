@@ -1,5 +1,8 @@
+import java.awt.Component;
 import java.awt.ComponentOrientation;
 import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,6 +30,8 @@ public class Board extends JPanel  {
     private int boardHeight;
     private HashMap<PlayerNumber, Player> players;
     private LinkedList<Goal> goals;
+    private int box_size = 30;
+    JPanel the_board = new JPanel();
     
     /**
      * @author Patrick Munsey, z5020841
@@ -37,28 +42,31 @@ public class Board extends JPanel  {
 		board = new Tile[boardHeight][boardWidth];
 		players = new  HashMap<PlayerNumber, Player>();
 		goals =  new LinkedList<Goal>();
-		addKeyListener(new BoardAdapter());
+		the_board.addKeyListener(new BoardAdapter());
 		
 		//initBoard(Difficulty.EASY, 1);
 		//initBoard(Difficulty.EASY, 2);
 		initBoard(Difficulty.MEDIUM, 1);
     	//initBoard(Difficulty.MEDIUM, 3);
 		initUI();
+		setPreferredSize(new Dimension(box_size*boardWidth*2, box_size*boardHeight*2));
     }
 
     /**
      * @author Patrick Munsey, z5020841
      */
     private void initUI() {	
-	this.setLayout(new GridLayout(boardHeight, boardWidth));
-	this.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+    setLayout(new GridBagLayout());
+	the_board.setLayout(new GridLayout(boardHeight, boardWidth));
+	the_board.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 	
 	for(int y = 0; y < boardHeight; y++){
 		for(int x = 0; x < boardWidth; x++){
-		    this.add(board[boardWidth-1-y][x]);//labels have to be added from top to bottom not bottom to top so reverse board y index
+		    the_board.add(board[boardWidth-1-y][x]);//labels have to be added from top to bottom not bottom to top so reverse board y index
 		}
 	}
-		setFocusable(true);  
+		the_board.setFocusable(true); 
+		add(the_board);
     }
     
     /**
@@ -66,7 +74,7 @@ public class Board extends JPanel  {
      */
     private void refreshUI() {
 		this.revalidate();
-	        this.repaint();
+	    this.repaint();
     }
     
 
