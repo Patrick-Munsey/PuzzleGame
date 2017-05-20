@@ -1,18 +1,12 @@
 import java.awt.ComponentOrientation;
-import java.awt.Container;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 
-import javax.swing.GroupLayout;
-import javax.swing.JComponent;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.Timer;
 
 
 /**
@@ -176,6 +170,7 @@ public class Board extends JPanel  {
     public void initGoal(int x, int y) {
 	Goal newGoal = new Goal();
 	goals.add(newGoal);
+	initFloor(x,y);
 	board[y][x].placeGoal(newGoal);
     }
     
@@ -185,7 +180,7 @@ public class Board extends JPanel  {
      * @param y
      */
     public void initWall(int x, int y) {
-	board[y][x] = new Wall(x,y);
+    	board[y][x] = new Wall(x,y);
     }
     
     /**
@@ -283,7 +278,15 @@ public class Board extends JPanel  {
      * @author Denny Dien
      * @param level
      */
-    private void initLevel(Level level) {
+    private void initLevel(Level level, int boardWidth, int boardHeight) {
+    	
+    	// Initialise the board
+    	board = new Tile[boardHeight][boardWidth];
+	   	for(int y = 0; y < boardHeight; y++){
+	   		for(int x = 0; x < boardWidth; x++){
+	   		    initFloor(x,y);
+	   		}
+	   	}
     	
     	// Set up the level
 		Iterator<String> itr = level.getLevel().iterator();
@@ -292,7 +295,7 @@ public class Board extends JPanel  {
 			String temp = (String) itr.next(); // read the string
 			for (int col = 0, n = temp.length(); col < n ; col++) { 
 				char symbol = temp.charAt(col); // get each char from the string
-				this.createObject(symbol, row, col); // create an object
+				this.createObject(symbol, col, row); // create an object
 				System.out.print(symbol);
 			}
 			System.out.println();
@@ -313,8 +316,8 @@ public class Board extends JPanel  {
 		
 		if (objectType.equals("Wall")) {
 			this.initWall(row, col);
-		} else if (objectType.equals("Empty")) {
-			this.initFloor(row, col);
+		} else if (objectType.equals("Floor")) {
+			//this.initFloor(row, col);
 		} else if (objectType.equals("Box")) {
 			this.initBox(row, col);
 		} else if (objectType.equals("Goal")) {
@@ -329,24 +332,18 @@ public class Board extends JPanel  {
      */
     private void initLevelE1() {
 		
-    	Level level = new Level();
+    	this.boardWidth = 5;
+		this.boardHeight = 5;
+
+	   	Level level = new Level();
 		level.addRow("#####"); // 0
 		level.addRow("##.##"); // 1
 		level.addRow("##$##"); // 2
-		level.addRow("##@##"); // 3
-		level.addRow("#####"); // 4
-		initLevel(level);
-    	
-    	/*this.boardWidth = 5;
-		this.boardHeight = 5;
-		board = new Tile[boardHeight][boardWidth];
-	   	for(int y = 0; y < boardHeight; y++){
-	   		for(int x = 0; x < boardWidth; x++){
-	   		    initWall(x,y);
-	   		}
-	   	}
+		level.addRow("## ##"); // 3
+		level.addRow("##@##"); // 4
+		initLevel(level, this.boardWidth, this.boardHeight);
 	   	
-	   	initFloor(1,2);
+	   	/*initFloor(1,2);
 	   	initFloor(2,2);
 	   	initFloor(3,2);
 	   	initFloor(3,3);
