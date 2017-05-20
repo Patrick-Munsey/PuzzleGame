@@ -328,7 +328,7 @@ public class Board extends JPanel  {
 		
 		if (objectType.equals("Wall")) {
 			this.initWall(row, col);
-		} else if (objectType.equals("Floor")) {
+		//} else if (objectType.equals("Floor")) {
 			//this.initFloor(row, col);
 		} else if (objectType.equals("Box")) {
 			this.initBox(row, col);
@@ -351,7 +351,7 @@ public class Board extends JPanel  {
 		level.addRow("#####"); // 0
 		level.addRow("##.##"); // 1
 		level.addRow("##$##"); // 2
-		level.addRow("## ##"); // 3
+		level.addRow("##-##"); // 3
 		level.addRow("##@##"); // 4
 		initLevel(level, this.boardWidth, this.boardHeight);
     }

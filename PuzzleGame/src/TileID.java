@@ -1,7 +1,7 @@
 public enum TileID {
 
 	Wall('#'),
-	Floor(' '),
+	Floor('-'),
 	Box('$'),
 	Goal('.'),
 	Player('@');
