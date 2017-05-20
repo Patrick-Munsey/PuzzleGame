@@ -241,6 +241,7 @@ public class Board extends JPanel  {
 			    break;
 			case HARD:
 			    filePath = filePath + "h";
+			    break;
 			default:
 			    System.out.println("Invalid difficulty");
 			    return;   
