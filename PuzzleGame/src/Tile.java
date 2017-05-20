@@ -16,10 +16,10 @@ class Tile extends JLabel{
      * @param y
      */
     public Tile(int x, int y) {
-	super();
-	this.x = x;
-	this.y = y;
-	updateLabel();
+		super();
+		this.x = x;
+		this.y = y;
+		updateLabel();
     }
     
     /**
@@ -27,14 +27,14 @@ class Tile extends JLabel{
      */
     // this.setIcon(Icon i)
     public void updateLabel() {
-	this.setText("0");
+    	this.setText("0");
     }
     
     /**
      * @return true if the Tile is able to be occupied by a GamePiece
      */
     public boolean isMoveable() {
-	return false;
+    	return false;
     }
          
     /**

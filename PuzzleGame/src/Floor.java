@@ -45,7 +45,6 @@ public class Floor extends Tile{
 			if(goal != null) {
 				ImageIcon icon = createImageIcon("images/goal.png");
 		    	setIcon(icon);
-				
 			}
 			else {
 				ImageIcon icon = createImageIcon("images/floor.png");

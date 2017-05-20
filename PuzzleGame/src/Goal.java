@@ -7,18 +7,18 @@ public class Goal {
     private boolean activated;
     
     Goal() {
-	this.activated = false;
+    	this.activated = false;
     }
     
     public void activate() {
-	this.activated = false;
+    	this.activated = false;
     }
     
     public void deactivate() {
-	this.activated = false;
+    	this.activated = false;
     }
     
     public boolean isactivated() {
-	return this.activated;
+    	return this.activated;
     }
 }

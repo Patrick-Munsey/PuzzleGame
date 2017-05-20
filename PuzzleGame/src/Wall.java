@@ -16,7 +16,7 @@ public class Wall extends Tile {
      * @param y
      */
     public Wall(int x, int y) {
-	super(x,y);
+    	super(x,y);
     }
 
     /* (non-Javadoc)

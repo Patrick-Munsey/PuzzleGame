@@ -26,8 +26,5 @@ public class Player extends GamePiece{
     	ImageIcon icon = createImageIcon("images/player.png");
     	label.setIcon(icon);
     }
-
-    
-
     
 }

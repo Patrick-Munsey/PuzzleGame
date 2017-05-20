@@ -23,51 +23,51 @@ public class GamePiece {
      */
     public boolean movePiece(Board board, Direction direction) {
 	
-	switch(direction) {
-	case UP:
-	    if(board.isMoveable(this.x, this.y +1)) {
-		board.MovePiece(this.x, this.y, direction);
-		return true;
-	    }
-	    else if(board.MovePiece(this.x, this.y +1, direction)) {
-		board.MovePiece(this.x, this.y, direction);
-		return true;
-	    }
-	    break;
-	case DOWN:
-	    if(board.isMoveable(this.x, this.y -1)) {
-		board.MovePiece(this.x, this.y, direction);
-		return true;
-	    }
-	    else if(board.MovePiece(this.x, this.y -1, direction)) {
-		board.MovePiece(this.x, this.y, direction);
-		return true;
-	    }
-	    break;
-	case LEFT:
-	    if(board.isMoveable(this.x -1, this.y)) {
-		board.MovePiece(this.x, this.y, direction);
-		return true;
-	    }
-	    else if(board.MovePiece(this.x -1, this.y, direction)) {
-		board.MovePiece(this.x, this.y, direction);
-		return true;
-	    }
-	    break;
-	case RIGHT:
-	    if(board.isMoveable(this.x +1, this.y)) {
-		board.MovePiece(this.x, this.y, direction);
-		return true;
-	    }
-	    else if(board.MovePiece(this.x +1, this.y, direction)) {
-		board.MovePiece(this.x, this.y, direction);
-		return true;
-	    }
-	    break;
-	default:
-	    break;
-	}
-	return false;
+		switch(direction) {
+			case UP:
+			    if(board.isMoveable(this.x, this.y +1)) {
+				board.MovePiece(this.x, this.y, direction);
+				return true;
+			    }
+			    else if(board.MovePiece(this.x, this.y +1, direction)) {
+				board.MovePiece(this.x, this.y, direction);
+				return true;
+			    }
+			    break;
+			case DOWN:
+			    if(board.isMoveable(this.x, this.y -1)) {
+				board.MovePiece(this.x, this.y, direction);
+				return true;
+			    }
+			    else if(board.MovePiece(this.x, this.y -1, direction)) {
+				board.MovePiece(this.x, this.y, direction);
+				return true;
+			    }
+			    break;
+			case LEFT:
+			    if(board.isMoveable(this.x -1, this.y)) {
+				board.MovePiece(this.x, this.y, direction);
+				return true;
+			    }
+			    else if(board.MovePiece(this.x -1, this.y, direction)) {
+				board.MovePiece(this.x, this.y, direction);
+				return true;
+			    }
+			    break;
+			case RIGHT:
+			    if(board.isMoveable(this.x +1, this.y)) {
+				board.MovePiece(this.x, this.y, direction);
+				return true;
+			    }
+			    else if(board.MovePiece(this.x +1, this.y, direction)) {
+				board.MovePiece(this.x, this.y, direction);
+				return true;
+			    }
+			    break;
+			default:
+			    break;
+		}
+			return false;
     }
     
     /**
@@ -75,8 +75,8 @@ public class GamePiece {
      * @param y
      */
     public void placePiece(int x, int y) {
-	this.x = x;
-	this.y = y;
+		this.x = x;
+		this.y = y;
     }
     
     /**
