@@ -232,6 +232,10 @@ public class Board extends JPanel  {
     	wipeBoard();
     	//changing to level.getLevelFromFile
     	String filePath = "../PuzzleGame/levels/main/";
+    	Level currLevel = new Level();
+		currLevel.setDiff(difficulty);
+		currLevel.setNum(levelNumber);
+		
 			switch(difficulty) {
 			case EASY:
 				filePath = filePath + "e";
@@ -248,7 +252,6 @@ public class Board extends JPanel  {
 		}
 			filePath = filePath + levelNumber + ".txt";
 			System.out.println(filePath);
-			Level currLevel = new Level();
 			currLevel.makeLevelFromFile(filePath);
 			initLevel(currLevel, currLevel.getWidth(), currLevel.getHeight());
 			this.boardHeight = currLevel.getHeight();
