@@ -170,7 +170,6 @@ public class Board extends JPanel  {
     public void initGoal(int x, int y) {
 	Goal newGoal = new Goal();
 	goals.add(newGoal);
-	initFloor(x,y);
 	board[y][x].placeGoal(newGoal);
     }
     
@@ -275,12 +274,14 @@ public class Board extends JPanel  {
     
     /**
      * Method which translates string representations of levels into the board
+     * Starts by setting up the board with floors
+     * Then updates the rest of the board based on the string inputs
      * @author Denny Dien
      * @param level
      */
     private void initLevel(Level level, int boardWidth, int boardHeight) {
     	
-    	// Initialise the board
+    	// Initialise the board with all floors
     	board = new Tile[boardHeight][boardWidth];
 	   	for(int y = 0; y < boardHeight; y++){
 	   		for(int x = 0; x < boardWidth; x++){
@@ -288,18 +289,19 @@ public class Board extends JPanel  {
 	   		}
 	   	}
     	
-    	// Set up the level
+    	// Set up the level based on the string input
 		Iterator<String> itr = level.getLevel().iterator();
-		int row = 0;
+		int row = 4; 
 		while (itr.hasNext()) {	
 			String temp = (String) itr.next(); // read the string
 			for (int col = 0, n = temp.length(); col < n ; col++) { 
 				char symbol = temp.charAt(col); // get each char from the string
 				this.createObject(symbol, col, row); // create an object
 				System.out.print(symbol);
+				//System.out.print(symbol + "(" + row +"," + col +") ");
 			}
 			System.out.println();
-			row++;
+			row--;
 		}
     	
     }
@@ -343,112 +345,83 @@ public class Board extends JPanel  {
 		level.addRow("##@##"); // 4
 		initLevel(level, this.boardWidth, this.boardHeight);
 	   	
-	   	/*initFloor(1,2);
-	   	initFloor(2,2);
-	   	initFloor(3,2);
-	   	initFloor(3,3);
-	
-		initPlayer(PlayerNumber.Player1, 3, 2);
-		initBox(2,2);
-		initGoal(1,2);*/
     }
     
     /**
      * 
      */
     private void initLevelE2() {
-	this.boardWidth = 5;
-	this.boardHeight = 5;
-	board = new Tile[boardHeight][boardWidth];
-   	for(int y = 0; y < boardHeight; y++){
-   		for(int x = 0; x < boardWidth; x++){
-   		    initWall(x,y);
-   		}
-   	}
+		this.boardWidth = 5;
+		this.boardHeight = 5;
+		Level level = new Level();
+		// Insert level strings here
+		initLevel(level, this.boardWidth, this.boardHeight);
     }
     
     /**
      * 
      */
     private void initLevelE3() {
-	this.boardWidth = 5;
-	this.boardHeight = 5;
-	board = new Tile[boardHeight][boardWidth];
-   	for(int y = 0; y < boardHeight; y++){
-   		for(int x = 0; x < boardWidth; x++){
-   		    initWall(x,y);
-   		}
-   	}
+		this.boardWidth = 5;
+		this.boardHeight = 5;
+		Level level = new Level();
+		// Insert level strings here
+		initLevel(level, this.boardWidth, this.boardHeight);
     }
     
     /**
      * 
      */
     private void initLevelM1() {
-	this.boardWidth = 8;
-	this.boardHeight = 8;
-	board = new Tile[boardHeight][boardWidth];
-   	for(int y = 0; y < boardHeight; y++){
-   		for(int x = 0; x < boardWidth; x++){
-   		    initWall(x,y);
-   		}
-   	}
+		this.boardWidth = 8;
+		this.boardHeight = 8;
+		Level level = new Level();
+		// Insert level strings here
+		initLevel(level, this.boardWidth, this.boardHeight);
     }
     
     /**
      * 
      */
     private void initLevelM2() {
-	this.boardWidth = 8;
-	this.boardHeight = 8;
-	board = new Tile[boardHeight][boardWidth];
-   	for(int y = 0; y < boardHeight; y++){
-   		for(int x = 0; x < boardWidth; x++){
-   		    initWall(x,y);
-   		}
-   	}
+		this.boardWidth = 8;
+		this.boardHeight = 8;
+		Level level = new Level();
+		// Insert level strings here
+		initLevel(level, this.boardWidth, this.boardHeight);
     }
     
     /**
      * 
      */
     private void initLevelM3() {
-	this.boardWidth = 8;
-	this.boardHeight = 8;
-	board = new Tile[boardHeight][boardWidth];
-   	for(int y = 0; y < boardHeight; y++){
-   		for(int x = 0; x < boardWidth; x++){
-   		    initWall(x,y);
-   		}
-   	}
+		this.boardWidth = 8;
+		this.boardHeight = 8;
+		Level level = new Level();
+		// Insert level strings here
+		initLevel(level, this.boardWidth, this.boardHeight);
     }
     
     /**
      * 
      */
     private void initLevelH1() {
-	this.boardWidth = 10;
-	this.boardHeight = 10;
-	board = new Tile[boardHeight][boardWidth];
-   	for(int y = 0; y < boardHeight; y++){
-   		for(int x = 0; x < boardWidth; x++){
-   		    initWall(x,y);
-   		}
-   	}
+		this.boardWidth = 10;
+		this.boardHeight = 10;
+		Level level = new Level();
+		// Insert level strings here
+		initLevel(level, this.boardWidth, this.boardHeight);
     }
     
     /**
      * 
      */
     private void initLevelH2() {
-	this.boardWidth = 10;
-	this.boardHeight = 10;
-	board = new Tile[boardHeight][boardWidth];
-   	for(int y = 0; y < boardHeight; y++){
-   		for(int x = 0; x < boardWidth; x++){
-   		    initWall(x,y);
-   		}
-   	}
+		this.boardWidth = 10;
+		this.boardHeight = 10;
+		Level level = new Level();
+		// Insert level strings here
+		initLevel(level, this.boardWidth, this.boardHeight);
     }
     
 
@@ -456,14 +429,11 @@ public class Board extends JPanel  {
      *
      */
     private void initLevelH3() {
-	this.boardWidth = 10;
-	this.boardHeight = 10;
-	board = new Tile[boardHeight][boardWidth];
-   	for(int y = 0; y < boardHeight; y++){
-   		for(int x = 0; x < boardWidth; x++){
-   		    initWall(x,y);
-   		}
-   	}
+		this.boardWidth = 10;
+		this.boardHeight = 10;
+		Level level = new Level();
+		// Insert level strings here
+		initLevel(level, this.boardWidth, this.boardHeight);
     }
     
 
