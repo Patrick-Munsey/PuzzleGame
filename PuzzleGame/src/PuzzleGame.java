@@ -97,8 +97,7 @@ public class PuzzleGame extends JFrame{
         restartMenuItem.setToolTipText("Restart Game");
         restartMenuItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-        	System.out.println("Restart button pressed");
-        	board.restart(); //TODO this is not restarting the game
+        	board.restart(); 
             }
         });
 

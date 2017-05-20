@@ -66,7 +66,6 @@ public class Level {
 				this.width = width;
 				this.height = height;
 				
-				System.out.println(filePath.substring(filePath.length()-6,filePath.length()-4));
 				
 				for(String currLine : inputLines){
 					  this.addRow(currLine);					
