@@ -35,12 +35,12 @@ public class Board extends JPanel  {
     public Board() {
 		this.boardWidth = 0;
 		this.boardHeight = 0;
-		board = new Tile[boardHeight][boardWidth];
+		board = new Tile[boardWidth][boardHeight];
 		players = new  HashMap<PlayerNumber, Player>();
 		goals =  new LinkedList<Goal>();
 		addKeyListener(new BoardAdapter());
 		
-		initBoard(Difficulty.EASY, 1);
+		initBoard(Difficulty.EASY, 0);
 		//initBoard(Difficulty.EASY, 2);
 		//initBoard(Difficulty.MEDIUM, 1);
     	//initBoard(Difficulty.MEDIUM, 3);
@@ -51,15 +51,15 @@ public class Board extends JPanel  {
      * @author Patrick Munsey, z5020841
      */
     private void initUI() {	
-	this.setLayout(new GridLayout(boardHeight, boardWidth));
-	this.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-	
-	for(int y = 0; y < boardHeight; y++){
-		for(int x = 0; x < boardWidth; x++){
-		    this.add(board[boardWidth-1-y][x]);//labels have to be added from top to bottom not bottom to top so reverse board y index
+		this.setLayout(new GridLayout(boardHeight, boardWidth));
+		this.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		
+		for(int y = 0; y < boardHeight; y++){
+			for(int x = 0; x < boardWidth; x++){
+			    this.add(board[x][boardHeight-1-y]);//labels have to be added from top to bottom not bottom to top so reverse board y index
+			}
 		}
-	}
-		setFocusable(true);  
+			setFocusable(true);  
     }
     
     /**
@@ -67,7 +67,7 @@ public class Board extends JPanel  {
      */
     private void refreshUI() {
 		this.revalidate();
-	        this.repaint();
+	    this.repaint();
     }
     
 
@@ -78,8 +78,8 @@ public class Board extends JPanel  {
      * @return true if player was moved successfully
      */
     public boolean MovePlayer(PlayerNumber playernumber, Direction direction) {
-	players.get(playernumber).movePiece(this, direction);
-	return true;
+		players.get(playernumber).movePiece(this, direction);
+		return true;
     }
     
     /**
@@ -98,46 +98,46 @@ public class Board extends JPanel  {
      * @return true if GamePiece was moved successfully
      */
     public boolean MovePiece(int x, int y, Direction direction) {
-	GamePiece gamepiece = board[y][x].removeGamePiece();
-	if(gamepiece == null) {
-	    return false;
-	}
-	
-	switch(direction) {
-	case UP:
-	    if(board[y+1][x].isMoveable()) {
-		board[y+1][x].placeGamePiece(gamepiece);
-		refreshUI();
-		return true;
-	    }
-	    break;
-	case DOWN:
-	    if(board[y-1][x].isMoveable()) {
-		board[y-1][x].placeGamePiece(gamepiece);
-		refreshUI();
-		return true;
-	    }
-	    break;
-	case LEFT:
-	    if(board[y][x-1].isMoveable()) {
-		board[y][x-1].placeGamePiece(gamepiece);
-		refreshUI();
-		return true;
-	    }
-	    break;
-	case RIGHT:
-	    if(board[y][x+1].isMoveable()) {
-		board[y][x+1].placeGamePiece(gamepiece);
-		refreshUI();
-		return true;
-	    }
-	    break;
-	default:
-	    break;
-	}
-	
-	board[y][x].placeGamePiece(gamepiece);
-	return false;
+		GamePiece gamepiece = board[x][y].removeGamePiece();
+		if(gamepiece == null) {
+		    return false;
+		}
+		
+		switch(direction) {
+			case UP:
+			    if(board[x][y+1].isMoveable()) {
+				board[x][y+1].placeGamePiece(gamepiece);
+				refreshUI();
+				return true;
+			    }
+			    break;
+			case DOWN:
+			    if(board[x][y-1].isMoveable()) {
+				board[x][y-1].placeGamePiece(gamepiece);
+				refreshUI();
+				return true;
+			    }
+			    break;
+			case LEFT:
+			    if(board[x-1][y].isMoveable()) {
+				board[x-1][y].placeGamePiece(gamepiece);
+				refreshUI();
+				return true;
+			    }
+			    break;
+			case RIGHT:
+			    if(board[x+1][y].isMoveable()) {
+				board[x+1][y].placeGamePiece(gamepiece);
+				refreshUI();
+				return true;
+			    }
+			    break;
+			default:
+			    break;
+		}
+		
+		board[x][y].placeGamePiece(gamepiece);
+		return false;
     }
     
     /**
@@ -147,7 +147,7 @@ public class Board extends JPanel  {
      * @return true if the tile is able to be occupied by a GamePiece
      */
     public boolean isMoveable(int x, int y) {	
-	return board[y][x].isMoveable();
+    	return board[x][y].isMoveable();
     } 
     
     /**
@@ -157,9 +157,9 @@ public class Board extends JPanel  {
      * @param y
      */
     public void initPlayer(PlayerNumber playerNumber, int x, int y) {
-	Player newPlayer = new Player(playerNumber);
-	players.put(playerNumber, newPlayer);
-	placeGamePiece(newPlayer, x, y);
+		Player newPlayer = new Player(playerNumber);
+		players.put(playerNumber, newPlayer);
+		placeGamePiece(newPlayer, x, y);
     }
     
     /**
@@ -168,8 +168,8 @@ public class Board extends JPanel  {
      * @param y
      */
     public void initBox(int x, int y) {
-	Box newBox = new Box();
-	placeGamePiece(newBox, x, y);
+		Box newBox = new Box();
+		placeGamePiece(newBox, x, y);
     }
     
     /**
@@ -178,9 +178,9 @@ public class Board extends JPanel  {
      * @param y
      */
     public void initGoal(int x, int y) {
-	Goal newGoal = new Goal();
-	goals.add(newGoal);
-	board[y][x].placeGoal(newGoal);
+		Goal newGoal = new Goal();
+		goals.add(newGoal);
+		board[x][y].placeGoal(newGoal);
     }
     
     /**
@@ -189,7 +189,7 @@ public class Board extends JPanel  {
      * @param y
      */
     public void initWall(int x, int y) {
-	board[y][x] = new Wall(x,y);
+    	board[x][y] = new Wall(x,y);
     }
     
     /**
@@ -198,7 +198,7 @@ public class Board extends JPanel  {
      * @param y
      */
     public void initFloor(int x, int y) {
-	board[y][x] = new Floor(x,y);
+    	board[x][y] = new Floor(x,y);
     }
     
     /**
@@ -208,7 +208,7 @@ public class Board extends JPanel  {
      * @param y
      */
     public void placeGamePiece(GamePiece gamepiece, int x, int y) {
-	board[y][x].placeGamePiece(gamepiece);
+    	board[x][y].placeGamePiece(gamepiece);
     }
     
     /**
@@ -217,9 +217,9 @@ public class Board extends JPanel  {
      * @param y
      */
     public void clearTile(int x, int y) {
-	board[y][x].removeGoal();
-	board[y][x].removeGamePiece();
-	board[y][x] = null;
+		board[x][y].removeGoal();
+		board[x][y].removeGamePiece();
+		board[x][y] = null;
     }
     
 
@@ -230,56 +230,30 @@ public class Board extends JPanel  {
      */
     private void initBoard(Difficulty difficulty, int levelNumber) {
     	wipeBoard();
+    	//changing to level.getLevelFromFile
+    	String filePath = "../PuzzleGame/levels/main/";
 			switch(difficulty) {
 			case EASY:
-			    switch(levelNumber) {
-			    	case 1:
-			    	    initLevelE1();
-			    	    return;
-			    	case 2:
-			    	    initLevelE2();
-			    	    return;
-			    	case 3:
-			    	    initLevelE3();
-			    	    return;
-			    	default:
-			    	    System.out.println("Invalid level");
-			    	    return;
-			    }
+				filePath = filePath + "e";
+			    break;
 			case MEDIUM:
-			    switch(levelNumber) {
-			    	case 1:
-			    	    initLevelM1();
-			    	    return;
-			    	case 2:
-			    	    initLevelM2();
-			    	    return;
-			    	case 3:
-			    	    initLevelM3();
-			    	    return;
-			    	default:
-			    	    System.out.println("Invalid level");
-			    	    return;
-			    }
+				filePath = filePath + "m";
+			    break;
 			case HARD:
-			    switch(levelNumber) {
-			    	case 1:
-			    	    initLevelH1();
-			    	    return;
-			    	case 2:
-			    	    initLevelH2();
-			    	    return;
-			    	case 3:
-			    	    initLevelH3();
-			    	    return;
-			    	default:
-			    	    System.out.println("Invalid level");
-			    	    return;
-			    }
+			    filePath = filePath + "h";
+			    break;
 			default:
 			    System.out.println("Invalid difficulty");
 			    return;   
 		}
+			filePath = filePath + levelNumber + ".txt";
+			System.out.println(filePath);
+			Level currLevel = new Level();
+			currLevel.makeLevelFromFile(filePath);
+			initLevel(currLevel, currLevel.getWidth(), currLevel.getHeight());
+			this.boardHeight = currLevel.getHeight();
+			this.boardWidth = currLevel.getWidth();
+			return;
     }
     
     /**
@@ -292,7 +266,7 @@ public class Board extends JPanel  {
     private void initLevel(Level level, int boardWidth, int boardHeight) {
     	
     	// Initialise the board with all floors
-    	board = new Tile[boardHeight][boardWidth];
+    	board = new Tile[boardWidth][boardHeight];
 	   	for(int y = 0; y < boardHeight; y++){
 	   		for(int x = 0; x < boardWidth; x++){
 	   		    initFloor(x,y);
@@ -301,11 +275,11 @@ public class Board extends JPanel  {
     	
     	// Set up the level based on the string input
 		Iterator<String> itr = level.getLevel().iterator();
-		int row = 4; 
+		int row = boardHeight-1;
 		while (itr.hasNext()) {	
-			String temp = (String) itr.next(); // read the string
-			for (int col = 0, n = temp.length(); col < n ; col++) { 
-				char symbol = temp.charAt(col); // get each char from the string
+			String strRow = (String) itr.next(); // read the string
+			for (int col = 0; col < boardWidth ; col++) { 
+				char symbol = strRow.charAt(col); // get each char from the string
 				this.createObject(symbol, col, row); // create an object
 				System.out.print(symbol);
 				//System.out.print(symbol + "(" + row +"," + col +") ");
@@ -328,7 +302,7 @@ public class Board extends JPanel  {
 		
 		if (objectType.equals("Wall")) {
 			this.initWall(row, col);
-		} else if (objectType.equals("Floor")) {
+		//} else if (objectType.equals("Floor")) {
 			//this.initFloor(row, col);
 		} else if (objectType.equals("Box")) {
 			this.initBox(row, col);
@@ -338,113 +312,6 @@ public class Board extends JPanel  {
 			this.initPlayer(PlayerNumber.Player1, row, col);
 		} 
 	}
-    
-    /**
-     * 
-     */
-    private void initLevelE1() {
-		
-    	this.boardWidth = 5;
-		this.boardHeight = 5;
-
-	   	Level level = new Level();
-		level.addRow("#####"); // 0
-		level.addRow("##.##"); // 1
-		level.addRow("##$##"); // 2
-		level.addRow("## ##"); // 3
-		level.addRow("##@##"); // 4
-		initLevel(level, this.boardWidth, this.boardHeight);
-	   	
-    }
-    
-    /**
-     * 
-     */
-    private void initLevelE2() {
-		this.boardWidth = 5;
-		this.boardHeight = 5;
-		Level level = new Level();
-		// Insert level strings here
-		initLevel(level, this.boardWidth, this.boardHeight);
-    }
-    
-    /**
-     * 
-     */
-    private void initLevelE3() {
-		this.boardWidth = 5;
-		this.boardHeight = 5;
-		Level level = new Level();
-		// Insert level strings here
-		initLevel(level, this.boardWidth, this.boardHeight);
-    }
-    
-    /**
-     * 
-     */
-    private void initLevelM1() {
-		this.boardWidth = 8;
-		this.boardHeight = 8;
-		Level level = new Level();
-		// Insert level strings here
-		initLevel(level, this.boardWidth, this.boardHeight);
-    }
-    
-    /**
-     * 
-     */
-    private void initLevelM2() {
-		this.boardWidth = 8;
-		this.boardHeight = 8;
-		Level level = new Level();
-		// Insert level strings here
-		initLevel(level, this.boardWidth, this.boardHeight);
-    }
-    
-    /**
-     * 
-     */
-    private void initLevelM3() {
-		this.boardWidth = 8;
-		this.boardHeight = 8;
-		Level level = new Level();
-		// Insert level strings here
-		initLevel(level, this.boardWidth, this.boardHeight);
-    }
-    
-    /**
-     * 
-     */
-    private void initLevelH1() {
-		this.boardWidth = 10;
-		this.boardHeight = 10;
-		Level level = new Level();
-		// Insert level strings here
-		initLevel(level, this.boardWidth, this.boardHeight);
-    }
-    
-    /**
-     * 
-     */
-    private void initLevelH2() {
-		this.boardWidth = 10;
-		this.boardHeight = 10;
-		Level level = new Level();
-		// Insert level strings here
-		initLevel(level, this.boardWidth, this.boardHeight);
-    }
-    
-
-    /**
-     *
-     */
-    private void initLevelH3() {
-		this.boardWidth = 10;
-		this.boardHeight = 10;
-		Level level = new Level();
-		// Insert level strings here
-		initLevel(level, this.boardWidth, this.boardHeight);
-    }
     
 
     /**
@@ -467,9 +334,9 @@ public class Board extends JPanel  {
     public void restart()
     {
     	wipeBoard();
-    	//initBoard(Difficulty.EASY, 1);
+    	initBoard(Difficulty.EASY, 3);
     	//initBoard(Difficulty.EASY, 2);
-    	initBoard(Difficulty.MEDIUM, 1);
+    	//initBoard(Difficulty.MEDIUM, 1);
     	//initBoard(Difficulty.MEDIUM, 3);
     	updateUI();
     }
@@ -477,12 +344,6 @@ public class Board extends JPanel  {
     /**
      * @authors: 	Patrick Munsey
      * zID: 	z5020841
-=======
-
-    /**
-     * @author Patrick Munsey
-     * zID: z5020841
->>>>>>> refs/remotes/origin/Patrick
      * 
      */
     class BoardAdapter extends KeyAdapter {

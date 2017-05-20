@@ -19,7 +19,7 @@ public class Box extends GamePiece{
      */
     @Override
     public void updateLabel(JLabel label) {
-	label.setText("B");
+    	label.setText("B");
     }
     
 }

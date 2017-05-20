@@ -22,7 +22,7 @@ public class Player extends GamePiece{
      */
     @Override
     public void updateLabel(JLabel label) {
-	label.setText("P");
+    	label.setText("P");
     }
 
     
