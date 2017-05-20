@@ -34,14 +34,15 @@ public class Level {
 		etc
 		*/
 		
-	   	
 		Scanner sc = null;
 		
 		try
 		{
 			sc = new Scanner(new FileReader(filePath));
 		}
-		catch(FileNotFoundException e){System.out.println("File read failed");}
+		catch(FileNotFoundException e){
+			System.out.println("File read failed");
+		}
 		
 		finally
 		{
