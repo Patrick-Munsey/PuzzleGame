@@ -15,7 +15,7 @@ public class Floor extends Tile{
      * @param y
      */
     public Floor(int x, int y) {
-	super(x,y);
+    	super(x,y);
     }
 
     /* (non-Javadoc)
@@ -23,10 +23,10 @@ public class Floor extends Tile{
      */
     @Override
     public boolean isMoveable() {
-	if(gamepiece == null) {
-	    return true;
-	}
-	return false;
+		if(gamepiece == null) {
+		    return true;
+		}
+		return false;
     }
 
     /* (non-Javadoc)
@@ -34,53 +34,53 @@ public class Floor extends Tile{
      */
     @Override
     public void updateLabel() {
-	if(gamepiece != null) {
-	    gamepiece.updateLabel(this);
-	}
-	else {
-	    if(goal != null) {
-		this.setText("[]");
-	    }
-	    else {
-		 this.setText(".");
-	    }  
-	}
+		if(gamepiece != null) {
+		    gamepiece.updateLabel(this);
+		}
+		else {
+		    if(goal != null) {
+		    	this.setText("[]");
+		    }
+		    else {
+		    	this.setText(".");
+		    }  
+		}
     }
     
     /* (non-Javadoc)
      * @see Tile#placeGamePiece(GamePiece)
      */
     public void placeGamePiece(GamePiece gamepiece) {
-	this.gamepiece = gamepiece;
-	gamepiece.placePiece(this.x, this.y);
-	
-	updateLabel();
+		this.gamepiece = gamepiece;
+		gamepiece.placePiece(this.x, this.y);
+		
+		updateLabel();
     }
     
     /* (non-Javadoc)
      * @see Tile#removeGamePiece()
      */
     public GamePiece removeGamePiece() {
-	GamePiece retGamePiece = this.gamepiece;
-	this.gamepiece = null;
-	updateLabel();
-	return retGamePiece;
+		GamePiece retGamePiece = this.gamepiece;
+		this.gamepiece = null;
+		updateLabel();
+		return retGamePiece;
     }
     
     /* (non-Javadoc)
      * @see Tile#placeGoal(Goal)
      */
     public void placeGoal(Goal goal) {
-	this.goal = goal;
-	updateLabel();
+		this.goal = goal;
+		updateLabel();
     }
     
     /* (non-Javadoc)
      * @see Tile#removeGoal()
      */
     public void removeGoal() {
-	this.goal = null;
-	updateLabel();
+		this.goal = null;
+		updateLabel();
     }
     
 
