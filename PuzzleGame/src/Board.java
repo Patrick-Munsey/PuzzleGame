@@ -338,7 +338,9 @@ public class Board extends JPanel  {
     	//initBoard(Difficulty.EASY, 2);
     	//initBoard(Difficulty.MEDIUM, 1);
     	//initBoard(Difficulty.MEDIUM, 3);
+    	
     	updateUI();
+    	
     }
     
     /**
