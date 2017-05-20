@@ -47,7 +47,7 @@ public class Level {
 		finally
 		{
 			if(sc!=null) {
-				sc.useDelimiter("\r\n");
+				sc.useDelimiter("\n");
 				ArrayList<String> inputLines = new ArrayList<String>();
 				
 				//populate input lines
@@ -59,8 +59,11 @@ public class Level {
 				//process input lines
 				String dimLine = inputLines.remove(0);
 				String[] dimensions = dimLine.split(","); //dimensions
+				System.out.println("Array length:" + dimensions.length);
+				System.out.println("dimension[0]:" + dimensions[0].trim());
 				int width = Integer.parseInt(dimensions[0].trim());
-				int height = Integer.parseInt(dimensions[1].trim());
+				System.out.println("dimension[1]:" + dimensions[1]);
+				int height = Integer.parseInt(dimensions[1]);
 				
 				this.width = width;
 				this.height = height;
