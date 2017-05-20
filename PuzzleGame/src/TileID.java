@@ -2,9 +2,9 @@ public enum TileID {
 
 	Wall('#'),
 	Floor('-'),
-	Box('$'),
-	Goal('.'),
-	Player('@');
+	Box('B'),
+	Goal('!'),
+	Player('P');
 	//PlayerOnGoal('+'),
 	//BoxOnGoal('*');
 	

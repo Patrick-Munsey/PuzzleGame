@@ -40,7 +40,7 @@ public class Board extends JPanel  {
 		goals =  new LinkedList<Goal>();
 		addKeyListener(new BoardAdapter());
 		
-		initBoard(Difficulty.EASY, 1);
+		initBoard(Difficulty.EASY, 0);
 		//initBoard(Difficulty.EASY, 2);
 		//initBoard(Difficulty.MEDIUM, 1);
     	//initBoard(Difficulty.MEDIUM, 3);
@@ -230,56 +230,29 @@ public class Board extends JPanel  {
      */
     private void initBoard(Difficulty difficulty, int levelNumber) {
     	wipeBoard();
+    	//changing to level.getLevelFromFile
+    	String filePath = "../PuzzleGame/levels/main/";
 			switch(difficulty) {
 			case EASY:
-			    switch(levelNumber) {
-			    	case 1:
-			    	    initLevelE1();
-			    	    return;
-			    	case 2:
-			    	    initLevelE2();
-			    	    return;
-			    	case 3:
-			    	    initLevelE3();
-			    	    return;
-			    	default:
-			    	    System.out.println("Invalid level");
-			    	    return;
-			    }
+				filePath = filePath + "e";
+			    break;
 			case MEDIUM:
-			    switch(levelNumber) {
-			    	case 1:
-			    	    initLevelM1();
-			    	    return;
-			    	case 2:
-			    	    initLevelM2();
-			    	    return;
-			    	case 3:
-			    	    initLevelM3();
-			    	    return;
-			    	default:
-			    	    System.out.println("Invalid level");
-			    	    return;
-			    }
+				filePath = filePath + "m";
+			    break;
 			case HARD:
-			    switch(levelNumber) {
-			    	case 1:
-			    	    initLevelH1();
-			    	    return;
-			    	case 2:
-			    	    initLevelH2();
-			    	    return;
-			    	case 3:
-			    	    initLevelH3();
-			    	    return;
-			    	default:
-			    	    System.out.println("Invalid level");
-			    	    return;
-			    }
+			    filePath = filePath + "h";
 			default:
 			    System.out.println("Invalid difficulty");
 			    return;   
 		}
+			filePath = filePath + levelNumber + ".txt";
+			System.out.println(filePath);
+			Level currLevel = new Level();
+			currLevel.makeLevelFromFile(filePath);
+			initLevel(currLevel, currLevel.getWidth(), currLevel.getHeight());
+			this.boardHeight = currLevel.getHeight();
+			this.boardWidth = currLevel.getWidth();
+			return;
     }
     
     /**
@@ -301,11 +274,11 @@ public class Board extends JPanel  {
     	
     	// Set up the level based on the string input
 		Iterator<String> itr = level.getLevel().iterator();
-		int row = 4; 
+		int row = boardHeight-1;
 		while (itr.hasNext()) {	
-			String temp = (String) itr.next(); // read the string
-			for (int col = 0, n = temp.length(); col < n ; col++) { 
-				char symbol = temp.charAt(col); // get each char from the string
+			String strRow = (String) itr.next(); // read the string
+			for (int col = 0; col < boardWidth ; col++) { 
+				char symbol = strRow.charAt(col); // get each char from the string
 				this.createObject(symbol, col, row); // create an object
 				System.out.print(symbol);
 				//System.out.print(symbol + "(" + row +"," + col +") ");
@@ -342,7 +315,7 @@ public class Board extends JPanel  {
     /**
      * 
      */
-    private void initLevelE1() {
+    /*private void initLevelE1() {
     	
     	this.boardWidth = 5;
 		this.boardHeight = 5;
@@ -353,12 +326,13 @@ public class Board extends JPanel  {
 		level.addRow("##$##"); // 2
 		level.addRow("##-##"); // 3
 		level.addRow("##@##"); // 4
-		initLevel(level, this.boardWidth, this.boardHeight);
+		//initLevel(level, this.boardWidth, this.boardHeight);
+		//level.initLevelFromFile("../PuzzleGame/levels/main/e0.txt", board, this);
     }
     
     /**
      * 
-     */
+     *
     private void initLevelE2() {
 		this.boardWidth = 6;
 		this.boardHeight = 6;
@@ -391,7 +365,7 @@ public class Board extends JPanel  {
     
     /**
      * 
-     */
+     *
     private void initLevelE3() {
 		this.boardWidth = 5;
 		this.boardHeight = 5;
@@ -402,7 +376,7 @@ public class Board extends JPanel  {
     
     /**
      * 
-     */
+     *
     private void initLevelM1() {
 		this.boardWidth = 8;
 		this.boardHeight = 8;
@@ -445,7 +419,7 @@ public class Board extends JPanel  {
     
     /**
      * 
-     */
+     *
     private void initLevelM2() {
 		this.boardWidth = 8;
 		this.boardHeight = 8;
@@ -456,7 +430,7 @@ public class Board extends JPanel  {
     
     /**
      * 
-     */
+     *
     private void initLevelM3() {
 		this.boardWidth = 8;
 		this.boardHeight = 8;
@@ -505,7 +479,7 @@ public class Board extends JPanel  {
     
     /**
      * 
-     */
+     *
     private void initLevelH1() {
 		this.boardWidth = 10;
 		this.boardHeight = 10;
@@ -516,7 +490,7 @@ public class Board extends JPanel  {
     
     /**
      * 
-     */
+     *
     private void initLevelH2() {
 		this.boardWidth = 10;
 		this.boardHeight = 10;
@@ -528,14 +502,14 @@ public class Board extends JPanel  {
 
     /**
      *
-     */
+     *
     private void initLevelH3() {
 		this.boardWidth = 10;
 		this.boardHeight = 10;
 		Level level = new Level();
 		// Insert level strings here
 		initLevel(level, this.boardWidth, this.boardHeight);
-    }
+    }*/
     
 
     /**
@@ -558,7 +532,7 @@ public class Board extends JPanel  {
     public void restart()
     {
     	wipeBoard();
-    	initBoard(Difficulty.EASY, 1);
+    	initBoard(Difficulty.EASY, 0);
     	//initBoard(Difficulty.EASY, 2);
     	//initBoard(Difficulty.MEDIUM, 1);
     	//initBoard(Difficulty.MEDIUM, 3);
