@@ -1,3 +1,6 @@
+import java.awt.Color;
+
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 
@@ -21,8 +24,7 @@ public class Wall extends Tile {
      */
     @Override
     public void updateLabel() {
-	this.setText("#");
+    	ImageIcon icon = createImageIcon("images/wall.png");
+    	setIcon(icon);
     }
-
-
 }

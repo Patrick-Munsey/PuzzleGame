@@ -1,3 +1,4 @@
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 
@@ -24,6 +25,7 @@ class Tile extends JLabel{
     /**
      * 
      */
+    // this.setIcon(Icon i)
     public void updateLabel() {
 	this.setText("0");
     }
@@ -60,4 +62,14 @@ class Tile extends JLabel{
     public void removeGoal() {
     }
     
+    public ImageIcon createImageIcon(String path) {
+		java.net.URL imgURL = Wall.class.getResource(path);
+		if (imgURL != null) {
+			System.out.println("success");
+			return new ImageIcon(imgURL);
+		} else {
+			System.err.println("Couldn't find file: " + path);
+			return null;
+		}
+	}
 }
