@@ -231,7 +231,7 @@ public class Board extends JPanel  {
     private void initBoard(Difficulty difficulty, int levelNumber) {
     	wipeBoard();
     	//changing to level.getLevelFromFile
-    	String filePath = "../levels/main/";
+    	String filePath = "../PuzzleGame/levels/main/";
 			switch(difficulty) {
 			case EASY:
 				filePath = filePath + "e";
