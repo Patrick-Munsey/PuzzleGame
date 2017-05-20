@@ -40,7 +40,7 @@ public class Board extends JPanel  {
 		goals =  new LinkedList<Goal>();
 		addKeyListener(new BoardAdapter());
 		
-		initBoard(Difficulty.EASY, 0);
+		initBoard(Difficulty.EASY, 3);
 		//initBoard(Difficulty.EASY, 2);
 		//initBoard(Difficulty.MEDIUM, 1);
     	//initBoard(Difficulty.MEDIUM, 3);
@@ -533,7 +533,7 @@ public class Board extends JPanel  {
     public void restart()
     {
     	wipeBoard();
-    	initBoard(Difficulty.EASY, 0);
+    	initBoard(Difficulty.EASY, 3);
     	//initBoard(Difficulty.EASY, 2);
     	//initBoard(Difficulty.MEDIUM, 1);
     	//initBoard(Difficulty.MEDIUM, 3);
