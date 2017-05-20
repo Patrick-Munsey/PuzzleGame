@@ -60,7 +60,9 @@ public class Level {
 				String dimLine = inputLines.remove(0);
 				String[] dimensions = dimLine.split(","); //dimensions
 				int width = Integer.parseInt(dimensions[0].trim());
+				
 				int height = Integer.parseInt(dimensions[1].trim());
+				
 				
 				this.width = width;
 				this.height = height;
