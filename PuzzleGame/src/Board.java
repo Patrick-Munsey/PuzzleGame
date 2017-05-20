@@ -45,12 +45,12 @@ public class Board extends JPanel  {
 		goals =  new LinkedList<Goal>();
 		the_board.addKeyListener(new BoardAdapter());
 		
-		initBoard(Difficulty.EASY, 0);
-		//initBoard(Difficulty.EASY, 2);
-		//initBoard(Difficulty.MEDIUM, 1);
+		//initBoard(Difficulty.EASY, 0);
+		//initBoard(Difficulty.EASY, 1);
+		initBoard(Difficulty.MEDIUM, 1);
     	//initBoard(Difficulty.MEDIUM, 3);
 		initUI();
-		setPreferredSize(new Dimension(box_size*boardWidth*2, box_size*boardHeight*2));
+		//the_board.setPreferredSize(new Dimension(box_size*boardWidth, box_size*boardHeight));
     }
 
     /**
@@ -63,7 +63,7 @@ public class Board extends JPanel  {
 	
 	for(int y = 0; y < boardHeight; y++){
 		for(int x = 0; x < boardWidth; x++){
-			this.add(board[x][boardHeight-1-y]);//labels have to be added from top to bottom not bottom to top so reverse board y index
+			the_board.add(board[x][boardHeight-1-y]);//labels have to be added from top to bottom not bottom to top so reverse board y index
 		}
 	}
 	
