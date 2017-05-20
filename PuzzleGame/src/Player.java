@@ -1,3 +1,4 @@
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 
@@ -22,10 +23,8 @@ public class Player extends GamePiece{
      */
     @Override
     public void updateLabel(JLabel label) {
-    	label.setText("P");
+    	ImageIcon icon = createImageIcon("images/player.png");
+    	label.setIcon(icon);
     }
-
-    
-
     
 }

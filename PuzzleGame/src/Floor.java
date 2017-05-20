@@ -1,3 +1,6 @@
+import java.awt.Color;
+
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 
@@ -37,13 +40,16 @@ public class Floor extends Tile{
 		if(gamepiece != null) {
 		    gamepiece.updateLabel(this);
 		}
+		
 		else {
-		    if(goal != null) {
-		    	this.setText("[]");
-		    }
-		    else {
-		    	this.setText(".");
-		    }  
+			if(goal != null) {
+				ImageIcon icon = createImageIcon("images/goal.png");
+		    	setIcon(icon);
+			}
+			else {
+				ImageIcon icon = createImageIcon("images/floor.png");
+				setIcon(icon);
+			}  
 		}
     }
     
@@ -82,6 +88,4 @@ public class Floor extends Tile{
 		this.goal = null;
 		updateLabel();
     }
-    
-
 }

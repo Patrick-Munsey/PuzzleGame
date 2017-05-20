@@ -1,3 +1,4 @@
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 /**
@@ -84,4 +85,15 @@ public class GamePiece {
     public void updateLabel(JLabel label) {
     	label.setText("GP");
     }
+    
+    public ImageIcon createImageIcon(String path) {
+  		java.net.URL imgURL = Wall.class.getResource(path);
+  		if (imgURL != null) {
+  			System.out.println("success");
+  			return new ImageIcon(imgURL);
+  		} else {
+  			System.err.println("Couldn't find file: " + path);
+  			return null;
+  		}
+  	}
 }

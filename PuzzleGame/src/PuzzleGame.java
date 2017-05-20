@@ -37,7 +37,7 @@ public class PuzzleGame extends JFrame{
         board.revalidate();
         board.repaint();
         
-        setSize(400, 400);
+        setSize(950, 700);
         setTitle("Puzzle Game");
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
