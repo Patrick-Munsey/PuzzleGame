@@ -59,11 +59,8 @@ public class Level {
 				//process input lines
 				String dimLine = inputLines.remove(0);
 				String[] dimensions = dimLine.split(","); //dimensions
-				System.out.println("Array length:" + dimensions.length);
-				System.out.println("dimension[0]:" + dimensions[0].trim());
 				int width = Integer.parseInt(dimensions[0].trim());
-				System.out.println("dimension[1]:" + dimensions[1]);
-				int height = Integer.parseInt(dimensions[1]);
+				int height = Integer.parseInt(dimensions[1].trim());
 				
 				this.width = width;
 				this.height = height;
