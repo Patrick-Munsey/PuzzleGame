@@ -32,12 +32,15 @@ public class Board extends JPanel  {
     private HashMap<PlayerNumber, Player> players;
     private LinkedList<Goal> goals;
     private int box_size = 30;
-    JPanel the_board = new JPanel();
+    private JPanel the_board;
+    private Difficulty currDifficulty;
+    private int currLv;
     
     /**
      * @author Patrick Munsey, z5020841
      */
     public Board() {
+    	the_board = new JPanel();
 		this.boardWidth = 0;
 		this.boardHeight = 0;
 		board = new Tile[boardWidth][boardHeight];
@@ -47,36 +50,41 @@ public class Board extends JPanel  {
 		
 		//initBoard(Difficulty.EASY, 0);
 		//initBoard(Difficulty.EASY, 1);
-		initBoard(Difficulty.MEDIUM, 1);
-    	//initBoard(Difficulty.MEDIUM, 3);
+		currDifficulty = Difficulty.MEDIUM;
+		currLv = 1;
+		initBoard(currDifficulty, currLv);
 		initUI();
-		//the_board.setPreferredSize(new Dimension(box_size*boardWidth, box_size*boardHeight));
     }
 
     /**
      * @author Patrick Munsey, z5020841
      */
     private void initUI() {	
-    setLayout(new GridBagLayout());
-	the_board.setLayout(new GridLayout(boardHeight, boardWidth));
-	the_board.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-	
-	for(int y = 0; y < boardHeight; y++){
-		for(int x = 0; x < boardWidth; x++){
-			the_board.add(board[x][boardHeight-1-y]);//labels have to be added from top to bottom not bottom to top so reverse board y index
-		}
-	}
-	
+	    setLayout(new GridBagLayout());
+		the_board.setLayout(new GridLayout(boardHeight, boardWidth));
+		the_board.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		tilesToBoard();
 		the_board.setFocusable(true); 
 		add(the_board);
     }
     
-    /**
+    /** @author James Doldissen
+     * Write all the tiles in the board array to the jpanel
+     */
+    private void tilesToBoard () {
+		for(int y = 0; y < boardHeight; y++){
+	    	for(int x = 0; x < boardWidth; x++){
+			the_board.add(board[x][boardHeight-1-y]);//labels have to be added from top to bottom not bottom to top so reverse board y index
+	    	}
+		}
+    }
+    
+    /** Refresh the JPanel after a move has been made
      * @author Patrick Munsey, z5020841
      */
     private void refreshUI() {
-		this.revalidate();
-	    this.repaint();
+		the_board.revalidate();
+		the_board.repaint();
     }
     
 
@@ -238,9 +246,12 @@ public class Board extends JPanel  {
      * @param levelNumber
      */
     private void initBoard(Difficulty difficulty, int levelNumber) {
-    	wipeBoard();
     	//changing to level.getLevelFromFile
     	String filePath = "../PuzzleGame/levels/main/";
+    	Level currLevel = new Level();
+		currLevel.setDiff(difficulty);
+		currLevel.setNum(levelNumber);
+		
 			switch(difficulty) {
 			case EASY:
 				filePath = filePath + "e";
@@ -256,8 +267,6 @@ public class Board extends JPanel  {
 			    return;   
 		}
 			filePath = filePath + levelNumber + ".txt";
-			System.out.println(filePath );
-			Level currLevel = new Level();
 			currLevel.makeLevelFromFile(filePath);
 			initLevel(currLevel, currLevel.getWidth(), currLevel.getHeight());
 			this.boardHeight = currLevel.getHeight();
@@ -290,10 +299,7 @@ public class Board extends JPanel  {
 			for (int col = 0; col < boardWidth ; col++) { 
 				char symbol = strRow.charAt(col); // get each char from the string
 				this.createObject(symbol, col, row); // create an object
-				System.out.print(symbol);
-				//System.out.print(symbol + "(" + row +"," + col +") ");
 			}
-			System.out.println();
 			row--;
 		}
     	
@@ -322,33 +328,26 @@ public class Board extends JPanel  {
 		} 
 	}
     
-
-    /**
-     * 
-     */
-    private void wipeBoard() {
-		this.boardWidth = 0;
-		this.boardHeight = 0;
-		for(int y = 0; y < boardHeight; y++){
-			for(int x = 0; x < boardWidth; x++){
-			    clearTile(x,y);
-			}
-		}
-    }
-    
     /**
      * @author James Doldissen
      * Restart the current level
      */
-    public void restart()
-    {
-    	wipeBoard();
-    	initBoard(Difficulty.EASY, 3);
-    	//initBoard(Difficulty.EASY, 2);
-    	//initBoard(Difficulty.MEDIUM, 1);
-    	//initBoard(Difficulty.MEDIUM, 3);
-    	
-    	updateUI();
+    public void restart() {
+    	the_board.removeAll();
+    	initBoard(currDifficulty, currLv);
+    	tilesToBoard();
+    	revalidate();
+    	repaint();
+    }
+    
+    public void checkCompletion() {
+	for(Goal goal : goals) {
+	    if(!goal.isactivated()) {
+		return;
+	    }
+	}
+	System.out.println("Level complete!!!");
+	////////////////////////////////////////////////////do game completion tasks (inform puzzlegame class)
     	
     }
     
@@ -368,22 +367,18 @@ public class Board extends JPanel  {
 	            
 	        case KeyEvent.VK_LEFT:
 	            MovePlayer(PlayerNumber.Player1, Direction.LEFT);
-	            System.out.println("moving player left\n");
 	            break;
 	            
 	        case KeyEvent.VK_RIGHT:
 	            MovePlayer(PlayerNumber.Player1, Direction.RIGHT);
-	            System.out.println("moving player right\n");
 	            break;
 	            
 	        case KeyEvent.VK_DOWN:
 	            MovePlayer(PlayerNumber.Player1, Direction.DOWN);
-	            System.out.println("moving player down\n");
 	            break;
 	            
 	        case KeyEvent.VK_UP:
 	            MovePlayer(PlayerNumber.Player1, Direction.UP);
-	            System.out.println("moving player up\n");
 	            break;
 	        }
 	    }

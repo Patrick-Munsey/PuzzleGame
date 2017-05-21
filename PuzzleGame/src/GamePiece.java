@@ -89,11 +89,13 @@ public class GamePiece {
     public ImageIcon createImageIcon(String path) {
   		java.net.URL imgURL = Wall.class.getResource(path);
   		if (imgURL != null) {
-  			System.out.println("success");
   			return new ImageIcon(imgURL);
   		} else {
   			System.err.println("Couldn't find file: " + path);
   			return null;
   		}
   	}
+    public boolean isBox() {
+	return false;
+    }
 }
