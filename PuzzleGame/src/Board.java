@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -50,7 +51,7 @@ public class Board extends JPanel  {
 		
 		//initBoard(Difficulty.EASY, 0);
 		//initBoard(Difficulty.EASY, 1);
-		currDifficulty = Difficulty.MEDIUM;
+		currDifficulty = Difficulty.EASY;
 		currLv = 1;
 		initBoard(currDifficulty, currLv);
 		initUI();

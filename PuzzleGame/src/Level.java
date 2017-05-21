@@ -94,6 +94,71 @@ public class Level {
 		this.diff = diff;
 	}
 	
+	public Level loadNextLevel(Board b) throws FileNotFoundException
+	{
+		Level nLevel = new Level();
+		String filePath = "../PuzzleGame/levels/main/";
+		
+		filePath = filePath + this.getDiffLetter(this.diff);
+		
+		filePath = filePath + (this.num+1) + ".txt";
+		//System.out.println(filePath);
+		Scanner sc = null;
+		try
+		{
+			sc = new Scanner(new FileReader(filePath));
+		}
+		catch(FileNotFoundException e){
+			filePath = "../PuzzleGame/levels/main/";
+			String nextLetter = this.getNextDiffLetter(this.diff);
+			if (nextLetter != ""){
+				
+					filePath = filePath + "0.txt";
+				}
+			
+			}
+		
+		finally{
+			nLevel.makeLevelFromFile(filePath);
+		}
+		
+		return nLevel;
+	}
+	
+	private String getDiffLetter(Difficulty diff){
+		String out = "";
+		switch(diff) {
+		case EASY:
+			out = "e";
+		    break;
+		case MEDIUM:
+			out = "m";
+		    break;
+		case HARD:
+			out = "h";
+		    break;
+		default:
+		    System.out.println("Invalid difficulty");
+		    break;
+		}
+		return out;
+	}
+	
+	private String getNextDiffLetter(Difficulty cDiff){
+		String out = "";
+		switch(diff) {
+		case EASY:
+			out = "m";
+		    break;
+		case MEDIUM:
+			out = "h";
+		    break;
+		default:
+		    System.out.println("Invalid difficulty");
+		    break;
+		}
+		return out;
+	}
 }
 
 
