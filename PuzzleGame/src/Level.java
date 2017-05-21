@@ -8,8 +8,12 @@ public class Level {
 	private ArrayList<String> level = new ArrayList<String>();
 	private int height;
 	private int width;
-	private int num;
-	private Difficulty diff;
+	private int levelNum;
+	
+	public Level (int levelNum) {
+		this.levelNum = levelNum;
+		makeLevelFromFile();
+	}
 	
 	public ArrayList<String> getLevel () {
 		return this.level;
@@ -27,7 +31,7 @@ public class Level {
 		return this.width;
 	}
 	
-	public void makeLevelFromFile(String filePath){
+	public void makeLevelFromFile(){
 		
 		/*input file format:
 		x,y
@@ -35,7 +39,7 @@ public class Level {
 		###...
 		etc
 		*/
-		
+		String filePath = "../PuzzleGame/levels/main/" + levelNum + ".txt";
 	   	
 		Scanner sc = null;
 		
@@ -78,90 +82,18 @@ public class Level {
 		return;
 	}
 
-	public int getNum() {
-		return num;
+	public int getlevelNum() {
+		return levelNum;
 	}
 
-	public void setNum(int num) {
-		this.num = num;
+	public void setlevelNum(int num) {
+		this.levelNum = num;
 	}
 
-	public Difficulty getDiff() {
-		return diff;
-	}
-
-	public void setDiff(Difficulty diff) {
-		this.diff = diff;
-	}
-	
 	public Level loadNextLevel(Board b) throws FileNotFoundException
 	{
-		Level nLevel = new Level();
-		String filePath = "../PuzzleGame/levels/main/";
-		
-		filePath = filePath + this.getDiffLetter(this.diff);
-		
-		filePath = filePath + (b.currLevel.getNum()+1) + ".txt";
-		
-		Scanner sc = null;
-		try
-		{
-			sc = new Scanner(new FileReader(filePath));
-			nLevel.diff = b.currLevel.getDiff();
-		}
-		catch(FileNotFoundException e){
-			filePath = "../PuzzleGame/levels/main/";
-			String nextLetter = this.getNextDiffLetter(this.diff);
-			
-			nLevel.diff = b.currLevel.getDiff().next();
-			if (nextLetter != ""){
-				
-					filePath = filePath + "0.txt";
-				}
-			
-			}
-		
-		finally{
-			nLevel.makeLevelFromFile(filePath);
-		}
-		
-		nLevel.num = b.currLevel.getNum()+1;
+		Level nLevel = new Level(levelNum+1);
 		return nLevel;
-	}
-	
-	private String getDiffLetter(Difficulty diff){
-		String out = "";
-		switch(diff) {
-		case EASY:
-			out = "e";
-		    break;
-		case MEDIUM:
-			out = "m";
-		    break;
-		case HARD:
-			out = "h";
-		    break;
-		default:
-		    System.out.println("Invalid difficulty");
-		    break;
-		}
-		return out;
-	}
-	
-	private String getNextDiffLetter(Difficulty cDiff){
-		String out = "";
-		switch(diff) {
-		case EASY:
-			out = "m";
-		    break;
-		case MEDIUM:
-			out = "h";
-		    break;
-		default:
-		    System.out.println("Invalid difficulty");
-		    break;
-		}
-		return out;
 	}
 }
 
