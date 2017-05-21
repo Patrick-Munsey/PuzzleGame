@@ -10,6 +10,7 @@ import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -21,7 +22,7 @@ import javax.swing.SwingConstants;
  *
  */
 public class InstructionsDialog extends JDialog {
-	public InstructionsDialog (Frame parent)
+	public InstructionsDialog (JFrame parent)
 	{
 		super(parent);
 		initUI();

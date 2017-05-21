@@ -8,6 +8,7 @@ import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
@@ -18,7 +19,7 @@ import javax.swing.JPanel;
  */
 public class OptionsDialog extends JDialog 
 {
-	public OptionsDialog (Frame parent)
+	public OptionsDialog (JFrame parent)
 	{
 		super(parent);
 		initUI();
