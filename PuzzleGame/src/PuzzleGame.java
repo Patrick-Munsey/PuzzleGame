@@ -36,6 +36,8 @@ public class PuzzleGame extends JFrame{
 
     private void initUI() {
     	//setup the JFrame
+
+        
     	AButton start = new AButton("Start Game");
     	AButton instructions = new AButton("Instructions");
 		menu.add(start);
@@ -54,12 +56,15 @@ public class PuzzleGame extends JFrame{
     	
     	start.addActionListener(new ActionListener() { 
     		public void actionPerformed(ActionEvent e) { 
-    			ButtonPressed();
+    			remove(menu);
+    			add(board);
+    			board.revalidate();
+    			board.repaint();
+    			
     		}
-
     	});
 
-  
+
         setSize(950, 700);
         setTitle("Puzzle Game");
         setLocationRelativeTo(null);
@@ -150,13 +155,6 @@ public class PuzzleGame extends JFrame{
 
     }
     
-	private void ButtonPressed() {
-		this.remove(menu);
-		this.add(board);
-        board.revalidate();
-        board.repaint();
-		
-	} 
     
     /**
      * @param args
