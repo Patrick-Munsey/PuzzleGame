@@ -25,7 +25,7 @@ public class InstructionsDialog extends JDialog {
 	{
 		super(parent);
 		initUI();
-		setSize(new Dimension(400,350));
+		setSize(new Dimension(400,300));
 		setTitle("Instructions");
 		setLocationRelativeTo(getParent());
 	}
