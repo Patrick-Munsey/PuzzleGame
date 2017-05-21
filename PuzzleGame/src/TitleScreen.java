@@ -110,3 +110,21 @@ public class AButton extends JButton {
 	}
 }
 */
+
+
+/*
+ AButton start = new AButton("Start Game");
+    	AButton instructions = new AButton("Instructions");
+		menu.add(start);
+		menu.add(Box.createRigidArea(new Dimension(0, 50)));
+		menu.add(instructions);
+
+		start.setAlignmentX(Component.CENTER_ALIGNMENT);
+		instructions.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+		start.setMaximumSize(new Dimension(300, 100));
+		instructions.setMaximumSize(new Dimension(300, 100));
+
+ 
+ 
+ */
