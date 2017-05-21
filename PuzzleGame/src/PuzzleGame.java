@@ -4,16 +4,17 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 
+import java.awt.Component;
 import java.awt.ComponentOrientation;
+import java.awt.Dimension;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 import javax.swing.Box;
+import javax.swing.JButton;
 import javax.swing.JComponent;
-
-
 
 /**
  * @author Patrick Munsey
@@ -23,11 +24,8 @@ import javax.swing.JComponent;
 @SuppressWarnings("serial")
 public class PuzzleGame extends JFrame{
     private Board board;
-
     private Menu menu;
     private JFrame the_frame = this;
-
-
 
     public PuzzleGame() throws Exception {
 		this.board = new Board();
@@ -38,14 +36,30 @@ public class PuzzleGame extends JFrame{
 
     private void initUI() {
     	//setup the JFrame
-    	//this.add(menu);
-    	//menu.revalidate();
-    	//menu.repaint();
+    	AButton start = new AButton("Start Game");
+    	AButton instructions = new AButton("Instructions");
+		menu.add(start);
+		menu.add(Box.createRigidArea(new Dimension(0, 50)));
+		menu.add(instructions);
 
-        this.add(board);
-        board.revalidate();
-        board.repaint();
-        
+		start.setAlignmentX(Component.CENTER_ALIGNMENT);
+		instructions.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+		start.setMaximumSize(new Dimension(300, 100));
+		instructions.setMaximumSize(new Dimension(300, 100));
+
+    	this.add(menu);
+    	menu.revalidate();
+    	menu.repaint();
+    	
+    	start.addActionListener(new ActionListener() { 
+    		public void actionPerformed(ActionEvent e) { 
+    			ButtonPressed();
+    		}
+
+    	});
+
+  
         setSize(950, 700);
         setTitle("Puzzle Game");
         setLocationRelativeTo(null);
@@ -135,6 +149,14 @@ public class PuzzleGame extends JFrame{
         setJMenuBar(menuBar);
 
     }
+    
+	private void ButtonPressed() {
+		this.remove(menu);
+		this.add(board);
+        board.revalidate();
+        board.repaint();
+		
+	} 
     
     /**
      * @param args
