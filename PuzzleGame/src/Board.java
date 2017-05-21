@@ -73,19 +73,19 @@ public class Board extends JPanel  {
      */
     private void tilesToBoard ()
     {
-    	for(int y = 0; y < boardHeight; y++){
-    		for(int x = 0; x < boardWidth; x++){
-    			the_board.add(board[x][boardHeight-1-y]);//labels have to be added from top to bottom not bottom to top so reverse board y index
-    		}
-    	}
+	for(int y = 0; y < boardHeight; y++){
+	    for(int x = 0; x < boardWidth; x++){
+		the_board.add(board[x][boardHeight-1-y]);//labels have to be added from top to bottom not bottom to top so reverse board y index
+	    }
+	}
     }
     
     /** Refresh the JPanel after a move has been made
      * @author Patrick Munsey, z5020841
      */
     private void refreshUI() {
-		the_board.revalidate();
-	    the_board.repaint();
+	the_board.revalidate();
+	the_board.repaint();
     }
     
 
@@ -96,10 +96,11 @@ public class Board extends JPanel  {
      * @return true if player was moved successfully
      */
     public boolean MovePlayer(PlayerNumber playernumber, Direction direction) {
-		players.get(playernumber).movePiece(this, direction);
-		return true;
+	players.get(playernumber).movePiece(this, direction);
+	checkCompletion();
+	return true;
     }
-    
+
     /**
      * @author Patrick Munsey, z5020841
      * @return true if a GamePiece can move to this tile
@@ -340,6 +341,16 @@ public class Board extends JPanel  {
     	tilesToBoard();
     	revalidate();
     	repaint();
+    }
+    
+    public void checkCompletion() {
+	for(Goal goal : goals) {
+	    if(!goal.isactivated()) {
+		return;
+	    }
+	}
+	System.out.println("Level complete!!!");
+	////////////////////////////////////////////////////do game completion tasks (inform puzzlegame class)
     }
     
     /**

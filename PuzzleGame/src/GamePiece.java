@@ -95,4 +95,7 @@ public class GamePiece {
   			return null;
   		}
   	}
+    public boolean isBox() {
+	return false;
+    }
 }

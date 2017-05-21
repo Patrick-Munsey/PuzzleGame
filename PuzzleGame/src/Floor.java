@@ -59,7 +59,9 @@ public class Floor extends Tile{
     public void placeGamePiece(GamePiece gamepiece) {
 		this.gamepiece = gamepiece;
 		gamepiece.placePiece(this.x, this.y);
-		
+		if((goal != null) && gamepiece.isBox()) {
+		    goal.activate();
+		}
 		updateLabel();
     }
     
@@ -69,6 +71,9 @@ public class Floor extends Tile{
     public GamePiece removeGamePiece() {
 		GamePiece retGamePiece = this.gamepiece;
 		this.gamepiece = null;
+		if(goal != null) {
+		    goal.deactivate();
+		}
 		updateLabel();
 		return retGamePiece;
     }
