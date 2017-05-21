@@ -16,10 +16,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-
-
 public class Board extends JPanel  {
-    
     private Tile[][] board;
     private int boardWidth;
     private int boardHeight;
@@ -72,7 +69,6 @@ public class Board extends JPanel  {
     }
     
 
-   
     public boolean MovePlayer(PlayerNumber playernumber, Direction direction) {
 		players.get(playernumber).movePiece(this, direction);
 		checkCompletion();
