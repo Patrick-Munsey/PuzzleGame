@@ -45,7 +45,10 @@ public class InstructionsDialog extends JDialog {
 			"    UP:&emsp UP_ARROW<br>" +
 			"  DOWN:&emsp DOWN_ARROW<br>" +
 			"  LEFT:&emsp LEFT_ARROW<br>" +
-			" RIGHT:&emsp RIGHT_ARROW<br><br></html>",
+			" RIGHT:&emsp RIGHT_ARROW<br>" +
+			"  RESTART:&emsp R<br>" +
+			"  UNDO:&emsp U<br>" +
+			"  QUIT:&emsp ESC<br><br></html>",
 			SwingConstants.CENTER);
 		instruction_text.setFont(new Font("serif", Font.PLAIN, 14));
 		instruction_text.setAlignmentX(Component.CENTER_ALIGNMENT);
