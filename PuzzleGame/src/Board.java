@@ -35,6 +35,7 @@ public class Board extends JPanel  {
     private JPanel the_board;
     private Difficulty currDifficulty;
     private int currLv;
+    private MoveList moves;
     
     /**
      * @author Patrick Munsey, z5020841
@@ -46,6 +47,7 @@ public class Board extends JPanel  {
 		board = new Tile[boardWidth][boardHeight];
 		players = new  HashMap<PlayerNumber, Player>();
 		goals =  new LinkedList<Goal>();
+		moves = new MoveList();
 		the_board.addKeyListener(new BoardAdapter());
 		
 		//initBoard(Difficulty.EASY, 0);
@@ -96,9 +98,72 @@ public class Board extends JPanel  {
      * @return true if player was moved successfully
      */
     public boolean MovePlayer(PlayerNumber playernumber, Direction direction) {
-	players.get(playernumber).movePiece(this, direction);
-	checkCompletion();
-	return true;
+		boolean moveCheck = players.get(playernumber).movePiece(this, direction, moves, false);
+		checkCompletion();
+		if (moveCheck == true) {
+			//moves.addMove(direction, false);
+			return true;
+		} else {
+			return false;
+		}
+    }
+    
+    /**
+     * Method to undo moves
+     * @author dennydien
+     * @param playernumber
+     * @return
+     */
+    public boolean undoMove(PlayerNumber playernumber) {
+    	
+    	Move undoMove = moves.undoMove(); 
+    	if (undoMove == null) { //early exit if no move to undo
+    		return false;
+    	}
+    	
+    	Direction undoDirection = undoMove.getDirection(); //get the direction of the undo
+    	boolean toMoveBox = undoMove.getBoxMoved(); //true if box must also move, false otherwise
+    	
+    	//move the player back
+    	boolean moveCheck = players.get(playernumber).movePiece(this, undoDirection, moves, true); 
+    	
+    	//move the box back
+    	if (toMoveBox == true) { // If we moved a box when making the move
+    	
+    		//Get the location of the player
+    		Player player = players.get(playernumber);
+        	int tempX = player.getX();
+        	int tempY = player.getY();
+        	
+        	/*
+        	 * Move the box back in the opposite direction
+        	 * We use the coordinate of the player to find the coordinate of the box
+        	 * We use +/- 2 because the player is moved before the box, so it isn't directly next to it
+        	 */
+        	switch(undoDirection) {
+        	
+        	case UP: 
+    			this.MovePiece(tempX, tempY -2, undoDirection);
+    			break;
+    		
+    		case DOWN:
+    			this.MovePiece(tempX, tempY +2, undoDirection);
+    			break;
+    			
+    		case LEFT: 
+    			this.MovePiece(tempX +2, tempY, undoDirection);
+    			break;
+    			
+    		case RIGHT: 
+    			this.MovePiece(tempX -2, tempY, undoDirection);
+    			break;
+    			
+    		default:
+    			break;
+        	
+        	}
+    	}
+		return true;
     }
 
     /**
@@ -339,6 +404,7 @@ public class Board extends JPanel  {
     	the_board.removeAll();
     	initBoard(currDifficulty, currLv);
     	tilesToBoard();
+    	moves.clear();
     	revalidate();
     	repaint();
     }
@@ -385,6 +451,18 @@ public class Board extends JPanel  {
 	        case KeyEvent.VK_UP:
 	            MovePlayer(PlayerNumber.Player1, Direction.UP);
 	            break;
+	            
+	        case KeyEvent.VK_U:
+	        	undoMove(PlayerNumber.Player1);
+	        	break;
+	        	
+	        case KeyEvent.VK_R:
+	        	restart();
+	        	break;
+	        	
+	        case KeyEvent.VK_ESCAPE:
+	        	System.exit(1);
+	        	break;
 	        }
 	    }
 	}
