@@ -257,6 +257,7 @@ public class Board extends JPanel  {
     public void restart()
     {
     	the_board.removeAll();
+    	the_board.setLayout(new GridLayout(boardHeight, boardWidth));
     	initBoard(currLevel.getDiff(), currLevel.getNum());
     	tilesToBoard();
     	revalidate();
