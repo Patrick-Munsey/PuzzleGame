@@ -1,7 +1,4 @@
-import java.awt.Component;
 import java.awt.ComponentOrientation;
-import java.awt.Container;
-import java.awt.Dimension;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -61,25 +58,25 @@ public class Board extends JPanel  {
     
     private void tilesToBoard ()
     {
-	for(int y = 0; y < boardHeight; y++){
-	    for(int x = 0; x < boardWidth; x++){
-		the_board.add(board[x][boardHeight-1-y]);//labels have to be added from top to bottom not bottom to top so reverse board y index
-	    }
-	}
+		for(int y = 0; y < boardHeight; y++){
+		    for(int x = 0; x < boardWidth; x++){
+			the_board.add(board[x][boardHeight-1-y]);//labels have to be added from top to bottom not bottom to top so reverse board y index
+		    }
+		}
     }
     
    
     private void refreshUI() {
-	the_board.revalidate();
-	the_board.repaint();
+		the_board.revalidate();
+		the_board.repaint();
     }
     
 
    
     public boolean MovePlayer(PlayerNumber playernumber, Direction direction) {
-	players.get(playernumber).movePiece(this, direction);
-	checkCompletion();
-	return true;
+		players.get(playernumber).movePiece(this, direction);
+		checkCompletion();
+		return true;
     }
 
     
@@ -268,26 +265,22 @@ public class Board extends JPanel  {
      * @author Patrick Munsey, z5020841
      */
     public void checkCompletion() {
-	for(Goal goal : goals) {
-	    if(!goal.isactivated()) {
-		return;
-	    }
-	}
-	System.out.println("Level complete!!!");
-	
-	try {
-		Level nextLevel = currLevel.loadNextLevel(this);
-		boardHeight = nextLevel.getHeight();
-		boardWidth = nextLevel.getWidth();
-		System.out.println("Next level loading");
-		currLevel = nextLevel;
-		//initUI();
-		//System.out.println(this.currLevel.);
-		restart();
-    	
-	} catch (FileNotFoundException e) {
-		System.out.println("You've Won!! (maybe)");
-	}
+		for(Goal goal : goals) {
+		    if(!goal.isactivated()) {
+			return;
+		    }
+		}
+		
+		try {
+			Level nextLevel = currLevel.loadNextLevel(this);
+			boardHeight = nextLevel.getHeight();
+			boardWidth = nextLevel.getWidth();
+			currLevel = nextLevel;
+			restart();
+	    	
+		} catch (FileNotFoundException e) {
+			System.out.println("You've Won!! (maybe)");
+		}
     }
     
     

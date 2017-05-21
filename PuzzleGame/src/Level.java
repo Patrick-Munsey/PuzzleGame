@@ -103,7 +103,6 @@ public class Level {
 		
 		filePath = filePath + (b.currLevel.getNum()+1) + ".txt";
 		
-		//System.out.println(filePath);
 		Scanner sc = null;
 		try
 		{
@@ -127,7 +126,6 @@ public class Level {
 		}
 		
 		nLevel.num = b.currLevel.getNum()+1;
-		System.out.println(filePath);
 		return nLevel;
 	}
 	
