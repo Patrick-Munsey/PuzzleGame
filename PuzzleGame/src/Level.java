@@ -8,6 +8,8 @@ public class Level {
 	private ArrayList<String> level = new ArrayList<String>();
 	private int height;
 	private int width;
+	private int num;
+	private Difficulty diff;
 	
 	public ArrayList<String> getLevel () {
 		return this.level;
@@ -74,6 +76,22 @@ public class Level {
 		}
 		
 		return;
+	}
+
+	public int getNum() {
+		return num;
+	}
+
+	public void setNum(int num) {
+		this.num = num;
+	}
+
+	public Difficulty getDiff() {
+		return diff;
+	}
+
+	public void setDiff(Difficulty diff) {
+		this.diff = diff;
 	}
 	
 }
