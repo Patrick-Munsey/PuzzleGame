@@ -101,16 +101,20 @@ public class Level {
 		
 		filePath = filePath + this.getDiffLetter(this.diff);
 		
-		filePath = filePath + (this.num+1) + ".txt";
+		filePath = filePath + (b.currLevel.getNum()+1) + ".txt";
+		
 		//System.out.println(filePath);
 		Scanner sc = null;
 		try
 		{
 			sc = new Scanner(new FileReader(filePath));
+			nLevel.diff = b.currLevel.getDiff();
 		}
 		catch(FileNotFoundException e){
 			filePath = "../PuzzleGame/levels/main/";
 			String nextLetter = this.getNextDiffLetter(this.diff);
+			
+			nLevel.diff = b.currLevel.getDiff().next();
 			if (nextLetter != ""){
 				
 					filePath = filePath + "0.txt";
@@ -122,6 +126,8 @@ public class Level {
 			nLevel.makeLevelFromFile(filePath);
 		}
 		
+		nLevel.num = b.currLevel.getNum()+1;
+		System.out.println(filePath);
 		return nLevel;
 	}
 	

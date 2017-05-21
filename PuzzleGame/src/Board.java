@@ -34,7 +34,7 @@ public class Board extends JPanel  {
     private LinkedList<Goal> goals;
     private int box_size = 30;
     private JPanel the_board;
-    private Level currLevel;
+    public Level currLevel;
     
     /**
      * @author Patrick Munsey, z5020841
@@ -349,13 +349,17 @@ public class Board extends JPanel  {
 	System.out.println("Level complete!!!");
 	
 	try {
-		currLevel = currLevel.loadNextLevel(this);
-		boardHeight = currLevel.getHeight();
-		boardWidth = currLevel.getWidth();
+		Level nextLevel = currLevel.loadNextLevel(this);
+		boardHeight = nextLevel.getHeight();
+		boardWidth = nextLevel.getWidth();
 		//initLevel(currLevel, boardWidth, boardHeight);
 		System.out.println("Next level loading");
-		restart();
-		//refresh ui
+		initLevel(nextLevel, boardWidth, boardHeight);
+		currLevel = nextLevel;
+		tilesToBoard();
+    	revalidate();
+    	repaint();
+    	
 	} catch (FileNotFoundException e) {
 		System.out.println("You've Won!! (maybe)");
 	}
