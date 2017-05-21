@@ -38,13 +38,13 @@ public class PuzzleGame extends JFrame{
 
     private void initUI() {
     	//setup the JFrame
-    	this.add(menu);
-    	menu.revalidate();
-    	menu.repaint();
+    	//this.add(menu);
+    	//menu.revalidate();
+    	//menu.repaint();
 
-        //this.add(board);
-        //board.revalidate();
-        //board.repaint();
+        this.add(board);
+        board.revalidate();
+        board.repaint();
         
         setSize(950, 700);
         setTitle("Puzzle Game");

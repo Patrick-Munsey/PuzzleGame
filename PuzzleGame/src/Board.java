@@ -48,8 +48,12 @@ public class Board extends JPanel  {
 		goals =  new LinkedList<Goal>();
 		moves = new MoveList();
 		the_board.addKeyListener(new BoardAdapter());
+<<<<<<< HEAD
 		countMoves = 0;
 		initBoard(1);
+=======
+		initBoard(9);
+>>>>>>> branch 'master' of https://github.com/Patrick-Munsey/PuzzleGame
 		initUI();
     }
 
