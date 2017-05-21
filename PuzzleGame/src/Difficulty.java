@@ -4,5 +4,12 @@
  * 
  */
 public enum Difficulty {
-    EASY, MEDIUM, HARD
+    EASY, MEDIUM, HARD;
+    
+    private static Difficulty[] vals = values();
+    
+    public Difficulty next()
+    {
+        return vals[(this.ordinal()+1) % vals.length];
+    }
 }

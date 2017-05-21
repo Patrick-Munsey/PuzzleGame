@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -33,8 +34,8 @@ public class Board extends JPanel  {
     private LinkedList<Goal> goals;
     private int box_size = 30;
     private JPanel the_board;
-    private Difficulty currDifficulty;
-    private int currLv;
+    public Level currLevel;
+    private MoveList moves;
     private int moves; //counter for every move you make
     
     /**
@@ -47,14 +48,13 @@ public class Board extends JPanel  {
 		board = new Tile[boardWidth][boardHeight];
 		players = new  HashMap<PlayerNumber, Player>();
 		goals =  new LinkedList<Goal>();
+		moves = new MoveList();
 		the_board.addKeyListener(new BoardAdapter());
 		moves = 0;
-		
+		currLevel = new Level();
 		//initBoard(Difficulty.EASY, 0);
 		//initBoard(Difficulty.EASY, 1);
-		currDifficulty = Difficulty.MEDIUM;
-		currLv = 1;
-		initBoard(currDifficulty, currLv);
+		initBoard(Difficulty.EASY, 0);
 		initUI();
     }
 
@@ -73,11 +73,12 @@ public class Board extends JPanel  {
     /** @author James Doldissen
      * Write all the tiles in the board array to the jpanel
      */
-    private void tilesToBoard () {
+    private void tilesToBoard ()
+    {
 		for(int y = 0; y < boardHeight; y++){
-	    	for(int x = 0; x < boardWidth; x++){
+		    for(int x = 0; x < boardWidth; x++){
 			the_board.add(board[x][boardHeight-1-y]);//labels have to be added from top to bottom not bottom to top so reverse board y index
-	    	}
+		    }
 		}
     }
     
@@ -97,10 +98,75 @@ public class Board extends JPanel  {
      * @return true if player was moved successfully
      */
     public boolean MovePlayer(PlayerNumber playernumber, Direction direction) {
-		players.get(playernumber).movePiece(this, direction);
-		return true;
+
+		boolean moveCheck = players.get(playernumber).movePiece(this, direction, moves, false);
+		checkCompletion();
+		if (moveCheck == true) {
+			//moves.addMove(direction, false);
+			return true;
+		} else {
+			return false;
+		}
     }
     
+    /**
+     * Method to undo moves
+     * @author dennydien
+     * @param playernumber
+     * @return
+     */
+    public boolean undoMove(PlayerNumber playernumber) {
+    	
+    	Move undoMove = moves.undoMove(); 
+    	if (undoMove == null) { //early exit if no move to undo
+    		return false;
+    	}
+    	
+    	Direction undoDirection = undoMove.getDirection(); //get the direction of the undo
+    	boolean toMoveBox = undoMove.getBoxMoved(); //true if box must also move, false otherwise
+    	
+    	//move the player back
+    	boolean moveCheck = players.get(playernumber).movePiece(this, undoDirection, moves, true); 
+    	
+    	//move the box back
+    	if (toMoveBox == true) { // If we moved a box when making the move
+    	
+    		//Get the location of the player
+    		Player player = players.get(playernumber);
+        	int tempX = player.getX();
+        	int tempY = player.getY();
+        	
+        	/*
+        	 * Move the box back in the opposite direction
+        	 * We use the coordinate of the player to find the coordinate of the box
+        	 * We use +/- 2 because the player is moved before the box, so it isn't directly next to it
+        	 */
+        	switch(undoDirection) {
+        	
+        	case UP: 
+    			this.MovePiece(tempX, tempY -2, undoDirection);
+    			break;
+    		
+    		case DOWN:
+    			this.MovePiece(tempX, tempY +2, undoDirection);
+    			break;
+    			
+    		case LEFT: 
+    			this.MovePiece(tempX +2, tempY, undoDirection);
+    			break;
+    			
+    		case RIGHT: 
+    			this.MovePiece(tempX -2, tempY, undoDirection);
+    			break;
+    			
+    		default:
+    			break;
+        	
+        	}
+    	}
+		return true;
+    }
+
     /**
      * @author Patrick Munsey, z5020841
      * @return true if a GamePiece can move to this tile
@@ -250,7 +316,9 @@ public class Board extends JPanel  {
     private void initBoard(Difficulty difficulty, int levelNumber) {
     	//changing to level.getLevelFromFile
     	String filePath = "../PuzzleGame/levels/main/";
-    	Level currLevel = new Level();
+    	currLevel = new Level();
+    	goals.clear();
+    	
 		currLevel.setDiff(difficulty);
 		currLevel.setNum(levelNumber);
 		
@@ -271,8 +339,8 @@ public class Board extends JPanel  {
 			filePath = filePath + levelNumber + ".txt";
 			currLevel.makeLevelFromFile(filePath);
 			initLevel(currLevel, currLevel.getWidth(), currLevel.getHeight());
-			this.boardHeight = currLevel.getHeight();
-			this.boardWidth = currLevel.getWidth();
+			boardHeight = currLevel.getHeight();
+			boardWidth = currLevel.getWidth();
 			return;
     }
     
@@ -336,8 +404,10 @@ public class Board extends JPanel  {
      */
     public void restart() {
     	the_board.removeAll();
-    	initBoard(currDifficulty, currLv);
+    	the_board.setLayout(new GridLayout(boardHeight, boardWidth));
+    	initBoard(currLevel.getDiff(), currLevel.getNum());
     	tilesToBoard();
+    	moves.clear();
     	revalidate();
     	repaint();
     }
@@ -346,14 +416,22 @@ public class Board extends JPanel  {
      * @author Patrick Munsey, z5020841
      */
     public void checkCompletion() {
-	for(Goal goal : goals) {
-	    if(!goal.isactivated()) {
-		return;
-	    }
-	}
-	System.out.println("Level complete!!!");
-	////////////////////////////////////////////////////do game completion tasks (inform puzzlegame class)
-    	
+		for(Goal goal : goals) {
+		    if(!goal.isactivated()) {
+			return;
+		    }
+		}
+		
+		try {
+			Level nextLevel = currLevel.loadNextLevel(this);
+			boardHeight = nextLevel.getHeight();
+			boardWidth = nextLevel.getWidth();
+			currLevel = nextLevel;
+			restart();
+	    	
+		} catch (FileNotFoundException e) {
+			System.out.println("You've Won!! (maybe)");
+		}
     }
     
     /**
@@ -386,6 +464,18 @@ public class Board extends JPanel  {
 	        case KeyEvent.VK_UP:
 	            MovePlayer(PlayerNumber.Player1, Direction.UP);
 	            break;
+	            
+	        case KeyEvent.VK_U:
+	        	undoMove(PlayerNumber.Player1);
+	        	break;
+	        	
+	        case KeyEvent.VK_R:
+	        	restart();
+	        	break;
+	        	
+	        case KeyEvent.VK_ESCAPE:
+	        	System.exit(1);
+	        	break;
 	        }
 	    }
 	}

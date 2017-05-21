@@ -23,12 +23,11 @@ import javax.swing.JComponent;
 @SuppressWarnings("serial")
 public class PuzzleGame extends JFrame{
     private Board board;
-<<<<<<< HEAD
+
     private Menu menu;
-    private Frame the_frame = this;
-=======
     private JFrame the_frame = this;
->>>>>>> branch 'master' of https://github.com/Patrick-Munsey/PuzzleGame
+
+
 
     public PuzzleGame() throws Exception {
 		this.board = new Board();
