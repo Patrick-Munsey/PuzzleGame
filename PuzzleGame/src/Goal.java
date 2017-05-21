@@ -11,7 +11,7 @@ public class Goal {
     }
     
     public void activate() {
-    	this.activated = false;
+    	this.activated = true;
     }
     
     public void deactivate() {

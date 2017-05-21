@@ -23,5 +23,12 @@ public class Box extends GamePiece{
     ImageIcon icon = createImageIcon("images/box.png");
     label.setIcon(icon);
     }
+
+    @Override
+    public boolean isBox() {
+	return true;
+    }
+    
+    
     
 }
