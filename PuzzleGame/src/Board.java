@@ -8,6 +8,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 
@@ -27,21 +28,23 @@ public class Board extends JPanel  {
     private JPanel the_board;
     public Level currLevel;
     private MoveList moves;
+    private JFrame frame;
     
     /**
      * @author Patrick Munsey, z5020841
      */
-    public Board() {
-    	the_board = new JPanel();
-		this.boardWidth = 0;
-		this.boardHeight = 0;
-		board = new Tile[boardWidth][boardHeight];
-		players = new  HashMap<PlayerNumber, Player>();
-		goals =  new LinkedList<Goal>();
-		moves = new MoveList();
-		the_board.addKeyListener(new BoardAdapter());
-		initBoard(12);
-		initUI();
+    public Board(JFrame frame) {
+	this.frame = frame;
+	the_board = new JPanel();
+	this.boardWidth = 0;
+	this.boardHeight = 0;
+	board = new Tile[boardWidth][boardHeight];
+	players = new  HashMap<PlayerNumber, Player>();
+	goals =  new LinkedList<Goal>();
+	moves = new MoveList();
+	the_board.addKeyListener(new BoardAdapter());
+	initBoard(12);
+	initUI();
     }
 
     /**

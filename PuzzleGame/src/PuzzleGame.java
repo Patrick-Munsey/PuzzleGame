@@ -23,19 +23,17 @@ import javax.swing.JComponent;
 @SuppressWarnings("serial")
 public class PuzzleGame extends JFrame{
     private Board board;
-    private JFrame the_frame = this;
+    private TitleScreen titleScreen;
+    private JFrame frame = this;
 
-    public PuzzleGame() {
-		this.board = new Board();
+    public PuzzleGame() throws Exception {
+		this.board = new Board(frame);
+		this.titleScreen = new TitleScreen(frame);
 		initUI();
     }
 
 
     private void initUI() {
-    	//setup the JFrame
-        this.add(board);
-        board.revalidate();
-        board.repaint();
         
         setSize(950, 700);
         setTitle("Puzzle Game");
@@ -57,7 +55,7 @@ public class PuzzleGame extends JFrame{
         optionsMenuItem.setToolTipText("Change game options");
         optionsMenuItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	OptionsDialog options = new OptionsDialog(the_frame);
+            	OptionsDialog options = new OptionsDialog(frame);
             	options.setVisible(true);
             }
         });
@@ -76,7 +74,7 @@ public class PuzzleGame extends JFrame{
         aboutMenuItem.setToolTipText("About");
         aboutMenuItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	AboutDialog about = new AboutDialog(the_frame);
+            	AboutDialog about = new AboutDialog(frame);
             	about.setVisible(true);
             }
         });
@@ -86,7 +84,7 @@ public class PuzzleGame extends JFrame{
         instructionsMenuItem.setToolTipText("Instructions");
         instructionsMenuItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-	        	InstructionsDialog instructions = new InstructionsDialog(the_frame);
+	        	InstructionsDialog instructions = new InstructionsDialog(frame);
 	        	instructions.setVisible(true);
             }
         });
@@ -125,12 +123,29 @@ public class PuzzleGame extends JFrame{
 	*/
         setJMenuBar(menuBar);
 
+        displayBoard();
+    }
+    
+    public void displayBoard() {
+	//setup the JFrame
+	this.getContentPane().removeAll();
+        this.add(board);
+        board.revalidate();
+        board.repaint();
+    }
+    
+    public void displayTitle() {
+	this.getContentPane().removeAll();
+	this.add(titleScreen);
+	titleScreen.revalidate();
+	titleScreen.repaint();
     }
     
     /**
      * @param args
+     * @throws Exception 
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 	    PuzzleGame puzzlegame = new PuzzleGame();
 	    puzzlegame.setVisible(true);
     }
