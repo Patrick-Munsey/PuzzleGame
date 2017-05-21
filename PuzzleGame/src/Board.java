@@ -19,14 +19,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-
 /**
  * @author Patrick Munsey
  * zID: z5020841
  * 
  */
 public class Board extends JPanel  {
-    
     private Tile[][] board;
     private int boardWidth;
     private int boardHeight;
@@ -51,10 +49,7 @@ public class Board extends JPanel  {
 		moves = new MoveList();
 		the_board.addKeyListener(new BoardAdapter());
 		countMoves = 0;
-		currLevel = new Level();
-		//initBoard(Difficulty.EASY, 0);
-		//initBoard(Difficulty.EASY, 1);
-		initBoard(Difficulty.EASY, 0);
+		initBoard(1);
 		initUI();
     }
 
@@ -98,7 +93,6 @@ public class Board extends JPanel  {
      * @return true if player was moved successfully
      */
     public boolean MovePlayer(PlayerNumber playernumber, Direction direction) {
-
 		boolean moveCheck = players.get(playernumber).movePiece(this, direction, moves, false);
 		checkCompletion();
 		if (moveCheck == true) {
@@ -313,35 +307,14 @@ public class Board extends JPanel  {
      * @param difficulty
      * @param levelNumber
      */
-    private void initBoard(Difficulty difficulty, int levelNumber) {
+    private void initBoard(int levelNumber) {
     	//changing to level.getLevelFromFile
-    	String filePath = "../PuzzleGame/levels/main/";
-    	currLevel = new Level();
+    	currLevel = new Level(levelNumber);
     	goals.clear();
-    	
-		currLevel.setDiff(difficulty);
-		currLevel.setNum(levelNumber);
-		
-			switch(difficulty) {
-			case EASY:
-				filePath = filePath + "e";
-			    break;
-			case MEDIUM:
-				filePath = filePath + "m";
-			    break;
-			case HARD:
-			    filePath = filePath + "h";
-			    break;
-			default:
-			    System.out.println("Invalid difficulty");
-			    return;   
-		}
-			filePath = filePath + levelNumber + ".txt";
-			currLevel.makeLevelFromFile(filePath);
-			initLevel(currLevel, currLevel.getWidth(), currLevel.getHeight());
-			boardHeight = currLevel.getHeight();
-			boardWidth = currLevel.getWidth();
-			return;
+		initLevel(currLevel, currLevel.getWidth(), currLevel.getHeight());
+		boardHeight = currLevel.getHeight();
+		boardWidth = currLevel.getWidth();
+		return;
     }
     
     /**
@@ -405,7 +378,7 @@ public class Board extends JPanel  {
     public void restart() {
     	the_board.removeAll();
     	the_board.setLayout(new GridLayout(boardHeight, boardWidth));
-    	initBoard(currLevel.getDiff(), currLevel.getNum());
+    	initBoard(currLevel.getlevelNum());
     	tilesToBoard();
     	moves.clear();
     	revalidate();
