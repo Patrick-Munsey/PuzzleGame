@@ -342,6 +342,9 @@ public class Board extends JPanel  {
     	repaint();
     }
     
+    /**
+     * @author Patrick Munsey, z5020841
+     */
     public void checkCompletion() {
 	for(Goal goal : goals) {
 	    if(!goal.isactivated()) {
