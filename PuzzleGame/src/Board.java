@@ -35,6 +35,7 @@ public class Board extends JPanel  {
     private JPanel the_board;
     private Difficulty currDifficulty;
     private int currLv;
+    private int moves; //counter for every move you make
     
     /**
      * @author Patrick Munsey, z5020841
@@ -47,6 +48,7 @@ public class Board extends JPanel  {
 		players = new  HashMap<PlayerNumber, Player>();
 		goals =  new LinkedList<Goal>();
 		the_board.addKeyListener(new BoardAdapter());
+		moves = 0;
 		
 		//initBoard(Difficulty.EASY, 0);
 		//initBoard(Difficulty.EASY, 1);
@@ -362,6 +364,7 @@ public class Board extends JPanel  {
 	    public void keyPressed(KeyEvent e) {
 
 	        int keycode = e.getKeyCode();
+	        moves++;
 
 	        switch (keycode) {
 	            

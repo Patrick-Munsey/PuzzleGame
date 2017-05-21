@@ -23,19 +23,25 @@ import javax.swing.JComponent;
 @SuppressWarnings("serial")
 public class PuzzleGame extends JFrame{
     private Board board;
+    private Menu menu;
     private Frame the_frame = this;
 
-    public PuzzleGame() {
+    public PuzzleGame() throws Exception {
 		this.board = new Board();
+		this.menu = new Menu();
 		initUI();
     }
 
 
     private void initUI() {
     	//setup the JFrame
-        this.add(board);
-        board.revalidate();
-        board.repaint();
+    	this.add(menu);
+    	menu.revalidate();
+    	menu.repaint();
+
+        //this.add(board);
+        //board.revalidate();
+        //board.repaint();
         
         setSize(950, 700);
         setTitle("Puzzle Game");
@@ -129,8 +135,9 @@ public class PuzzleGame extends JFrame{
     
     /**
      * @param args
+     * @throws Exception 
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 	    PuzzleGame puzzlegame = new PuzzleGame();
 	    puzzlegame.setVisible(true);
     }
