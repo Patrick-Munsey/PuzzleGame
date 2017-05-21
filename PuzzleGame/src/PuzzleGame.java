@@ -23,7 +23,7 @@ import javax.swing.JComponent;
 @SuppressWarnings("serial")
 public class PuzzleGame extends JFrame{
     private Board board;
-    private Frame the_frame = this;
+    private JFrame the_frame = this;
 
     public PuzzleGame() {
 		this.board = new Board();
