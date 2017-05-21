@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -19,11 +20,7 @@ import javax.swing.JPanel;
 import javax.swing.Timer;
 
 
-/**
- * @author Patrick Munsey
- * zID: z5020841
- * 
- */
+
 public class Board extends JPanel  {
     
     private Tile[][] board;
@@ -33,12 +30,9 @@ public class Board extends JPanel  {
     private LinkedList<Goal> goals;
     private int box_size = 30;
     private JPanel the_board;
-    private Difficulty currDifficulty;
-    private int currLv;
+    public Level currLevel;
     
-    /**
-     * @author Patrick Munsey, z5020841
-     */
+   
     public Board() {
     	the_board = new JPanel();
 		this.boardWidth = 0;
@@ -47,18 +41,14 @@ public class Board extends JPanel  {
 		players = new  HashMap<PlayerNumber, Player>();
 		goals =  new LinkedList<Goal>();
 		the_board.addKeyListener(new BoardAdapter());
-		
+		currLevel = new Level();
 		//initBoard(Difficulty.EASY, 0);
 		//initBoard(Difficulty.EASY, 1);
-		currDifficulty = Difficulty.MEDIUM;
-		currLv = 1;
-		initBoard(currDifficulty, currLv);
+		initBoard(Difficulty.EASY, 0);
 		initUI();
     }
 
-    /**
-     * @author Patrick Munsey, z5020841
-     */
+   
     private void initUI() {	
 	    setLayout(new GridBagLayout());
 		the_board.setLayout(new GridLayout(boardHeight, boardWidth));
@@ -68,9 +58,7 @@ public class Board extends JPanel  {
 		add(the_board);
     }
     
-    /** @author James Doldissen
-     * Write all the tiles in the board array to the jpanel
-     */
+    
     private void tilesToBoard ()
     {
 	for(int y = 0; y < boardHeight; y++){
@@ -80,42 +68,26 @@ public class Board extends JPanel  {
 	}
     }
     
-    /** Refresh the JPanel after a move has been made
-     * @author Patrick Munsey, z5020841
-     */
+   
     private void refreshUI() {
 	the_board.revalidate();
 	the_board.repaint();
     }
     
 
-    /**
-     * @author Patrick Munsey, z5020841
-     * @param playernumber
-     * @param direction
-     * @return true if player was moved successfully
-     */
+   
     public boolean MovePlayer(PlayerNumber playernumber, Direction direction) {
 	players.get(playernumber).movePiece(this, direction);
 	checkCompletion();
 	return true;
     }
 
-    /**
-     * @author Patrick Munsey, z5020841
-     * @return true if a GamePiece can move to this tile
-     */
+    
     public boolean isMoveable() {
     	return false;
     }
     
-    /**
-     * @author Patrick Munsey, z5020841
-     * @param x
-     * @param y
-     * @param direction
-     * @return true if GamePiece was moved successfully
-     */
+    
     public boolean MovePiece(int x, int y, Direction direction) {
 		GamePiece gamepiece = board[x][y].removeGamePiece();
 		if(gamepiece == null) {
@@ -159,82 +131,47 @@ public class Board extends JPanel  {
 		return false;
     }
     
-    /**
-     * @author Patrick Munsey, z5020841
-     * @param x
-     * @param y
-     * @return true if the tile is able to be occupied by a GamePiece
-     */
+   
     public boolean isMoveable(int x, int y) {	
     	return board[x][y].isMoveable();
     } 
     
-    /**
-     * @author Patrick Munsey, z5020841
-     * @param playerNumber
-     * @param x
-     * @param y
-     */
+    
     public void initPlayer(PlayerNumber playerNumber, int x, int y) {
 		Player newPlayer = new Player(playerNumber);
 		players.put(playerNumber, newPlayer);
 		placeGamePiece(newPlayer, x, y);
     }
     
-    /**
-     * @author Patrick Munsey, z5020841
-     * @param x
-     * @param y
-     */
+   
     public void initBox(int x, int y) {
 		Box newBox = new Box();
 		placeGamePiece(newBox, x, y);
     }
     
-    /**
-     * @author Patrick Munsey, z5020841
-     * @param x
-     * @param y
-     */
+    
     public void initGoal(int x, int y) {
 		Goal newGoal = new Goal();
 		goals.add(newGoal);
 		board[x][y].placeGoal(newGoal);
     }
     
-    /**
-     * @author Patrick Munsey, z5020841
-     * @param x
-     * @param y
-     */
+    
     public void initWall(int x, int y) {
     	board[x][y] = new Wall(x,y);
     }
     
-    /**
-     * @author Patrick Munsey, z5020841
-     * @param x
-     * @param y
-     */
+    
     public void initFloor(int x, int y) {
     	board[x][y] = new Floor(x,y);
     }
     
-    /**
-     * @author Patrick Munsey, z5020841
-     * @param gamepiece
-     * @param x
-     * @param y
-     */
+    
     public void placeGamePiece(GamePiece gamepiece, int x, int y) {
     	board[x][y].placeGamePiece(gamepiece);
     }
     
-    /**
-     * @author Patrick Munsey, z5020841
-     * @param x
-     * @param y
-     */
+    
     public void clearTile(int x, int y) {
 		board[x][y].removeGoal();
 		board[x][y].removeGamePiece();
@@ -242,15 +179,13 @@ public class Board extends JPanel  {
     }
     
 
-    /**
-     * @author Patrick Munsey, z5020841
-     * @param difficulty
-     * @param levelNumber
-     */
+    
     private void initBoard(Difficulty difficulty, int levelNumber) {
     	//changing to level.getLevelFromFile
     	String filePath = "../PuzzleGame/levels/main/";
-    	Level currLevel = new Level();
+    	currLevel = new Level();
+    	goals.clear();
+    	
 		currLevel.setDiff(difficulty);
 		currLevel.setNum(levelNumber);
 		
@@ -271,18 +206,12 @@ public class Board extends JPanel  {
 			filePath = filePath + levelNumber + ".txt";
 			currLevel.makeLevelFromFile(filePath);
 			initLevel(currLevel, currLevel.getWidth(), currLevel.getHeight());
-			this.boardHeight = currLevel.getHeight();
-			this.boardWidth = currLevel.getWidth();
+			boardHeight = currLevel.getHeight();
+			boardWidth = currLevel.getWidth();
 			return;
     }
     
-    /**
-     * Method which translates string representations of levels into the board
-     * Starts by setting up the board with floors
-     * Then updates the rest of the board based on the string inputs
-     * @author Denny Dien
-     * @param level
-     */
+    
     private void initLevel(Level level, int boardWidth, int boardHeight) {
     	
     	// Initialise the board with all floors
@@ -307,13 +236,7 @@ public class Board extends JPanel  {
     	
     }
     
-    /**
-     * Method which initialises game objects based on their allocated symbol
-     * @author Denny Dien
-     * @param symbol
-     * @param row
-     * @param col
-     */
+    
     public void createObject(char symbol, int row, int col) {
 		String objectType = TileID.getTileID(symbol);
 		
@@ -330,14 +253,12 @@ public class Board extends JPanel  {
 		} 
 	}
     
-    /**
-     * @author James Doldissen
-     * Restart the current level
-     */
+    
     public void restart()
     {
     	the_board.removeAll();
-    	initBoard(currDifficulty, currLv);
+    	the_board.setLayout(new GridLayout(boardHeight, boardWidth));
+    	initBoard(currLevel.getDiff(), currLevel.getNum());
     	tilesToBoard();
     	revalidate();
     	repaint();
@@ -353,14 +274,23 @@ public class Board extends JPanel  {
 	    }
 	}
 	System.out.println("Level complete!!!");
-	////////////////////////////////////////////////////do game completion tasks (inform puzzlegame class)
+	
+	try {
+		Level nextLevel = currLevel.loadNextLevel(this);
+		boardHeight = nextLevel.getHeight();
+		boardWidth = nextLevel.getWidth();
+		System.out.println("Next level loading");
+		currLevel = nextLevel;
+		//initUI();
+		//System.out.println(this.currLevel.);
+		restart();
+    	
+	} catch (FileNotFoundException e) {
+		System.out.println("You've Won!! (maybe)");
+	}
     }
     
-    /**
-     * @authors: 	Patrick Munsey
-     * zID: 	z5020841
-     * 
-     */
+    
     class BoardAdapter extends KeyAdapter {
 	    
 	    @Override
