@@ -40,7 +40,7 @@ public class Board extends JPanel  {
 		goals =  new LinkedList<Goal>();
 		moves = new MoveList();
 		the_board.addKeyListener(new BoardAdapter());
-		initBoard(5);
+		initBoard(1);
 		initUI();
     }
 
