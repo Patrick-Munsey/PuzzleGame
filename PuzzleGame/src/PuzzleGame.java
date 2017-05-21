@@ -51,8 +51,7 @@ public class PuzzleGame extends JFrame{
 		instructions.setMaximumSize(new Dimension(300, 100));
 
     	this.add(menu);
-    	menu.revalidate();
-    	menu.repaint();
+
     	
     	start.addActionListener(new ActionListener() { 
     		public void actionPerformed(ActionEvent e) { 

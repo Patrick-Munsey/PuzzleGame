@@ -50,6 +50,8 @@ public class Menu extends JPanel{
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		this.setBackground(Color.gray);
 		this.setBorder(new EmptyBorder(new Insets(300, 0, 0, 0)));
+    	revalidate();
+    	repaint();
 
 	}
 	
