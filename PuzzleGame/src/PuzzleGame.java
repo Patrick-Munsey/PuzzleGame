@@ -136,15 +136,15 @@ public class PuzzleGame extends JFrame{
     }
     
     public void displayTitle() {
-	this.getContentPane().removeAll();
-	this.add(titleScreen);
-	titleScreen.revalidate();
-	titleScreen.repaint();
+    	this.getContentPane().removeAll();
+    	this.add(titleScreen);
+    	titleScreen.revalidate();
+    	titleScreen.repaint();
     }
     
     public void displayInstructionsDialog() {
-	InstructionsDialog instructions = new InstructionsDialog(frame);
-	instructions.setVisible(true);
+    	InstructionsDialog instructions = new InstructionsDialog(frame);
+    	instructions.setVisible(true);
     }
     
     /**

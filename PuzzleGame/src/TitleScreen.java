@@ -49,50 +49,55 @@ public class TitleScreen extends JPanel{
 
     private void initUI() throws Exception{
 	this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-	this.setBackground(Color.gray);
-	this.setBorder(new EmptyBorder(new Insets(300, 0, 0, 0)));
 
+	//adds start button
 	JButton start_button = new JButton("Start");
 	start_button.setBackground(Color.white);
 	start_button.setOpaque(true);
+	start_button.setBorder(BorderFactory.createLineBorder(Color.gray));
 	start_button.addMouseListener(new MouseAdapter() {
 		@Override
 		public void mouseEntered(MouseEvent e) {
-			setBorder(BorderFactory.createLineBorder(Color.blue));
+			start_button.setBorder(BorderFactory.createLineBorder(Color.blue));
 		}
 
 		@Override
 		public void mouseExited(MouseEvent e) {
-			setBorder(BorderFactory.createLineBorder(Color.gray));
+			start_button.setBorder(BorderFactory.createLineBorder(Color.gray));
 		}
 	});
+	
 	start_button.addActionListener(new ActionListener() {
 	    public void actionPerformed(ActionEvent e) {
+	    	puzzleGame.displayBoard();
 	    }
 	});
 	
 	
-	
+	//adds JButton
 	JButton instructions_button = new JButton("Instructions");
 	instructions_button.setBackground(Color.white);
 	instructions_button.setOpaque(true);
+	instructions_button.setBorder(BorderFactory.createLineBorder(Color.gray));
 	instructions_button.addMouseListener(new MouseAdapter() {
 		@Override
 		public void mouseEntered(MouseEvent e) {
-			setBorder(BorderFactory.createLineBorder(Color.blue));
+			instructions_button.setBorder(BorderFactory.createLineBorder(Color.blue));
 		}
 
 		@Override
 		public void mouseExited(MouseEvent e) {
-			setBorder(BorderFactory.createLineBorder(Color.gray));
+			instructions_button.setBorder(BorderFactory.createLineBorder(Color.gray));
 		}
 	});
+	
 	instructions_button.addActionListener(new ActionListener() {
 	    public void actionPerformed(ActionEvent e) {
 		puzzleGame.displayInstructionsDialog();
 	    }
 	});
 
+    this.add(Box.createVerticalStrut(250));
 	this.add(start_button);
 	this.add(Box.createRigidArea(new Dimension(0, 50)));
 	this.add(instructions_button);
