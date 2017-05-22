@@ -122,15 +122,14 @@ public class PuzzleGame extends JFrame{
 	*/
         setJMenuBar(menuBar);
 
-        displayTitle();
+       displayTitle();
         //displayBoard();
         
     }
     
     public void displayBoard() {
-	//setup the JFrame
-	this.getContentPane().removeAll();
-        this.add(board);
+    	this.getContentPane().removeAll();
+    	this.add(board);
         board.revalidate();
         board.repaint();
     }

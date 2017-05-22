@@ -34,7 +34,7 @@ public class Board extends JPanel  {
      * @author Patrick Munsey, z5020841
      */
     public Board(JFrame frame) {
-	this.puzzleGame = puzzleGame;
+	this.puzzleGame = (PuzzleGame) frame;
 	the_board = new JPanel();
 	this.boardWidth = 0;
 	this.boardHeight = 0;
@@ -43,6 +43,7 @@ public class Board extends JPanel  {
 	goals =  new LinkedList<Goal>();
 	moves = new MoveList();
 	the_board.addKeyListener(new BoardAdapter());
+	//this.addKeyListener(new BoardAdapter());
 	initBoard(1);
 	initUI();
     }
@@ -80,7 +81,9 @@ public class Board extends JPanel  {
 		the_board.repaint();
     }
     
-
+    public JPanel getTheBoard(){
+    	return this.the_board;
+    }
 
 
     /**
@@ -411,7 +414,7 @@ public class Board extends JPanel  {
      * zID: 	z5020841
      * 
      */
-    class BoardAdapter extends KeyAdapter {
+    public class BoardAdapter extends KeyAdapter {
 	    
 	    @Override
 	    public void keyPressed(KeyEvent e) {
