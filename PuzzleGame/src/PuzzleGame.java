@@ -33,7 +33,7 @@ public class PuzzleGame extends JFrame{
     }
 
 
-    private void initUI() {
+    private void initUI() throws Exception {
         
         setSize(950, 700);
         setTitle("Puzzle Game");
@@ -134,7 +134,8 @@ public class PuzzleGame extends JFrame{
         board.repaint();
     }
     
-    public void displayTitle() {
+    public void displayTitle() throws Exception {
+	titleScreen = new TitleScreen(this);
     	this.getContentPane().removeAll();
     	this.add(titleScreen);
     	titleScreen.revalidate();

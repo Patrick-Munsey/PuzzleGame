@@ -33,18 +33,18 @@ public class Board extends JPanel  {
     /**
      * @author Patrick Munsey, z5020841
      */
-    public Board(JFrame frame) {
-	this.puzzleGame = (PuzzleGame) frame;
-	the_board = new JPanel();
-	this.boardWidth = 0;
-	this.boardHeight = 0;
-	board = new Tile[boardWidth][boardHeight];
-	players = new  HashMap<PlayerNumber, Player>();
-	goals =  new LinkedList<Goal>();
-	moves = new MoveList();
-	the_board.addKeyListener(new BoardAdapter());
-	initBoard(1);
-	initUI();
+    public Board(PuzzleGame puzzleGame) {
+		this.puzzleGame = puzzleGame;
+		the_board = new JPanel();
+		this.boardWidth = 0;
+		this.boardHeight = 0;
+		board = new Tile[boardWidth][boardHeight];
+		players = new  HashMap<PlayerNumber, Player>();
+		goals =  new LinkedList<Goal>();
+		moves = new MoveList();
+		addListeners();
+		initBoard(1);
+		initUI();
     }
 
     /**
@@ -404,6 +404,10 @@ public class Board extends JPanel  {
 		} catch (FileNotFoundException e) {
 			System.out.println("You've Won!! (maybe)");
 		}
+    }
+    
+    public void addListeners() {
+		the_board.addKeyListener(new BoardAdapter());
     }
     
     /**
