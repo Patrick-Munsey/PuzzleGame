@@ -24,46 +24,17 @@ import javax.swing.JComponent;
 @SuppressWarnings("serial")
 public class PuzzleGame extends JFrame{
     private Board board;
-    private Menu menu;
-    private JFrame the_frame = this;
+    private TitleScreen titleScreen;
+    private JFrame frame = this;
 
     public PuzzleGame() throws Exception {
-		this.board = new Board();
-		this.menu = new Menu();
+		this.board = new Board(frame);
+		this.titleScreen = new TitleScreen(frame);
 		initUI();
     }
 
 
-    private void initUI() {
-    	//setup the JFrame
-
-        
-    	AButton start = new AButton("Start Game");
-    	AButton instructions = new AButton("Instructions");
-		menu.add(start);
-		menu.add(Box.createRigidArea(new Dimension(0, 50)));
-		menu.add(instructions);
-
-		start.setAlignmentX(Component.CENTER_ALIGNMENT);
-		instructions.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-		start.setMaximumSize(new Dimension(300, 100));
-		instructions.setMaximumSize(new Dimension(300, 100));
-
-    	this.add(menu);
-
-    	
-    	start.addActionListener(new ActionListener() { 
-    		public void actionPerformed(ActionEvent e) { 
-    			remove(menu);
-    			add(board);
-    			board.revalidate();
-    			board.repaint();
-    			
-    		}
-    	});
-
-
+    private void initUI() {      
         setSize(950, 700);
         setTitle("Puzzle Game");
         setLocationRelativeTo(null);
@@ -84,7 +55,7 @@ public class PuzzleGame extends JFrame{
         optionsMenuItem.setToolTipText("Change game options");
         optionsMenuItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	OptionsDialog options = new OptionsDialog(the_frame);
+            	OptionsDialog options = new OptionsDialog(frame);
             	options.setVisible(true);
             }
         });
@@ -103,7 +74,7 @@ public class PuzzleGame extends JFrame{
         aboutMenuItem.setToolTipText("About");
         aboutMenuItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	AboutDialog about = new AboutDialog(the_frame);
+            	AboutDialog about = new AboutDialog(frame);
             	about.setVisible(true);
             }
         });
@@ -113,7 +84,7 @@ public class PuzzleGame extends JFrame{
         instructionsMenuItem.setToolTipText("Instructions");
         instructionsMenuItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-	        	InstructionsDialog instructions = new InstructionsDialog(the_frame);
+	        	InstructionsDialog instructions = new InstructionsDialog(frame);
 	        	instructions.setVisible(true);
             }
         });
@@ -152,8 +123,23 @@ public class PuzzleGame extends JFrame{
 	*/
         setJMenuBar(menuBar);
 
+        displayBoard();
     }
     
+    public void displayBoard() {
+	//setup the JFrame
+	this.getContentPane().removeAll();
+        this.add(board);
+        board.revalidate();
+        board.repaint();
+    }
+    
+    public void displayTitle() {
+		this.getContentPane().removeAll();
+		this.add(titleScreen);
+		titleScreen.revalidate();
+		titleScreen.repaint();
+    }
     
     /**
      * @param args

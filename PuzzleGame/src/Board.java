@@ -16,6 +16,7 @@ import java.util.LinkedList;
 import javax.swing.GroupLayout;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
@@ -35,23 +36,23 @@ public class Board extends JPanel  {
     public Level currLevel;
     private MoveList moves;
     private int countMoves; //counter for every move you make
+    private JFrame frame;
     
     /**
      * @author Patrick Munsey, z5020841
      */
-    public Board() {
-    	the_board = new JPanel();
+    public Board(JFrame frame) {
+    	this.frame = frame;
+		the_board = new JPanel();
 		this.boardWidth = 0;
 		this.boardHeight = 0;
 		board = new Tile[boardWidth][boardHeight];
 		players = new  HashMap<PlayerNumber, Player>();
 		goals =  new LinkedList<Goal>();
 		moves = new MoveList();
-		
 		the_board.addKeyListener(new BoardAdapter());
 		countMoves = 0;
-		initBoard(1);
-
+		initBoard(12);
 		initUI();
     }
 
