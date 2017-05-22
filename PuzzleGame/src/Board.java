@@ -43,7 +43,6 @@ public class Board extends JPanel  {
 	goals =  new LinkedList<Goal>();
 	moves = new MoveList();
 	the_board.addKeyListener(new BoardAdapter());
-	//this.addKeyListener(new BoardAdapter());
 	initBoard(1);
 	initUI();
     }
@@ -81,9 +80,7 @@ public class Board extends JPanel  {
 		the_board.repaint();
     }
     
-    public JPanel getTheBoard(){
-    	return this.the_board;
-    }
+
 
 
     /**
@@ -414,7 +411,7 @@ public class Board extends JPanel  {
      * zID: 	z5020841
      * 
      */
-    public class BoardAdapter extends KeyAdapter {
+    class BoardAdapter extends KeyAdapter {
 	    
 	    @Override
 	    public void keyPressed(KeyEvent e) {

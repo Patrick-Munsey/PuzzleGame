@@ -30,20 +30,17 @@ import javax.swing.Box;
 public class TitleScreen extends JPanel{
     private PuzzleGame puzzleGame;
     private BufferedImage image = null;
-    private Image scaledImage;
 
     TitleScreen(PuzzleGame puzzleGame) throws Exception {
 	super();
 	this.puzzleGame = puzzleGame;
 
-	
 	try {
 	    image = ImageIO.read(new File("src/images/menuBackground.png"));	
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}
 
-	//Image scaledImage = image.getScaledInstance(puzzleGame.getWidth(),puzzleGame.getHeight(),Image.SCALE_SMOOTH);
 	initUI();
 
     }
@@ -111,8 +108,8 @@ public class TitleScreen extends JPanel{
     }
 
     protected void paintComponent(Graphics g) {
-	super.paintComponent(g); // paint the background image and scale it to fill the entire space
-	g.drawImage(image, 0, 0, this.getWidth(), this.getHeight(), null);
+    	super.paintComponent(g); // paint the background image and scale it to fill the entire space
+    	g.drawImage(image, 0, 0, this.getWidth(), this.getHeight(), null);
     }
 
 }
