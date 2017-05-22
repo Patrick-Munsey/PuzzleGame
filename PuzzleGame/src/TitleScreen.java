@@ -69,11 +69,7 @@ public class TitleScreen extends JPanel{
 	
 	start_button.addActionListener(new ActionListener() {
 	    public void actionPerformed(ActionEvent e) {
-<<<<<<< HEAD
 	    	puzzleGame.displayBoard();
-=======
-		puzzleGame.displayBoard();
->>>>>>> branch 'master' of https://github.com/Patrick-Munsey/PuzzleGame
 	    }
 	});
 	
