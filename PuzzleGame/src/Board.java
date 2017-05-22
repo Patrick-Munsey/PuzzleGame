@@ -33,7 +33,7 @@ public class Board extends JPanel  {
     /**
      * @author Patrick Munsey, z5020841
      */
-    public Board(JFrame frame) {
+    public Board(PuzzleGame puzzleGame) {
 	this.puzzleGame = puzzleGame;
 	the_board = new JPanel();
 	this.boardWidth = 0;
@@ -42,7 +42,7 @@ public class Board extends JPanel  {
 	players = new  HashMap<PlayerNumber, Player>();
 	goals =  new LinkedList<Goal>();
 	moves = new MoveList();
-	the_board.addKeyListener(new BoardAdapter());
+	addListeners();
 	initBoard(1);
 	initUI();
     }
@@ -406,6 +406,10 @@ public class Board extends JPanel  {
 		}
     }
     
+    public void addListeners() {
+	the_board.addKeyListener(new BoardAdapter());
+    }
+    
     /**
      * @authors: 	Patrick Munsey
      * zID: 	z5020841
@@ -450,4 +454,5 @@ public class Board extends JPanel  {
 	        }
 	    }
 	}
+    
 }
