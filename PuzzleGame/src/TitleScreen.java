@@ -68,6 +68,7 @@ public class TitleScreen extends JPanel{
 	});
 	start_button.addActionListener(new ActionListener() {
 	    public void actionPerformed(ActionEvent e) {
+		puzzleGame.displayBoard();
 	    }
 	});
 	
