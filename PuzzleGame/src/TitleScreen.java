@@ -4,6 +4,8 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Insets;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -26,105 +28,87 @@ import javax.swing.Box;
  *
  */
 public class TitleScreen extends JPanel{
-    private JFrame frame;
+    private PuzzleGame puzzleGame;
     private BufferedImage image = null;
-	
-    TitleScreen(JFrame frame) throws Exception {
+
+    TitleScreen(PuzzleGame puzzleGame) throws Exception {
 	super();
-	this.frame = frame;
-	
+	this.puzzleGame = puzzleGame;
+
 	try {
-	    image = ImageIO.read(new File("images/menuBackground.png"));	
+	    image = ImageIO.read(new File("src/images/menuBackground.png"));	
 	} catch (IOException e) {
 	    e.printStackTrace();
 	}
-	
+
 	initUI();
 
     }
+
+
+
+    private void initUI() throws Exception{
+	this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+	this.setBackground(Color.gray);
+	this.setBorder(new EmptyBorder(new Insets(300, 0, 0, 0)));
+
+	JButton start_button = new JButton("Start");
+	start_button.setBackground(Color.white);
+	start_button.setOpaque(true);
+	start_button.addMouseListener(new MouseAdapter() {
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			setBorder(BorderFactory.createLineBorder(Color.blue));
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			setBorder(BorderFactory.createLineBorder(Color.gray));
+		}
+	});
+	start_button.addActionListener(new ActionListener() {
+	    public void actionPerformed(ActionEvent e) {
+	    }
+	});
 	
-	protected void paintComponent(Graphics g) {
-	    super.paintComponent(g); // paint the background image and scale it to fill the entire space
-	    g.drawImage(image, 0, 0, null);
-	}
 	
-	private void initUI() throws Exception{
-		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-		this.setBackground(Color.gray);
-		this.setBorder(new EmptyBorder(new Insets(300, 0, 0, 0)));
-	}
 	
+	JButton instructions_button = new JButton("Instructions");
+	instructions_button.setBackground(Color.white);
+	instructions_button.setOpaque(true);
+	instructions_button.addMouseListener(new MouseAdapter() {
+		@Override
+		public void mouseEntered(MouseEvent e) {
+			setBorder(BorderFactory.createLineBorder(Color.blue));
+		}
+
+		@Override
+		public void mouseExited(MouseEvent e) {
+			setBorder(BorderFactory.createLineBorder(Color.gray));
+		}
+	});
+	instructions_button.addActionListener(new ActionListener() {
+	    public void actionPerformed(ActionEvent e) {
+		puzzleGame.displayInstructionsDialog();
+	    }
+	});
+
+	this.add(start_button);
+	this.add(Box.createRigidArea(new Dimension(0, 50)));
+	this.add(instructions_button);
+
+	start_button.setAlignmentX(Component.CENTER_ALIGNMENT);
+	instructions_button.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+	start_button.setMaximumSize(new Dimension(300, 100));
+	instructions_button.setMaximumSize(new Dimension(300, 100));
+
+
+    }
+
+    protected void paintComponent(Graphics g) {
+	super.paintComponent(g); // paint the background image and scale it to fill the entire space
+	g.drawImage(image, 0, 0, null);
+    }
+
 }
-/*
-import java.awt.Color;
-import java.awt.Image;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.MouseAdapter;
-import java.awt.event.MouseEvent;
-
-import javax.swing.BorderFactory;
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-
-/**Generic button with actionlisteners already
- * 
- * @author lindatruong
- *
- */
-/*
-public class AButton extends JButton {
-	
-	public AButton(String nameButton){
-		super(nameButton);
-		initUI();
-	}
-	
-	public AButton(Image image) {
-		super(new ImageIcon(image));
-		initUI();
-	}
-	
-	public void initUI() {
-		setBackground(Color.white);
-		setOpaque(true);
-		BorderFactory.createLineBorder(Color.gray); //lines the button
-		addMouseListener(new MouseAdapter() {
-			@Override
-			public void mouseEntered(MouseEvent e) {
-				setBorder(BorderFactory.createLineBorder(Color.blue));
-			}
-	
-			@Override
-			public void mouseExited(MouseEvent e) {
-				setBorder(BorderFactory.createLineBorder(Color.gray));
-			}
-		});
-		
-		//addActionListener(new ActionListener(){
-		//	@Override
-		//	public void actionPerformed(ActionEvent e) 		
-		//	}
-		//});
-
-	}
-}
-*/
-
-
-/*
- AButton start = new AButton("Start Game");
-    	AButton instructions = new AButton("Instructions");
-		menu.add(start);
-		menu.add(Box.createRigidArea(new Dimension(0, 50)));
-		menu.add(instructions);
-
-		start.setAlignmentX(Component.CENTER_ALIGNMENT);
-		instructions.setAlignmentX(Component.CENTER_ALIGNMENT);
-
-		start.setMaximumSize(new Dimension(300, 100));
-		instructions.setMaximumSize(new Dimension(300, 100));
-
- 
- 
- */

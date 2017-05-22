@@ -28,13 +28,13 @@ public class Board extends JPanel  {
     private JPanel the_board;
     public Level currLevel;
     private MoveList moves;
-    private JFrame frame;
+    private PuzzleGame puzzleGame;
     
     /**
      * @author Patrick Munsey, z5020841
      */
     public Board(JFrame frame) {
-	this.frame = frame;
+	this.puzzleGame = puzzleGame;
 	the_board = new JPanel();
 	this.boardWidth = 0;
 	this.boardHeight = 0;

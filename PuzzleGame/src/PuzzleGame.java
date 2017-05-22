@@ -27,8 +27,8 @@ public class PuzzleGame extends JFrame{
     private JFrame frame = this;
 
     public PuzzleGame() throws Exception {
-		this.board = new Board(frame);
-		this.titleScreen = new TitleScreen(frame);
+		this.board = new Board(this);
+		this.titleScreen = new TitleScreen(this);
 		initUI();
     }
 
@@ -84,8 +84,7 @@ public class PuzzleGame extends JFrame{
         instructionsMenuItem.setToolTipText("Instructions");
         instructionsMenuItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-	        	InstructionsDialog instructions = new InstructionsDialog(frame);
-	        	instructions.setVisible(true);
+        	displayInstructionsDialog();
             }
         });
         
@@ -123,7 +122,9 @@ public class PuzzleGame extends JFrame{
 	*/
         setJMenuBar(menuBar);
 
-        displayBoard();
+        displayTitle();
+        //displayBoard();
+        
     }
     
     public void displayBoard() {
@@ -139,6 +140,11 @@ public class PuzzleGame extends JFrame{
 	this.add(titleScreen);
 	titleScreen.revalidate();
 	titleScreen.repaint();
+    }
+    
+    public void displayInstructionsDialog() {
+	InstructionsDialog instructions = new InstructionsDialog(frame);
+	instructions.setVisible(true);
     }
     
     /**
