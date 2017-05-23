@@ -26,6 +26,8 @@ public class PuzzleGame extends JFrame{
     private TitleScreen titleScreen;
     private JFrame frame = this;
     private GameTimer gameTimer;
+    private int currentLevel;
+    private int numPlayers;
 
     public PuzzleGame() throws Exception {
 		this.board = new Board(this);
@@ -118,7 +120,6 @@ public class PuzzleGame extends JFrame{
         setJMenuBar(menuBar);
 
        displayTitle();
-       //displayBoard();
         
     }
     
@@ -145,6 +146,14 @@ public class PuzzleGame extends JFrame{
     public void displayInstructionsDialog() {
     	InstructionsDialog instructions = new InstructionsDialog(frame);
     	instructions.setVisible(true);
+    }
+    
+    public void setLevel(int level) {
+	this.currentLevel = level;
+    }
+    
+    public int getLevel() {
+	return this.currentLevel;
     }
     
     /**
