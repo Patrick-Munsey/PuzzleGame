@@ -135,7 +135,7 @@ public class PuzzleGame extends JFrame{
     }
     
     public void displayTitle() throws Exception {
-	titleScreen = new TitleScreen(this);
+    	titleScreen = new TitleScreen(this);
     	this.getContentPane().removeAll();
     	this.add(titleScreen);
     	titleScreen.revalidate();

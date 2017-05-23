@@ -101,6 +101,12 @@ public class GamePiece {
     	label.setText("GP");
     }
     
+    /**
+     * Function will take in a path place on net and then return that image 
+     * otherwise error
+     * @param path
+     * @return an image icon type
+     */
     public ImageIcon createImageIcon(String path) {
   		java.net.URL imgURL = Wall.class.getResource(path);
   		if (imgURL != null) {
@@ -110,6 +116,7 @@ public class GamePiece {
   			return null;
   		}
   	}
+    
     public boolean isBox() {
 	return false;
     }
