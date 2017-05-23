@@ -16,17 +16,46 @@ import javax.swing.Timer;
  */
 public class GameTimer extends JLabel implements ActionListener{
     private Timer timer;
-
+    private int sec;
+    private int min;
+    
     public GameTimer() {
-	this.setText(new Date().toString());
+	this.sec = 0;
+	this.min = 0;
+	this.setText(toString());
 	timer = new Timer(1000,this);
 	timer.setInitialDelay(1);
-	timer.start();
     }
     
     @Override
     public void actionPerformed(ActionEvent arg0) {
-	this.setText(new Date().toString());
+	sec = sec + 1;
+	if(sec >= 60) {
+	    sec = 0;
+	    min = min + 1;
+	}
+	this.setText(toString());
     }
+    
+    @Override
+    public String toString() {
+	return String.format("    Time: %02d:%02d    ", this.min, this.sec);
+    }
+    
+    public void restart() {
+	timer.stop();
+	sec = 0;
+	min = 0;
+	timer.start();
+    }
+    
+    public void pause() {
+	timer.stop();
+    }
+    
+    public void start() {
+	timer.start();
+    }
+    
     
 }

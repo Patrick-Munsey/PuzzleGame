@@ -34,6 +34,7 @@ public class PuzzleGame extends JFrame{
 		this.titleScreen = new TitleScreen(this);
 		this.gameTimer = new GameTimer();
 		initUI();
+		displayTitleScreen();
     }
 
 
@@ -77,8 +78,7 @@ public class PuzzleGame extends JFrame{
         aboutMenuItem.setToolTipText("About");
         aboutMenuItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	AboutDialog about = new AboutDialog(frame);
-            	about.setVisible(true);
+        	displayAboutDialog();
             }
         });
         
@@ -97,7 +97,7 @@ public class PuzzleGame extends JFrame{
         restartMenuItem.setToolTipText("Restart Game");
         restartMenuItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-        	board.restart(); 
+        	restartLevel();
             }
         });
 
@@ -117,9 +117,6 @@ public class PuzzleGame extends JFrame{
 	menuBar.add(gameTimer);
 
         setJMenuBar(menuBar);
-
-       displayTitle();
-        
     }
     
     public void displayBoard() {
@@ -130,9 +127,10 @@ public class PuzzleGame extends JFrame{
         this.revalidate();
     	this.repaint();
         board.requestFocusInWindow();
+        gameTimer.restart();
     }
     
-    public void displayTitle() {
+    public void displayTitleScreen() {
     	this.getContentPane().removeAll();
     	this.add(titleScreen);
     	titleScreen.revalidate();
@@ -140,6 +138,14 @@ public class PuzzleGame extends JFrame{
     	this.revalidate();
     	this.repaint();
     	titleScreen.requestFocusInWindow();
+    }
+    
+    public void displayLevelCompleteScreen() {
+	gameTimer.pause();
+    	this.getContentPane().removeAll();
+    	this.add(new LevelCompleteScreen(this, this.currentLevel, this.gameTimer.toString()));
+    	this.revalidate();
+    	this.repaint();
     }
     
     public void displayInstructionsDialog() {
@@ -157,9 +163,19 @@ public class PuzzleGame extends JFrame{
 	newGameDialog.setVisible(true);
     }
     
+    public void displayAboutDialog() {
+	AboutDialog about = new AboutDialog(frame);
+    	about.setVisible(true);
+    }
+    
     public void changeLevel(int level) {
         this.currentLevel = level;
-        //tell the board to reset and init to new level number
+        displayBoard();
+    }
+    
+    public void restartLevel() {
+	board.restart(); 
+	gameTimer.restart();
     }
         
     /**

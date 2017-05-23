@@ -399,12 +399,13 @@ public class Board extends JPanel  {
 		}
 		
 		try {
-			Level nextLevel = currLevel.loadNextLevel(this);
-			boardHeight = nextLevel.getHeight();
-			boardWidth = nextLevel.getWidth();
-			currLevel = nextLevel;
-			System.out.println(nextLevel.getlevelNum());
-			restart();
+		    puzzleGame.displayLevelCompleteScreen();
+		    Level nextLevel = currLevel.loadNextLevel(this);
+		    boardHeight = nextLevel.getHeight();
+		    boardWidth = nextLevel.getWidth();
+		    currLevel = nextLevel;
+		    System.out.println(nextLevel.getlevelNum());
+		    restart();
 	    	
 		} catch (FileNotFoundException e) {
 			System.out.println("You've Won!! (maybe)");
