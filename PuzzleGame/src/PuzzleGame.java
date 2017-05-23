@@ -123,7 +123,7 @@ public class PuzzleGame extends JFrame{
         setJMenuBar(menuBar);
 
        displayTitle();
-        //displayBoard();
+       //displayBoard();
         
     }
     
@@ -132,14 +132,19 @@ public class PuzzleGame extends JFrame{
     	this.add(board);
         board.revalidate();
         board.repaint();
+        this.revalidate();
+    	this.repaint();
+        board.requestFocusInWindow();
     }
     
-    public void displayTitle() throws Exception {
-	titleScreen = new TitleScreen(this);
+    public void displayTitle() {
     	this.getContentPane().removeAll();
     	this.add(titleScreen);
     	titleScreen.revalidate();
     	titleScreen.repaint();
+    	this.revalidate();
+    	this.repaint();
+    	titleScreen.requestFocusInWindow();
     }
     
     public void displayInstructionsDialog() {

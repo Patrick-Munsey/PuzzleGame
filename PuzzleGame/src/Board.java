@@ -25,7 +25,7 @@ public class Board extends JPanel  {
     private HashMap<PlayerNumber, Player> players;
     private LinkedList<Goal> goals;
     private int box_size = 30;
-    private JPanel the_board;
+
     public Level currLevel;
     private MoveList moves;
     private PuzzleGame puzzleGame;
@@ -35,14 +35,14 @@ public class Board extends JPanel  {
      */
     public Board(PuzzleGame puzzleGame) {
 		this.puzzleGame = puzzleGame;
-		the_board = new JPanel();
+
 		this.boardWidth = 0;
 		this.boardHeight = 0;
 		board = new Tile[boardWidth][boardHeight];
 		players = new  HashMap<PlayerNumber, Player>();
 		goals =  new LinkedList<Goal>();
 		moves = new MoveList();
-		addListeners();
+		this.addKeyListener(new BoardAdapter());
 		initBoard(1);
 		initUI();
     }
@@ -53,11 +53,11 @@ public class Board extends JPanel  {
     
     private void initUI() {	
 	    setLayout(new GridBagLayout());
-		the_board.setLayout(new GridLayout(boardHeight, boardWidth));
-		the_board.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
+		this.setLayout(new GridLayout(boardHeight, boardWidth));
+		this.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
 		tilesToBoard();
-		the_board.setFocusable(true); 
-		add(the_board);
+		this.setFocusable(true); 
+
     }
     
     /** @author James Doldissen
@@ -67,7 +67,7 @@ public class Board extends JPanel  {
     {
 		for(int y = 0; y < boardHeight; y++){
 		    for(int x = 0; x < boardWidth; x++){
-			the_board.add(board[x][boardHeight-1-y]);//labels have to be added from top to bottom not bottom to top so reverse board y index
+			this.add(board[x][boardHeight-1-y]);//labels have to be added from top to bottom not bottom to top so reverse board y index
 		    }
 		}
     }
@@ -76,8 +76,8 @@ public class Board extends JPanel  {
      * @author Patrick Munsey, z5020841
      */
     private void refreshUI() {
-		the_board.revalidate();
-		the_board.repaint();
+		this.revalidate();
+		this.repaint();
     }
     
 
@@ -374,8 +374,8 @@ public class Board extends JPanel  {
      */
     public void restart()
     {
-    	the_board.removeAll();
-    	the_board.setLayout(new GridLayout(boardHeight, boardWidth));
+    	this.removeAll();
+    	this.setLayout(new GridLayout(boardHeight, boardWidth));
     	initBoard(currLevel.getlevelNum());
     	tilesToBoard();
     	moves.clear();
@@ -404,10 +404,6 @@ public class Board extends JPanel  {
 		} catch (FileNotFoundException e) {
 			System.out.println("You've Won!! (maybe)");
 		}
-    }
-    
-    public void addListeners() {
-		the_board.addKeyListener(new BoardAdapter());
     }
     
     /**
