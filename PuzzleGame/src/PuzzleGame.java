@@ -25,10 +25,12 @@ public class PuzzleGame extends JFrame{
     private Board board;
     private TitleScreen titleScreen;
     private JFrame frame = this;
+    private GameTimer gameTimer;
 
     public PuzzleGame() throws Exception {
 		this.board = new Board(this);
 		this.titleScreen = new TitleScreen(this);
+		this.gameTimer = new GameTimer();
 		initUI();
     }
 
@@ -111,15 +113,8 @@ public class PuzzleGame extends JFrame{
         menuBar.add(help);
         menuBar.add(Box.createHorizontalGlue());
         menuBar.add(restartMenuItem);
+	menuBar.add(gameTimer);
 
-        
-        /*
-	JMenu timerdisplay = new JMenu(gameTimer.toString());
-	gameTimer.restart();
-	gameTimer.setTimeDisplay(timerdisplay);
-	timerdisplay.update(getGraphics());
-	menuBar.add(timerdisplay);
-	*/
         setJMenuBar(menuBar);
 
        displayTitle();

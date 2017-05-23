@@ -62,6 +62,7 @@ public class Floor extends Tile{
 		if((goal != null) && gamepiece.isBox()) {
 		    goal.activate();
 		}
+		
 		updateLabel();
     }
     
