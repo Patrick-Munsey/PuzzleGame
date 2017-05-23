@@ -168,8 +168,8 @@ public class PuzzleGame extends JFrame{
     	about.setVisible(true);
     }
     
-    public void changeLevel(int level) {
-        this.currentLevel = level;
+    public void changeLevel(int levelNumber) {
+        this.currentLevel = levelNumber;
         displayBoard();
     }
     

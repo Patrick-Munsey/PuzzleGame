@@ -346,10 +346,10 @@ public class Board extends JPanel  {
     	//changing to level.getLevelFromFile
     	currLevel = new Level(levelNumber);
     	goals.clear();
-		initLevel(currLevel, currLevel.getWidth(), currLevel.getHeight());
-		boardHeight = currLevel.getHeight();
-		boardWidth = currLevel.getWidth();
-		return;
+    	initLevel(currLevel, currLevel.getWidth(), currLevel.getHeight());
+    	boardHeight = currLevel.getHeight();
+    	boardWidth = currLevel.getWidth();
+    	return;
     }
     
     /**
@@ -491,6 +491,19 @@ public class Board extends JPanel  {
 		} catch (FileNotFoundException e) {
 			System.out.println("You've Won!! (maybe)");
 		}
+    }
+    
+    public void changeLevel(int levelNumber) {
+	//insert code for changing from any level to the specified one
+	
+	
+	
+	
+	
+	
+	
+	
+	//////////////////////////
     }
     
     /**
