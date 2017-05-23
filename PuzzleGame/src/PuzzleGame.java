@@ -1,17 +1,15 @@
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-
 import java.awt.ComponentOrientation;
-import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
+import javax.swing.AbstractAction;
 import javax.swing.Box;
-import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.KeyStroke;
 
 
 
@@ -27,7 +25,7 @@ public class PuzzleGame extends JFrame{
     private JFrame frame = this;
 
     public PuzzleGame() throws Exception {
-		this.board = new Board(this);
+		//this.board = new Board(this);
 		this.titleScreen = new TitleScreen(this);
 		initUI();
     }
@@ -122,20 +120,23 @@ public class PuzzleGame extends JFrame{
 	*/
         setJMenuBar(menuBar);
 
-       displayTitle();
-        //displayBoard();
+        //displayTitle();
+        displayBoard();
         
     }
     
     public void displayBoard() {
+    	board = new Board(this);
     	this.getContentPane().removeAll();
     	this.add(board);
         board.revalidate();
         board.repaint();
+        
+        System.out.println("Board Displayed");
     }
     
     public void displayTitle() throws Exception {
-	titleScreen = new TitleScreen(this);
+    	titleScreen = new TitleScreen(this);
     	this.getContentPane().removeAll();
     	this.add(titleScreen);
     	titleScreen.revalidate();

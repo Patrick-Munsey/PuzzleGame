@@ -6,6 +6,7 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -67,6 +68,7 @@ public class TitleScreen extends JPanel{
 	
     	start_button.addActionListener(new ActionListener() {
     		public void actionPerformed(ActionEvent e) {
+    			System.out.println("Displaying Board");
     			puzzleGame.displayBoard();
     		}
     	});

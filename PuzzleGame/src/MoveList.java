@@ -4,6 +4,7 @@ public class MoveList {
 	
 	public static int moveCount = 0;
 	private Stack<Move> moves = new Stack<Move>();
+	public static boolean boxInPortal = false;
 	
 	public MoveList() {
 		
@@ -62,5 +63,5 @@ public class MoveList {
 		}
 
 	}
-	
+
 }

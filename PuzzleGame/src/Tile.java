@@ -62,6 +62,21 @@ class Tile extends JLabel{
     public void removeGoal() {
     }
     
+    public void placePortal(Portal portal) {
+    	
+    }
+    
+    public void setPortalLoc() {
+    	
+    }
+    
+    public void setLocNum(int num) {
+    }
+    
+    public int getLocNum() {
+    	return -1;
+    }
+    
     public ImageIcon createImageIcon(String path) {
 		java.net.URL imgURL = Wall.class.getResource(path);
 		if (imgURL != null) {

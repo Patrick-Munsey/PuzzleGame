@@ -13,6 +13,13 @@ public class Floor extends Tile{
     private GamePiece gamepiece;
     private Goal goal;
     
+    // for portal purposes
+    private Portal portal;
+    private boolean portalLoc = false;
+    private int locNum;
+    private int locX;
+    private int locY;
+    
     /**
      * @param x
      * @param y
@@ -26,9 +33,11 @@ public class Floor extends Tile{
      */
     @Override
     public boolean isMoveable() {
-		if(gamepiece == null) {
+    	if (portal != null) {
+    		return true;
+    	} else if(gamepiece == null) {
 		    return true;
-		}
+		} 
 		return false;
     }
 
@@ -45,8 +54,10 @@ public class Floor extends Tile{
 			if(goal != null) {
 				ImageIcon icon = createImageIcon("images/goal.png");
 		    	setIcon(icon);
-			}
-			else {
+			} else if (portal != null) {
+				ImageIcon icon = createImageIcon("images/portal.png"); 
+	        	setIcon(icon);
+			} else {
 				ImageIcon icon = createImageIcon("images/floor.png");
 				setIcon(icon);
 			}  
@@ -59,8 +70,17 @@ public class Floor extends Tile{
     public void placeGamePiece(GamePiece gamepiece) {
 		this.gamepiece = gamepiece;
 		gamepiece.placePiece(this.x, this.y);
+		
 		if((goal != null) && gamepiece.isBox()) {
 		    goal.activate();
+		} else if (portal != null && !gamepiece.isBox()) {
+			System.out.println("IN PORTAL");
+			portal.activate();
+//			portal.teleport(gamepiece);
+		} else if (portal != null && gamepiece.isBox()) { // If box is in portal
+			//Box will go into portal: need to undo the move
+			System.out.println("BOX IS NOT MAGIC: set");
+			MoveList.boxInPortal = true;
 		}
 		updateLabel();
     }
@@ -93,4 +113,43 @@ public class Floor extends Tile{
 		this.goal = null;
 		updateLabel();
     }
+    
+    /* (non-Javadoc)
+     * @see Tile#placePortal(Portal)
+     */
+    public void placePortal(Portal portal) {
+		this.portal = portal;
+		updateLabel();
+    }
+    
+    public void setPortalLoc() {
+    	this.portalLoc = true;
+    }
+    
+    public void setLocNum(int num) {
+    	this.locNum = num;
+    }
+    
+    public int getLocNum() {
+    	return this.locNum;
+    }
+    
+    public void setLocX(int locX) {
+    	this.locX = locX;
+    }
+    
+    public void setLocY(int locY) {
+    	this.locY = locY;
+    }
+    
+    public int getLocX() {
+    	return this.locX;
+    }
+    
+    public int getLocY() {
+    	return this.locY;
+    }
+    
 }
+
+

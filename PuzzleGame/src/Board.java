@@ -1,6 +1,7 @@
 import java.awt.ComponentOrientation;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.FileNotFoundException;
@@ -8,8 +9,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+import javax.swing.AbstractAction;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.KeyStroke;
 
 
 
@@ -24,6 +27,8 @@ public class Board extends JPanel  {
     private int boardHeight;
     private HashMap<PlayerNumber, Player> players;
     private LinkedList<Goal> goals;
+    private LinkedList<Portal> portals;
+    private LinkedList<Floor> portalLocs;
     private int box_size = 30;
     private JPanel the_board;
     public Level currLevel;
@@ -41,9 +46,11 @@ public class Board extends JPanel  {
 		board = new Tile[boardWidth][boardHeight];
 		players = new  HashMap<PlayerNumber, Player>();
 		goals =  new LinkedList<Goal>();
+		portals = new LinkedList<Portal>();
+		portalLocs = new LinkedList<Floor>();
 		moves = new MoveList();
 		addListeners();
-		initBoard(1);
+		initBoard(6);
 		initUI();
     }
 
@@ -92,6 +99,9 @@ public class Board extends JPanel  {
     public boolean MovePlayer(PlayerNumber playernumber, Direction direction) {
 		boolean moveCheck = players.get(playernumber).movePiece(this, direction, moves, false);
 		checkCompletion();
+		magicPortal(playernumber);
+		checkPortal();
+		
 		if (moveCheck == true) {
 			//moves.addMove(direction, false);
 			return true;
@@ -117,7 +127,8 @@ public class Board extends JPanel  {
     	boolean toMoveBox = undoMove.getBoxMoved(); //true if box must also move, false otherwise
     	
     	//move the player back
-    	boolean moveCheck = players.get(playernumber).movePiece(this, undoDirection, moves, true); 
+    	boolean moveCheck = players.get(playernumber).movePiece(this, undoDirection, moves, true);
+    	magicPortal(playernumber);
     	
     	//move the box back
     	if (toMoveBox == true) { // If we moved a box when making the move
@@ -182,30 +193,30 @@ public class Board extends JPanel  {
 		switch(direction) {
 			case UP:
 			    if(board[x][y+1].isMoveable()) {
-				board[x][y+1].placeGamePiece(gamepiece);
-				refreshUI();
-				return true;
+					board[x][y+1].placeGamePiece(gamepiece);
+					refreshUI();
+					return true;
 			    }
 			    break;
 			case DOWN:
 			    if(board[x][y-1].isMoveable()) {
-				board[x][y-1].placeGamePiece(gamepiece);
-				refreshUI();
-				return true;
+					board[x][y-1].placeGamePiece(gamepiece);
+					refreshUI();
+					return true;
 			    }
 			    break;
 			case LEFT:
 			    if(board[x-1][y].isMoveable()) {
-				board[x-1][y].placeGamePiece(gamepiece);
-				refreshUI();
-				return true;
+					board[x-1][y].placeGamePiece(gamepiece);
+					refreshUI();
+					return true;
 			    }
 			    break;
 			case RIGHT:
 			    if(board[x+1][y].isMoveable()) {
-				board[x+1][y].placeGamePiece(gamepiece);
-				refreshUI();
-				return true;
+					board[x+1][y].placeGamePiece(gamepiece);
+					refreshUI();
+					return true;
 			    }
 			    break;
 			default:
@@ -214,6 +225,15 @@ public class Board extends JPanel  {
 		
 		board[x][y].placeGamePiece(gamepiece);
 		return false;
+    }
+    
+    public boolean MovePiece(int startX, int startY, int endX, int endY) {
+    	GamePiece gamepiece = board[startX][startY].removeGamePiece();
+		if(gamepiece == null) {
+		    return false;
+		}
+		board[endX][endY].placeGamePiece(gamepiece);
+		return true;
     }
     
     /**
@@ -257,6 +277,25 @@ public class Board extends JPanel  {
 		Goal newGoal = new Goal();
 		goals.add(newGoal);
 		board[x][y].placeGoal(newGoal);
+    }
+    
+    public void initPortal(int x, int y, int index) {
+    	//initWall(x,y);
+    	Portal newPortal = new Portal(index);
+    	portals.add(newPortal);
+    	board[x][y].placePortal(newPortal);
+    }
+    
+    public void initPortalLoc(int x, int y, int index) {
+    	
+    	Floor newPortalLoc = new Floor(x,y);
+    	newPortalLoc.setLocNum(index);
+    	newPortalLoc.setLocX(x);
+    	newPortalLoc.setLocY(y);
+    	board[x][y] = newPortalLoc;
+    	System.out.println(x + " " + y);
+    	System.out.println("endX: " + newPortalLoc.getLocX() + " endY:" + newPortalLoc.getLocY());
+    	portalLocs.add(newPortalLoc);
     }
     
     /**
@@ -365,7 +404,19 @@ public class Board extends JPanel  {
 			this.initGoal(row, col);
 		} else if (objectType.equals("Player")) {
 			this.initPlayer(PlayerNumber.Player1, row, col);
-		} 
+		} else if (objectType.equals("Portal1")) {
+			this.initPortal(row, col, 1);
+			System.out.println("Portal made");
+		} else if (objectType.equals("Portal2")) {
+			this.initPortal(row, col, 2);
+			System.out.println("Portal made");
+		} else if (objectType.equals("PortalLoc1")) {
+			this.initPortalLoc(row, col, 1);
+			System.out.println("PortalLoc1 made");
+		} else if (objectType.equals("PortalLoc2")) {
+			this.initPortalLoc(row, col, 2);
+			System.out.println("PortalLoc2 made");
+		}
 	}
     
     /**
@@ -383,6 +434,45 @@ public class Board extends JPanel  {
     	repaint();
     }
     
+    public void magicPortal(PlayerNumber playernumber) {
+    	
+    	int endX;
+    	int endY;
+    	
+    	for (Portal portal: portals) {
+    		if(portal.isActivated()) {
+    			System.out.println("Portal activated");
+    			// TODO: Teleport when portal is activated
+    			
+    			//Get the teleport location portal
+    			int index = portal.getIndex(); //get the portal # to move to the right portal location
+    			for (Floor portalLocs: portalLocs) {
+    				
+    				if(portalLocs.getLocNum() == index) {
+    					// Get the coordinates of the portal location
+    					endX = portalLocs.getLocX();
+    					endY = portalLocs.getLocY();
+    					System.out.println("endX: " + endX + "// endY: " + endY);
+    					//Teleport
+    	    			players.get(playernumber).teleport(this,endX,endY);
+    				}
+    				
+    			}
+    			portal.deactivate();
+    		}
+    	}
+    }
+    
+    public void checkPortal(){
+    
+    	if (MoveList.boxInPortal == true) {
+    		this.undoMove(PlayerNumber.Player1);
+    		MoveList.boxInPortal = false;
+		}
+    	
+    }
+    
+    
     /**
      * @author Patrick Munsey, z5020841
      */
@@ -399,6 +489,8 @@ public class Board extends JPanel  {
 			boardWidth = nextLevel.getWidth();
 			currLevel = nextLevel;
 			System.out.println(nextLevel.getlevelNum());
+			portals.clear();
+			portalLocs.clear();
 			restart();
 	    	
 		} catch (FileNotFoundException e) {
@@ -408,6 +500,7 @@ public class Board extends JPanel  {
     
     public void addListeners() {
 		the_board.addKeyListener(new BoardAdapter());
+		
     }
     
     /**
@@ -417,14 +510,20 @@ public class Board extends JPanel  {
      */
     class BoardAdapter extends KeyAdapter {
 	    
+    	public BoardAdapter() {
+    		System.out.println("BoardAdapter created");
+    	}
+    	
 	    @Override
 	    public void keyPressed(KeyEvent e) {
+	    	System.out.println("Key has been presssed");
 
 	        int keycode = e.getKeyCode();
 
 	        switch (keycode) {
 	            
 	        case KeyEvent.VK_LEFT:
+	        	System.out.println("LEFT");
 	            MovePlayer(PlayerNumber.Player1, Direction.LEFT);
 	            break;
 	            
