@@ -73,7 +73,7 @@ public class GamePiece {
 		
 		// If undo is false, we will reverse the move but we don't add it to the moves list
 		
-		if (boxMoved == true && undo == false) { 
+		if (boxMoved == true && undo == false) {
 			moves.addMove(direction, true); // Add move and note that box has moved too
 			return true;
 		} else if (move == true && undo == false) {
@@ -83,6 +83,17 @@ public class GamePiece {
 			return false;
 		}
 		
+    }
+    
+    public boolean teleport (Board board, int endX, int endY) {
+    	if (board.isMoveable(endX, endY)) {
+    		board.MovePiece(this.x, this.y, endX, endY);
+    		return true;
+    	} else {
+    		System.out.println("Can't teleport");
+    		return false;
+    	}
+    	
     }
     
     /**

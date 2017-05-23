@@ -24,7 +24,16 @@ public class Wall extends Tile {
      */
     @Override
     public void updateLabel() {
-    	ImageIcon icon = createImageIcon("images/wall.png");
-    	setIcon(icon);
+    		ImageIcon icon = createImageIcon("images/wall.png");
+        	setIcon(icon);
     }
+    
+    /* (non-Javadoc)
+     * @see Tile#isMoveable()
+     */
+    @Override
+    public boolean isMoveable() {
+		return false;
+    }
+    
 }

@@ -26,7 +26,7 @@ public class InstructionsDialog extends JDialog {
 	{
 		super(parent);
 		initUI();
-		setSize(new Dimension(400,350));
+		setSize(new Dimension(400,400));
 		setTitle("Instructions");
 		setLocationRelativeTo(getParent());
 	}
@@ -41,7 +41,7 @@ public class InstructionsDialog extends JDialog {
 			"<html>Your are a warehouse boss.<br>" +
 			"Your objective is to push all of the boxes so that the <br>" +
 			"goal locations are all filled at the same time<br><br>" +
-			"<strong>CONTROLS: </strong><br>" +
+			"<div style='text-align: center;'><strong>CONTROLS: </strong></div><br>" +
 			"    UP:&emsp UP_ARROW<br>" +
 			"  DOWN:&emsp DOWN_ARROW<br>" +
 			"  LEFT:&emsp LEFT_ARROW<br>" +

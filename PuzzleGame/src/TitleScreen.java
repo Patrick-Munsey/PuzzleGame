@@ -6,6 +6,7 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
@@ -52,21 +53,22 @@ public class TitleScreen extends JPanel{
     	JButton start_button = new JButton("Start");
     	start_button.setBackground(Color.white);
     	start_button.setOpaque(true);
-    	start_button.setBorder(BorderFactory.createLineBorder(Color.gray));
+    	start_button.setBorder(BorderFactory.createLineBorder(Color.gray,3));
     	start_button.addMouseListener(new MouseAdapter() {
     		@Override
     		public void mouseEntered(MouseEvent e) {
-    			start_button.setBorder(BorderFactory.createLineBorder(Color.blue));
+    			start_button.setBorder(BorderFactory.createLineBorder(Color.blue,3));
     		}
 
     		@Override
     		public void mouseExited(MouseEvent e) {
-    			start_button.setBorder(BorderFactory.createLineBorder(Color.gray));
+    			start_button.setBorder(BorderFactory.createLineBorder(Color.gray,3));
     		}
     	});
 	
     	start_button.addActionListener(new ActionListener() {
     		public void actionPerformed(ActionEvent e) {
+    			System.out.println("Displaying Board");
     			puzzleGame.displayBoard();
     		}
     	});
@@ -76,16 +78,16 @@ public class TitleScreen extends JPanel{
     	JButton instructions_button = new JButton("Instructions");
     	instructions_button.setBackground(Color.white);
     	instructions_button.setOpaque(true);
-    	instructions_button.setBorder(BorderFactory.createLineBorder(Color.gray));
+    	instructions_button.setBorder(BorderFactory.createLineBorder(Color.gray,3));
     	instructions_button.addMouseListener(new MouseAdapter() {
     		@Override
     		public void mouseEntered(MouseEvent e) {
-    			instructions_button.setBorder(BorderFactory.createLineBorder(Color.blue));
+    			instructions_button.setBorder(BorderFactory.createLineBorder(Color.blue,3));
     		}
 
     		@Override
     		public void mouseExited(MouseEvent e) {
-    			instructions_button.setBorder(BorderFactory.createLineBorder(Color.gray));
+    			instructions_button.setBorder(BorderFactory.createLineBorder(Color.gray,3));
     		}
     	});
 	

@@ -1,4 +1,5 @@
 import java.awt.ComponentOrientation;
+import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.KeyAdapter;
@@ -24,8 +25,10 @@ public class Board extends JPanel  {
     private int boardHeight;
     private HashMap<PlayerNumber, Player> players;
     private LinkedList<Goal> goals;
+    private LinkedList<Portal> portals;
+    private LinkedList<Floor> portalLocs;
     private int box_size = 30;
-    private JPanel the_board;
+
     public Level currLevel;
     private MoveList moves;
     private PuzzleGame puzzleGame;
@@ -35,14 +38,15 @@ public class Board extends JPanel  {
      */
     public Board(PuzzleGame puzzleGame) {
 		this.puzzleGame = puzzleGame;
-		the_board = new JPanel();
 		this.boardWidth = 0;
 		this.boardHeight = 0;
 		board = new Tile[boardWidth][boardHeight];
 		players = new  HashMap<PlayerNumber, Player>();
 		goals =  new LinkedList<Goal>();
+		portals = new LinkedList<Portal>();
+		portalLocs = new LinkedList<Floor>();
 		moves = new MoveList();
-		addListeners();
+		this.addKeyListener(new BoardAdapter());
 		initBoard(1);
 		initUI();
     }
@@ -52,12 +56,10 @@ public class Board extends JPanel  {
      */
     
     private void initUI() {	
-	    setLayout(new GridBagLayout());
-		the_board.setLayout(new GridLayout(boardHeight, boardWidth));
-		the_board.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-		tilesToBoard();
-		the_board.setFocusable(true); 
-		add(the_board);
+	this.setLayout(new GridBagLayout());
+	tilesToBoard();
+	this.setFocusable(true); 
+
     }
     
     /** @author James Doldissen
@@ -65,19 +67,26 @@ public class Board extends JPanel  {
      */
     private void tilesToBoard ()
     {
-		for(int y = 0; y < boardHeight; y++){
-		    for(int x = 0; x < boardWidth; x++){
-			the_board.add(board[x][boardHeight-1-y]);//labels have to be added from top to bottom not bottom to top so reverse board y index
-		    }
-		}
+	GridBagConstraints c = new GridBagConstraints();
+	c.fill = GridBagConstraints.HORIZONTAL;
+	c.gridx = 0;
+	c.gridy = 0;
+
+	for(int y = 0; y < boardHeight; y++){
+	    for(int x = 0; x < boardWidth; x++){
+		c.gridx = x;
+		c.gridy = y;
+		this.add(board[x][boardHeight-1-y], c);//labels have to be added from top to bottom not bottom to top so reverse board y index	
+	    }
+	}
     }
     
     /** Refresh the JPanel after a move has been made
      * @author Patrick Munsey, z5020841
      */
     private void refreshUI() {
-		the_board.revalidate();
-		the_board.repaint();
+		this.revalidate();
+		this.repaint();
     }
     
 
@@ -92,6 +101,9 @@ public class Board extends JPanel  {
     public boolean MovePlayer(PlayerNumber playernumber, Direction direction) {
 		boolean moveCheck = players.get(playernumber).movePiece(this, direction, moves, false);
 		checkCompletion();
+		magicPortal(playernumber);
+		checkPortal();
+		
 		if (moveCheck == true) {
 			//moves.addMove(direction, false);
 			return true;
@@ -117,7 +129,8 @@ public class Board extends JPanel  {
     	boolean toMoveBox = undoMove.getBoxMoved(); //true if box must also move, false otherwise
     	
     	//move the player back
-    	boolean moveCheck = players.get(playernumber).movePiece(this, undoDirection, moves, true); 
+    	boolean moveCheck = players.get(playernumber).movePiece(this, undoDirection, moves, true);
+    	magicPortal(playernumber);
     	
     	//move the box back
     	if (toMoveBox == true) { // If we moved a box when making the move
@@ -182,30 +195,30 @@ public class Board extends JPanel  {
 		switch(direction) {
 			case UP:
 			    if(board[x][y+1].isMoveable()) {
-				board[x][y+1].placeGamePiece(gamepiece);
-				refreshUI();
-				return true;
+					board[x][y+1].placeGamePiece(gamepiece);
+					refreshUI();
+					return true;
 			    }
 			    break;
 			case DOWN:
 			    if(board[x][y-1].isMoveable()) {
-				board[x][y-1].placeGamePiece(gamepiece);
-				refreshUI();
-				return true;
+					board[x][y-1].placeGamePiece(gamepiece);
+					refreshUI();
+					return true;
 			    }
 			    break;
 			case LEFT:
 			    if(board[x-1][y].isMoveable()) {
-				board[x-1][y].placeGamePiece(gamepiece);
-				refreshUI();
-				return true;
+					board[x-1][y].placeGamePiece(gamepiece);
+					refreshUI();
+					return true;
 			    }
 			    break;
 			case RIGHT:
 			    if(board[x+1][y].isMoveable()) {
-				board[x+1][y].placeGamePiece(gamepiece);
-				refreshUI();
-				return true;
+					board[x+1][y].placeGamePiece(gamepiece);
+					refreshUI();
+					return true;
 			    }
 			    break;
 			default:
@@ -214,6 +227,15 @@ public class Board extends JPanel  {
 		
 		board[x][y].placeGamePiece(gamepiece);
 		return false;
+    }
+    
+    public boolean MovePiece(int startX, int startY, int endX, int endY) {
+    	GamePiece gamepiece = board[startX][startY].removeGamePiece();
+		if(gamepiece == null) {
+		    return false;
+		}
+		board[endX][endY].placeGamePiece(gamepiece);
+		return true;
     }
     
     /**
@@ -257,6 +279,22 @@ public class Board extends JPanel  {
 		Goal newGoal = new Goal();
 		goals.add(newGoal);
 		board[x][y].placeGoal(newGoal);
+    }
+    
+    public void initPortal(int x, int y, int index) {
+    	Portal newPortal = new Portal(index);
+    	portals.add(newPortal);
+    	board[x][y].placePortal(newPortal);
+    }
+    
+    public void initPortalLoc(int x, int y, int index) {
+    	
+    	Floor newPortalLoc = new Floor(x,y);
+    	newPortalLoc.setLocNum(index);
+    	newPortalLoc.setLocX(x);
+    	newPortalLoc.setLocY(y);
+    	board[x][y] = newPortalLoc;
+    	portalLocs.add(newPortalLoc);
     }
     
     /**
@@ -308,10 +346,10 @@ public class Board extends JPanel  {
     	//changing to level.getLevelFromFile
     	currLevel = new Level(levelNumber);
     	goals.clear();
-		initLevel(currLevel, currLevel.getWidth(), currLevel.getHeight());
-		boardHeight = currLevel.getHeight();
-		boardWidth = currLevel.getWidth();
-		return;
+    	initLevel(currLevel, currLevel.getWidth(), currLevel.getHeight());
+    	boardHeight = currLevel.getHeight();
+    	boardWidth = currLevel.getWidth();
+    	return;
     }
     
     /**
@@ -365,7 +403,15 @@ public class Board extends JPanel  {
 			this.initGoal(row, col);
 		} else if (objectType.equals("Player")) {
 			this.initPlayer(PlayerNumber.Player1, row, col);
-		} 
+		} else if (objectType.equals("Portal1")) {
+			this.initPortal(row, col, 1);
+		} else if (objectType.equals("Portal2")) {
+			this.initPortal(row, col, 2);
+		} else if (objectType.equals("PortalLoc1")) {
+			this.initPortalLoc(row, col, 1);
+		} else if (objectType.equals("PortalLoc2")) {
+			this.initPortalLoc(row, col, 2);
+		}
 	}
     
     /**
@@ -374,14 +420,52 @@ public class Board extends JPanel  {
      */
     public void restart()
     {
-    	the_board.removeAll();
-    	the_board.setLayout(new GridLayout(boardHeight, boardWidth));
+    	this.removeAll();
+    	this.setLayout(new GridBagLayout());
     	initBoard(currLevel.getlevelNum());
     	tilesToBoard();
     	moves.clear();
     	revalidate();
     	repaint();
     }
+    
+    public void magicPortal(PlayerNumber playernumber) {
+    	
+    	int endX;
+    	int endY;
+    	
+    	for (Portal portal: portals) {
+    		if(portal.isActivated()) {
+    			
+    			//Get the teleport location portal
+    			int index = portal.getIndex(); //get the portal # to move to the right portal location
+    			for (Floor portalLocs: portalLocs) {
+    				
+    				if(portalLocs.getLocNum() == index) {
+    					// Get the coordinates of the portal location
+    					endX = portalLocs.getLocX();
+    					endY = portalLocs.getLocY();
+    					//Teleport
+    	    			players.get(playernumber).teleport(this,endX,endY);
+    	    			break;
+    				}
+    				
+    			}
+    			portal.deactivate();
+    			
+    		}
+    	}
+    }
+    
+    public void checkPortal(){
+    
+    	if (MoveList.boxInPortal == true) {
+    		this.undoMove(PlayerNumber.Player1);
+    		MoveList.boxInPortal = false;
+		}
+    	
+    }
+    
     
     /**
      * @author Patrick Munsey, z5020841
@@ -394,11 +478,14 @@ public class Board extends JPanel  {
 		}
 		
 		try {
+			puzzleGame.displayLevelCompleteScreen();
 			Level nextLevel = currLevel.loadNextLevel(this);
 			boardHeight = nextLevel.getHeight();
 			boardWidth = nextLevel.getWidth();
 			currLevel = nextLevel;
 			System.out.println(nextLevel.getlevelNum());
+			portals.clear();
+			portalLocs.clear();
 			restart();
 	    	
 		} catch (FileNotFoundException e) {
@@ -406,8 +493,17 @@ public class Board extends JPanel  {
 		}
     }
     
-    public void addListeners() {
-		the_board.addKeyListener(new BoardAdapter());
+    public void changeLevel(int levelNumber) {
+	//insert code for changing from any level to the specified one
+	
+	
+	
+	
+	
+	
+	
+	
+	//////////////////////////
     }
     
     /**

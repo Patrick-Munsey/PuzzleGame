@@ -2,6 +2,10 @@ public enum TileID {
 
 	Wall('#'),
 	Floor('-'),
+	Portal1('X'),
+	Portal2('Y'),
+	PortalLoc1('1'),
+	PortalLoc2('2'),
 	Box('B'),
 	Goal('!'),
 	Player('P');

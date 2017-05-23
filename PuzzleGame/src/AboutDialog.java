@@ -38,17 +38,16 @@ public class AboutDialog extends JDialog {
 		
 		
 		JLabel about_text = new JLabel (
-			"<html>Created by group 'Useless' for COMP2911 2017S1 group assignment<br><br>"+
+			"<html><div style='text-align: center;'>Created by group 'Useless' for COMP2911 2017S1 group assignment<br><br>"+
 				"<strong>Authors:</strong><br>"+
 				"Patrick Munsey<br>"+
 				"Hayden Carson<br>"+
 				"Linda Truong<br>"+
 				"James Doldissen<br>"+
-				"Denny Dien</html>",
+				"Denny Dien</div></html>",
 			SwingConstants.CENTER);
 		about_text.setFont(new Font("serif", Font.PLAIN, 14));
 		about_text.setAlignmentX(Component.CENTER_ALIGNMENT);
-		
 		JButton okButton = new JButton("OK");
 		okButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 		okButton.addActionListener(new ActionListener() {

@@ -25,11 +25,16 @@ public class PuzzleGame extends JFrame{
     private Board board;
     private TitleScreen titleScreen;
     private JFrame frame = this;
+    private GameTimer gameTimer;
+    private int currentLevel;
+    private int numPlayers;
 
     public PuzzleGame() throws Exception {
 		this.board = new Board(this);
 		this.titleScreen = new TitleScreen(this);
+		this.gameTimer = new GameTimer();
 		initUI();
+		displayTitleScreen();
     }
 
 
@@ -46,7 +51,7 @@ public class PuzzleGame extends JFrame{
         newGameMenuItem.setToolTipText("Start a new game");
         newGameMenuItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-        	System.out.println("New Game button pressed");
+        	displayNewGameDialog();
             }
         });
 
@@ -55,8 +60,7 @@ public class PuzzleGame extends JFrame{
         optionsMenuItem.setToolTipText("Change game options");
         optionsMenuItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	OptionsDialog options = new OptionsDialog(frame);
-            	options.setVisible(true);
+        		displayOptionsDialog();
             }
         });
 
@@ -74,8 +78,7 @@ public class PuzzleGame extends JFrame{
         aboutMenuItem.setToolTipText("About");
         aboutMenuItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	AboutDialog about = new AboutDialog(frame);
-            	about.setVisible(true);
+        		displayAboutDialog();
             }
         });
         
@@ -94,7 +97,7 @@ public class PuzzleGame extends JFrame{
         restartMenuItem.setToolTipText("Restart Game");
         restartMenuItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-        	board.restart(); 
+        		restartLevel();
             }
         });
 
@@ -111,20 +114,9 @@ public class PuzzleGame extends JFrame{
         menuBar.add(help);
         menuBar.add(Box.createHorizontalGlue());
         menuBar.add(restartMenuItem);
+	menuBar.add(gameTimer);
 
-        
-        /*
-	JMenu timerdisplay = new JMenu(gameTimer.toString());
-	gameTimer.restart();
-	gameTimer.setTimeDisplay(timerdisplay);
-	timerdisplay.update(getGraphics());
-	menuBar.add(timerdisplay);
-	*/
         setJMenuBar(menuBar);
-
-       displayTitle();
-        //displayBoard();
-        
     }
     
     public void displayBoard() {
@@ -132,14 +124,30 @@ public class PuzzleGame extends JFrame{
     	this.add(board);
         board.revalidate();
         board.repaint();
+        this.revalidate();
+    	this.repaint();
+        board.requestFocusInWindow();
+        gameTimer.restart();
     }
     
     public void displayTitle() throws Exception {
     	titleScreen = new TitleScreen(this);
+    public void displayTitleScreen() {
     	this.getContentPane().removeAll();
     	this.add(titleScreen);
     	titleScreen.revalidate();
     	titleScreen.repaint();
+    	this.revalidate();
+    	this.repaint();
+    	titleScreen.requestFocusInWindow();
+    }
+    
+    public void displayLevelCompleteScreen() {
+	gameTimer.pause();
+    	this.getContentPane().removeAll();
+    	this.add(new LevelCompleteScreen(this, this.currentLevel, this.gameTimer.toString()));
+    	this.revalidate();
+    	this.repaint();
     }
     
     public void displayInstructionsDialog() {
@@ -147,6 +155,31 @@ public class PuzzleGame extends JFrame{
     	instructions.setVisible(true);
     }
     
+    public void displayOptionsDialog() {
+    	OptionsDialog optionsDialog = new OptionsDialog(this);
+    	optionsDialog.setVisible(true);
+    }
+    
+    public void displayNewGameDialog() {
+	NewGameDialog newGameDialog = new NewGameDialog(this);
+	newGameDialog.setVisible(true);
+    }
+    
+    public void displayAboutDialog() {
+	AboutDialog about = new AboutDialog(frame);
+    	about.setVisible(true);
+    }
+    
+    public void changeLevel(int levelNumber) {
+        this.currentLevel = levelNumber;
+        displayBoard();
+    }
+    
+    public void restartLevel() {
+	board.restart(); 
+	gameTimer.restart();
+    }
+        
     /**
      * @param args
      * @throws Exception 
