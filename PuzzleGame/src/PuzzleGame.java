@@ -1,17 +1,15 @@
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-
 import java.awt.ComponentOrientation;
-import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
+import javax.swing.AbstractAction;
 import javax.swing.Box;
-import javax.swing.JComponent;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.KeyStroke;
 
 
 
@@ -30,7 +28,7 @@ public class PuzzleGame extends JFrame{
     private int numPlayers;
 
     public PuzzleGame() throws Exception {
-		this.board = new Board(this);
+		//this.board = new Board(this);
 		this.titleScreen = new TitleScreen(this);
 		this.gameTimer = new GameTimer();
 		initUI();
@@ -118,21 +116,37 @@ public class PuzzleGame extends JFrame{
 
         setJMenuBar(menuBar);
 
+<<<<<<< HEAD
        displayTitle();
+=======
+        //displayTitle();
+        displayBoard();
+>>>>>>> refs/heads/Denny_2
         
     }
     
     public void displayBoard() {
+    	board = new Board(this);
     	this.getContentPane().removeAll();
     	this.add(board);
         board.revalidate();
         board.repaint();
+<<<<<<< HEAD
         this.revalidate();
     	this.repaint();
         board.requestFocusInWindow();
+=======
+        
+        System.out.println("Board Displayed");
+>>>>>>> refs/heads/Denny_2
     }
     
+<<<<<<< HEAD
     public void displayTitle() {
+=======
+    public void displayTitle() throws Exception {
+    	titleScreen = new TitleScreen(this);
+>>>>>>> refs/heads/Denny_2
     	this.getContentPane().removeAll();
     	this.add(titleScreen);
     	titleScreen.revalidate();
