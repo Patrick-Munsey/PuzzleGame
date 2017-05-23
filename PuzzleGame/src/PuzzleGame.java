@@ -50,7 +50,7 @@ public class PuzzleGame extends JFrame{
         newGameMenuItem.setToolTipText("Start a new game");
         newGameMenuItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-        	System.out.println("New Game button pressed");
+        	displayNewGameDialog();
             }
         });
 
@@ -59,8 +59,7 @@ public class PuzzleGame extends JFrame{
         optionsMenuItem.setToolTipText("Change game options");
         optionsMenuItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-            	OptionsDialog options = new OptionsDialog(frame);
-            	options.setVisible(true);
+        	displayOptionsDialog();
             }
         });
 
@@ -148,14 +147,21 @@ public class PuzzleGame extends JFrame{
     	instructions.setVisible(true);
     }
     
-    public void setLevel(int level) {
-	this.currentLevel = level;
+    public void displayOptionsDialog() {
+    	OptionsDialog optionsDialog = new OptionsDialog(this);
+    	optionsDialog.setVisible(true);
     }
     
-    public int getLevel() {
-	return this.currentLevel;
+    public void displayNewGameDialog() {
+	NewGameDialog newGameDialog = new NewGameDialog(this);
+	newGameDialog.setVisible(true);
     }
     
+    public void changeLevel(int level) {
+        this.currentLevel = level;
+        //tell the board to reset and init to new level number
+    }
+        
     /**
      * @param args
      * @throws Exception 
