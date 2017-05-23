@@ -1,4 +1,5 @@
 import java.awt.ComponentOrientation;
+import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.KeyAdapter;
@@ -35,7 +36,6 @@ public class Board extends JPanel  {
      */
     public Board(PuzzleGame puzzleGame) {
 		this.puzzleGame = puzzleGame;
-
 		this.boardWidth = 0;
 		this.boardHeight = 0;
 		board = new Tile[boardWidth][boardHeight];
@@ -52,11 +52,9 @@ public class Board extends JPanel  {
      */
     
     private void initUI() {	
-	    setLayout(new GridBagLayout());
-		this.setLayout(new GridLayout(boardHeight, boardWidth));
-		this.setComponentOrientation(ComponentOrientation.LEFT_TO_RIGHT);
-		tilesToBoard();
-		this.setFocusable(true); 
+	this.setLayout(new GridBagLayout());
+	tilesToBoard();
+	this.setFocusable(true); 
 
     }
     
@@ -65,11 +63,18 @@ public class Board extends JPanel  {
      */
     private void tilesToBoard ()
     {
-		for(int y = 0; y < boardHeight; y++){
-		    for(int x = 0; x < boardWidth; x++){
-			this.add(board[x][boardHeight-1-y]);//labels have to be added from top to bottom not bottom to top so reverse board y index
-		    }
-		}
+	GridBagConstraints c = new GridBagConstraints();
+	c.fill = GridBagConstraints.HORIZONTAL;
+	c.gridx = 0;
+	c.gridy = 0;
+
+	for(int y = 0; y < boardHeight; y++){
+	    for(int x = 0; x < boardWidth; x++){
+		c.gridx = x;
+		c.gridy = y;
+		this.add(board[x][boardHeight-1-y], c);//labels have to be added from top to bottom not bottom to top so reverse board y index	
+	    }
+	}
     }
     
     /** Refresh the JPanel after a move has been made
@@ -375,7 +380,7 @@ public class Board extends JPanel  {
     public void restart()
     {
     	this.removeAll();
-    	this.setLayout(new GridLayout(boardHeight, boardWidth));
+    	this.setLayout(new GridBagLayout());
     	initBoard(currLevel.getlevelNum());
     	tilesToBoard();
     	moves.clear();
