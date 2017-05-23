@@ -87,7 +87,6 @@ public class GamePiece {
     
     public boolean teleport (Board board, int endX, int endY) {
     	if (board.isMoveable(endX, endY)) {
-    		System.out.println("Can teleport");
     		board.MovePiece(this.x, this.y, endX, endY);
     		return true;
     	} else {

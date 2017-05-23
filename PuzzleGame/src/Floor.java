@@ -74,12 +74,9 @@ public class Floor extends Tile{
 		if((goal != null) && gamepiece.isBox()) {
 		    goal.activate();
 		} else if (portal != null && !gamepiece.isBox()) {
-			System.out.println("IN PORTAL");
 			portal.activate();
-//			portal.teleport(gamepiece);
 		} else if (portal != null && gamepiece.isBox()) { // If box is in portal
 			//Box will go into portal: need to undo the move
-			System.out.println("BOX IS NOT MAGIC: set");
 			MoveList.boxInPortal = true;
 		}
 		

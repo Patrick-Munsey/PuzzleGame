@@ -436,8 +436,6 @@ public class Board extends JPanel  {
     	
     	for (Portal portal: portals) {
     		if(portal.isActivated()) {
-    			System.out.println("Portal activated");
-    			// TODO: Teleport when portal is activated
     			
     			//Get the teleport location portal
     			int index = portal.getIndex(); //get the portal # to move to the right portal location
@@ -447,13 +445,14 @@ public class Board extends JPanel  {
     					// Get the coordinates of the portal location
     					endX = portalLocs.getLocX();
     					endY = portalLocs.getLocY();
-    					System.out.println("endX: " + endX + "// endY: " + endY);
     					//Teleport
     	    			players.get(playernumber).teleport(this,endX,endY);
+    	    			break;
     				}
     				
     			}
     			portal.deactivate();
+    			
     		}
     	}
     }
