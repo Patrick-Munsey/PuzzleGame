@@ -1,4 +1,5 @@
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -29,7 +30,11 @@ public class PuzzleGame extends JFrame{
     private int currentLevel;
     private int numPlayers;
 
+    /**
+     * @throws Exception
+     */
     public PuzzleGame() throws Exception {
+		this.currentLevel = 1;
 		this.board = new Board(this);
 		this.titleScreen = new TitleScreen(this);
 		this.gameTimer = new GameTimer();
@@ -39,7 +44,6 @@ public class PuzzleGame extends JFrame{
 
 
     private void initUI() throws Exception {
-        
         setSize(950, 700);
         setTitle("Puzzle Game");
         setLocationRelativeTo(null);
@@ -114,11 +118,14 @@ public class PuzzleGame extends JFrame{
         menuBar.add(help);
         menuBar.add(Box.createHorizontalGlue());
         menuBar.add(restartMenuItem);
-	menuBar.add(gameTimer);
+		menuBar.add(gameTimer);
 
         setJMenuBar(menuBar);
     }
-    
+
+    /**
+     * @author Patrick Munsey, z5020841
+     */
     public void displayBoard() {
     	this.getContentPane().removeAll();
     	this.add(board);
@@ -129,11 +136,10 @@ public class PuzzleGame extends JFrame{
         board.requestFocusInWindow();
         gameTimer.restart();
     }
-    
-    public void displayTitle() throws Exception {
-    	titleScreen = new TitleScreen(this);
-    }
-    
+
+    /**
+     * @author Patrick Munsey, z5020841
+     */
     public void displayTitleScreen() {
     	this.getContentPane().removeAll();
     	this.add(titleScreen);
@@ -143,25 +149,37 @@ public class PuzzleGame extends JFrame{
     	this.repaint();
     	titleScreen.requestFocusInWindow();
     }
-    
+
+    /**
+     * @author Patrick Munsey, z5020841
+     */
     public void displayLevelCompleteScreen() {
-	gameTimer.pause();
+		gameTimer.pause();
     	this.getContentPane().removeAll();
     	this.add(new LevelCompleteScreen(this, this.currentLevel, this.gameTimer.toString()));
     	this.revalidate();
     	this.repaint();
     }
-    
+
+    /**
+     * @author Patrick Munsey, z5020841
+     */
     public void displayInstructionsDialog() {
     	InstructionsDialog instructions = new InstructionsDialog(frame);
     	instructions.setVisible(true);
     }
-    
+
+    /**
+     * @author Patrick Munsey, z5020841
+     */
     public void displayOptionsDialog() {
     	OptionsDialog optionsDialog = new OptionsDialog(this);
     	optionsDialog.setVisible(true);
     }
-    
+
+    /**
+     * @author Patrick Munsey, z5020841
+     */
     public void displayNewGameDialog() {
 	NewGameDialog newGameDialog = new NewGameDialog(this);
 	newGameDialog.setVisible(true);
@@ -171,12 +189,19 @@ public class PuzzleGame extends JFrame{
 	AboutDialog about = new AboutDialog(frame);
     	about.setVisible(true);
     }
-    
+
+    /**
+     * @author Patrick Munsey, z5020841
+     * @param levelNumber
+     */
     public void changeLevel(int levelNumber) {
         this.currentLevel = levelNumber;
         displayBoard();
     }
-    
+
+    /**
+     * @author Patrick Munsey, z5020841
+     */
     public void restartLevel() {
 	board.restart(); 
 	gameTimer.restart();

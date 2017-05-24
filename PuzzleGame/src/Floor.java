@@ -28,9 +28,6 @@ public class Floor extends Tile implements Piece{
     	super(x,y);
     }
 
-    /* (non-Javadoc)
-     * @see Tile#isMoveable()
-     */
     @Override
     public boolean isMoveable() {
     	if (portal != null) {
@@ -41,32 +38,27 @@ public class Floor extends Tile implements Piece{
 		return false;
     }
 
-    /* (non-Javadoc)
-     * @see Tile#updateLabel()
-     */
     @Override
     public void updateLabel() {
-		if(gamepiece != null) {
-		    gamepiece.updateLabel(this);
-		}
-		
-		else {
-			if(goal != null) {
-				ImageIcon icon = createImageIcon("images/goal.png");
-		    	setIcon(icon);
-			} else if (portal != null) {
-				ImageIcon icon = createImageIcon("images/portal.png"); 
-	        	setIcon(icon);
-			} else {
-				ImageIcon icon = createImageIcon("images/floor.png");
-				setIcon(icon);
-			}  
-		}
+	if(gamepiece != null) {
+	    gamepiece.updateLabel(this);
+	}
+
+	else {
+	    if(goal != null) {
+		ImageIcon icon = createImageIcon("images/goal.png");
+		setIcon(icon);
+	    } else if (portal != null) {
+		ImageIcon icon = createImageIcon("images/portal.png"); 
+		setIcon(icon);
+	    } else {
+		ImageIcon icon = createImageIcon("images/floor.png");
+		setIcon(icon);
+	    }  
+	}
     }
     
-    /* (non-Javadoc)
-     * @see Tile#placeGamePiece(GamePiece)
-     */
+
     public void placeGamePiece(GamePiece gamepiece) {
 		this.gamepiece = gamepiece;
 		gamepiece.placePiece(this.x, this.y);
@@ -83,9 +75,7 @@ public class Floor extends Tile implements Piece{
 		updateLabel();
     }
     
-    /* (non-Javadoc)
-     * @see Tile#removeGamePiece()
-     */
+
     public GamePiece removeGamePiece() {
 		GamePiece retGamePiece = this.gamepiece;
 		this.gamepiece = null;
@@ -96,25 +86,19 @@ public class Floor extends Tile implements Piece{
 		return retGamePiece;
     }
     
-    /* (non-Javadoc)
-     * @see Tile#placeGoal(Goal)
-     */
+
     public void placeGoal(Goal goal) {
 		this.goal = goal;
 		updateLabel();
     }
     
-    /* (non-Javadoc)
-     * @see Tile#removeGoal()
-     */
+
     public void removeGoal() {
 		this.goal = null;
 		updateLabel();
     }
     
-    /* (non-Javadoc)
-     * @see Tile#placePortal(Portal)
-     */
+
     public void placePortal(Portal portal) {
 		this.portal = portal;
 		updateLabel();

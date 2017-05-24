@@ -28,8 +28,8 @@ public class Player extends GamePiece implements Piece{
     	//this.draw();
     }
     
-    public void draw(){
-    	
+    public JLabel draw(JLabel label){
+    	return label;
     }
     
     //overlaylayout

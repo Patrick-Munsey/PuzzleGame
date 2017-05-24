@@ -17,9 +17,12 @@ public class GamePiece implements Piece{
     }
     
     /**
+     * @author Patrick Munsey, z5020841
      * @param board
      * @param direction
-     * @return true is the GamePiece was moved correctly
+     * @param moves
+     * @param undo
+     * @return
      */
     public boolean movePiece(Board board, Direction direction, MoveList moves, boolean undo) {
 	
@@ -84,7 +87,13 @@ public class GamePiece implements Piece{
 		}
 		
     }
-    
+
+    /**
+     * @param board
+     * @param endX
+     * @param endY
+     * @return
+     */
     public boolean teleport (Board board, int endX, int endY) {
     	if (board.isMoveable(endX, endY)) {
     		board.MovePiece(this.x, this.y, endX, endY);
@@ -111,7 +120,7 @@ public class GamePiece implements Piece{
     public void updateLabel(JLabel label) {
     	label.setText("GP");
     }
-    
+
     /**
      * Function will take in a path place on net and then return that image 
      * otherwise error
@@ -119,23 +128,33 @@ public class GamePiece implements Piece{
      * @return an image icon type
      */
     public ImageIcon createImageIcon(String path) {
-  		java.net.URL imgURL = Wall.class.getResource(path);
-  		if (imgURL != null) {
-  			return new ImageIcon(imgURL);
-  		} else {
-  			System.err.println("Couldn't find file: " + path);
-  			return null;
-  		}
-  	}
-    
-    public boolean isBox() {
-	return false;
+		java.net.URL imgURL = Wall.class.getResource(path);
+		if (imgURL != null) {
+	    	return new ImageIcon(imgURL);
+		} else {
+	    	System.err.println("Couldn't find file: " + path);
+	    	return null;
+		}	
     }
     
+    /**
+     * @return
+     */
+    
+    public boolean isBox() {
+		return false;
+    }
+
+    /**
+     * @return
+     */
     public int getX() {
     	return this.x;
     }
-    
+
+    /**
+     * @return
+     */
     public int getY() {
     	return this.y;
     }

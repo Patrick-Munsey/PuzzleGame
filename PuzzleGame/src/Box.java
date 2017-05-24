@@ -20,17 +20,23 @@ public class Box extends GamePiece implements Piece{
      */
     @Override
     public void updateLabel(JLabel label) {
+<<<<<<< HEAD
 	    //ImageIcon icon = createImageIcon("images/box.png");
     	
     	JLabel newLabel = draw(label);
 	    newLabel.setIcon(icon);
+=======
+	ImageIcon icon = createImageIcon("images/box.png");
+	label.setIcon(icon);
+>>>>>>> branch 'master' of https://github.com/Patrick-Munsey/PuzzleGame
     }
 
     @Override
     public boolean isBox() {
-    	return true;
+	return true;
     }
 
+<<<<<<< HEAD
 	@Override
 	public JLabel draw(JLabel Label) {
 		
@@ -43,4 +49,8 @@ public class Box extends GamePiece implements Piece{
     //check out updating labels
 	//check out stacking imageicons
 	
+=======
+
+
+>>>>>>> branch 'master' of https://github.com/Patrick-Munsey/PuzzleGame
 }
