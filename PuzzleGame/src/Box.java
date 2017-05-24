@@ -20,15 +20,15 @@ public class Box extends GamePiece{
      */
     @Override
     public void updateLabel(JLabel label) {
-	    ImageIcon icon = createImageIcon("images/box.png");
-	    label.setIcon(icon);
+	ImageIcon icon = createImageIcon("images/box.png");
+	label.setIcon(icon);
     }
 
     @Override
     public boolean isBox() {
-    	return true;
+	return true;
     }
-    
-    
-    
+
+
+
 }

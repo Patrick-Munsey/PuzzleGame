@@ -19,7 +19,10 @@ import javax.swing.JPanel;
  */
 public class OptionsDialog extends JDialog {
     PuzzleGame puzzlegame;
-    
+
+    /**
+     * @param parent
+     */
     public OptionsDialog (PuzzleGame parent)
     {
 	super();

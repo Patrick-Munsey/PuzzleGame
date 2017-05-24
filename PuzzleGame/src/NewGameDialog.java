@@ -20,7 +20,10 @@ import javax.swing.JPanel;
  */
 public class NewGameDialog extends JDialog {
     PuzzleGame puzzlegame;
-    
+
+    /**
+     * @param puzzlegame
+     */
     public NewGameDialog (PuzzleGame puzzlegame)
     {
 	super();
@@ -33,7 +36,7 @@ public class NewGameDialog extends JDialog {
     private void initUI()
     {
 	JComponent[] components = new JComponent[15];
-	
+
 	JLabel title_text = new JLabel ("Level Select");
 	title_text.setFont(new Font("serif", Font.BOLD, 16));
 	title_text.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -48,7 +51,7 @@ public class NewGameDialog extends JDialog {
 	    }
 	});
 	components[1] = level_button;
-	
+
 	level_button = new JButton ("Level 2");
 	level_button.setAlignmentX(Component.CENTER_ALIGNMENT);
 	level_button.addActionListener(new ActionListener() {
@@ -58,7 +61,7 @@ public class NewGameDialog extends JDialog {
 	    }
 	});
 	components[2] = level_button;
-	
+
 	level_button = new JButton ("Level 3");
 	level_button.setAlignmentX(Component.CENTER_ALIGNMENT);
 	level_button.addActionListener(new ActionListener() {
@@ -68,7 +71,7 @@ public class NewGameDialog extends JDialog {
 	    }
 	});
 	components[3] = level_button;
-	
+
 	level_button = new JButton ("Level 4");
 	level_button.setAlignmentX(Component.CENTER_ALIGNMENT);
 	level_button.addActionListener(new ActionListener() {
@@ -78,7 +81,7 @@ public class NewGameDialog extends JDialog {
 	    }
 	});
 	components[4] = level_button;
-	
+
 	level_button = new JButton ("Level 5");
 	level_button.setAlignmentX(Component.CENTER_ALIGNMENT);
 	level_button.addActionListener(new ActionListener() {
@@ -88,7 +91,7 @@ public class NewGameDialog extends JDialog {
 	    }
 	});
 	components[5] = level_button;
-	
+
 	level_button = new JButton ("Level 6");
 	level_button.setAlignmentX(Component.CENTER_ALIGNMENT);
 	level_button.addActionListener(new ActionListener() {
@@ -98,7 +101,7 @@ public class NewGameDialog extends JDialog {
 	    }
 	});
 	components[6] = level_button;
-	
+
 	level_button = new JButton ("Level 7");
 	level_button.setAlignmentX(Component.CENTER_ALIGNMENT);
 	level_button.addActionListener(new ActionListener() {
@@ -108,7 +111,7 @@ public class NewGameDialog extends JDialog {
 	    }
 	});
 	components[7] = level_button;
-	
+
 	level_button = new JButton ("Level 8");
 	level_button.setAlignmentX(Component.CENTER_ALIGNMENT);
 	level_button.addActionListener(new ActionListener() {
@@ -118,7 +121,7 @@ public class NewGameDialog extends JDialog {
 	    }
 	});
 	components[8] = level_button;
-	
+
 	level_button = new JButton ("Level 9");
 	level_button.setAlignmentX(Component.CENTER_ALIGNMENT);
 	level_button.addActionListener(new ActionListener() {
@@ -128,7 +131,7 @@ public class NewGameDialog extends JDialog {
 	    }
 	});
 	components[9] = level_button;
-	
+
 	level_button = new JButton ("Level 10");
 	level_button.setAlignmentX(Component.CENTER_ALIGNMENT);
 	level_button.addActionListener(new ActionListener() {
@@ -148,7 +151,7 @@ public class NewGameDialog extends JDialog {
 	    }
 	});
 	components[11] = level_button;
-	
+
 	level_button = new JButton ("Level 12");
 	level_button.setAlignmentX(Component.CENTER_ALIGNMENT);
 	level_button.addActionListener(new ActionListener() {
@@ -158,7 +161,7 @@ public class NewGameDialog extends JDialog {
 	    }
 	});
 	components[12] = level_button;
-	
+
 	level_button = new JButton ("Level 13");
 	level_button.setAlignmentX(Component.CENTER_ALIGNMENT);
 	level_button.addActionListener(new ActionListener() {
@@ -168,7 +171,7 @@ public class NewGameDialog extends JDialog {
 	    }
 	});
 	components[13] = level_button;
-	
+
 	JButton cancelButton = new JButton("Cancel");
 	cancelButton.setAlignmentX(Component.CENTER_ALIGNMENT);
 	cancelButton.addActionListener(new ActionListener() {
@@ -177,7 +180,7 @@ public class NewGameDialog extends JDialog {
 	    }
 	});
 	components[14] = cancelButton;
-	
+
 	create_layout(components);
 
     }

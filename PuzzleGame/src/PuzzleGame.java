@@ -30,6 +30,9 @@ public class PuzzleGame extends JFrame{
     private int currentLevel;
     private int numPlayers;
 
+    /**
+     * @throws Exception
+     */
     public PuzzleGame() throws Exception {
 	this.currentLevel = 1;
 	this.board = new Board(this);
@@ -41,152 +44,180 @@ public class PuzzleGame extends JFrame{
 
 
     private void initUI() throws Exception {
-        
-        setSize(950, 700);
-        setTitle("Puzzle Game");
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        //setup the JMenu items (buttons etc)
-        JMenuItem newGameMenuItem = new JMenuItem("New Game");
-        newGameMenuItem.setMnemonic(KeyEvent.VK_N);
-        newGameMenuItem.setToolTipText("Start a new game");
-        newGameMenuItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-        	displayNewGameDialog();
-            }
-        });
+	setSize(950, 700);
+	setTitle("Puzzle Game");
+	setLocationRelativeTo(null);
+	setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-        JMenuItem optionsMenuItem = new JMenuItem("Options");
-        optionsMenuItem.setMnemonic(KeyEvent.VK_O);
-        optionsMenuItem.setToolTipText("Change game options");
-        optionsMenuItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-        	displayOptionsDialog();
-            }
-        });
+	//setup the JMenu items (buttons etc)
+	JMenuItem newGameMenuItem = new JMenuItem("New Game");
+	newGameMenuItem.setMnemonic(KeyEvent.VK_N);
+	newGameMenuItem.setToolTipText("Start a new game");
+	newGameMenuItem.addActionListener(new ActionListener() {
+	    public void actionPerformed(ActionEvent e) {
+		displayNewGameDialog();
+	    }
+	});
 
-        JMenuItem exitMenuItem = new JMenuItem("Exit");
-        exitMenuItem.setMnemonic(KeyEvent.VK_E);
-        exitMenuItem.setToolTipText("Exit application");
-        exitMenuItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-            	System.exit(0);
-            }
-        });
-        
-        JMenuItem aboutMenuItem = new JMenuItem("About");
-        aboutMenuItem.setMnemonic(KeyEvent.VK_A);
-        aboutMenuItem.setToolTipText("About");
-        aboutMenuItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-        	displayAboutDialog();
-            }
-        });
-        
-        JMenuItem instructionsMenuItem = new JMenuItem("Instructions");
-        instructionsMenuItem.setMnemonic(KeyEvent.VK_I);
-        instructionsMenuItem.setToolTipText("Instructions");
-        instructionsMenuItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-        	displayInstructionsDialog();
-            }
-        });
-        
-        JMenuItem restartMenuItem = new JMenuItem("Restart");
-        restartMenuItem.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT); 
-        restartMenuItem.setMnemonic(KeyEvent.VK_R);
-        restartMenuItem.setToolTipText("Restart Game");
-        restartMenuItem.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
-        	restartLevel();
-            }
-        });
+	JMenuItem optionsMenuItem = new JMenuItem("Options");
+	optionsMenuItem.setMnemonic(KeyEvent.VK_O);
+	optionsMenuItem.setToolTipText("Change game options");
+	optionsMenuItem.addActionListener(new ActionListener() {
+	    public void actionPerformed(ActionEvent e) {
+		displayOptionsDialog();
+	    }
+	});
 
-        //add all of the Jmenu items to the Menu bar
-        JMenuBar menuBar = new JMenuBar();
-        JMenu game = new JMenu("Game");
-        game.add(newGameMenuItem);
-        game.add(optionsMenuItem);
-        game.add(exitMenuItem);
-        menuBar.add(game);
-        JMenu help = new JMenu("Help");
-        help.add(instructionsMenuItem);
-        help.add(aboutMenuItem);
-        menuBar.add(help);
-        menuBar.add(Box.createHorizontalGlue());
-        menuBar.add(restartMenuItem);
+	JMenuItem exitMenuItem = new JMenuItem("Exit");
+	exitMenuItem.setMnemonic(KeyEvent.VK_E);
+	exitMenuItem.setToolTipText("Exit application");
+	exitMenuItem.addActionListener(new ActionListener() {
+	    public void actionPerformed(ActionEvent e) {
+		System.exit(0);
+	    }
+	});
+
+	JMenuItem aboutMenuItem = new JMenuItem("About");
+	aboutMenuItem.setMnemonic(KeyEvent.VK_A);
+	aboutMenuItem.setToolTipText("About");
+	aboutMenuItem.addActionListener(new ActionListener() {
+	    public void actionPerformed(ActionEvent e) {
+		displayAboutDialog();
+	    }
+	});
+
+	JMenuItem instructionsMenuItem = new JMenuItem("Instructions");
+	instructionsMenuItem.setMnemonic(KeyEvent.VK_I);
+	instructionsMenuItem.setToolTipText("Instructions");
+	instructionsMenuItem.addActionListener(new ActionListener() {
+	    public void actionPerformed(ActionEvent e) {
+		displayInstructionsDialog();
+	    }
+	});
+
+	JMenuItem restartMenuItem = new JMenuItem("Restart");
+	restartMenuItem.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT); 
+	restartMenuItem.setMnemonic(KeyEvent.VK_R);
+	restartMenuItem.setToolTipText("Restart Game");
+	restartMenuItem.addActionListener(new ActionListener() {
+	    public void actionPerformed(ActionEvent e) {
+		restartLevel();
+	    }
+	});
+
+	//add all of the Jmenu items to the Menu bar
+	JMenuBar menuBar = new JMenuBar();
+	JMenu game = new JMenu("Game");
+	game.add(newGameMenuItem);
+	game.add(optionsMenuItem);
+	game.add(exitMenuItem);
+	menuBar.add(game);
+	JMenu help = new JMenu("Help");
+	help.add(instructionsMenuItem);
+	help.add(aboutMenuItem);
+	menuBar.add(help);
+	menuBar.add(Box.createHorizontalGlue());
+	menuBar.add(restartMenuItem);
 	menuBar.add(gameTimer);
 
-        setJMenuBar(menuBar);
+	setJMenuBar(menuBar);
     }
-    
+
+    /**
+     * @author Patrick Munsey, z5020841
+     */
     public void displayBoard() {
-    	this.getContentPane().removeAll();
-    	this.add(board);
-        board.revalidate();
-        board.repaint();
-        this.revalidate();
-    	this.repaint();
-        board.requestFocusInWindow();
-        gameTimer.restart();
+	this.getContentPane().removeAll();
+	this.add(board);
+	board.revalidate();
+	board.repaint();
+	this.revalidate();
+	this.repaint();
+	board.requestFocusInWindow();
+	gameTimer.restart();
     }
-    
+
+    /**
+     * @author Patrick Munsey, z5020841
+     */
     public void displayTitleScreen() {
-    	this.getContentPane().removeAll();
-    	this.add(titleScreen);
-    	titleScreen.revalidate();
-    	titleScreen.repaint();
-    	this.revalidate();
-    	this.repaint();
-    	titleScreen.requestFocusInWindow();
+	this.getContentPane().removeAll();
+	this.add(titleScreen);
+	titleScreen.revalidate();
+	titleScreen.repaint();
+	this.revalidate();
+	this.repaint();
+	titleScreen.requestFocusInWindow();
     }
-    
+
+    /**
+     * @author Patrick Munsey, z5020841
+     */
     public void displayLevelCompleteScreen() {
 	gameTimer.pause();
-    	this.getContentPane().removeAll();
-    	this.add(new LevelCompleteScreen(this, this.currentLevel, this.gameTimer.toString()));
-    	this.revalidate();
-    	this.repaint();
+	this.getContentPane().removeAll();
+	this.add(new LevelCompleteScreen(this, this.currentLevel, this.gameTimer.toString()));
+	this.revalidate();
+	this.repaint();
     }
-    
+
+    /**
+     * @author Patrick Munsey, z5020841
+     */
     public void displayInstructionsDialog() {
-    	InstructionsDialog instructions = new InstructionsDialog(frame);
-    	instructions.setVisible(true);
+	InstructionsDialog instructions = new InstructionsDialog(frame);
+	instructions.setVisible(true);
     }
-    
+
+    /**
+     * @author Patrick Munsey, z5020841
+     */
     public void displayOptionsDialog() {
-    	OptionsDialog optionsDialog = new OptionsDialog(this);
-    	optionsDialog.setVisible(true);
+	OptionsDialog optionsDialog = new OptionsDialog(this);
+	optionsDialog.setVisible(true);
     }
-    
+
+    /**
+     * @author Patrick Munsey, z5020841
+     */
     public void displayNewGameDialog() {
 	NewGameDialog newGameDialog = new NewGameDialog(this);
 	newGameDialog.setVisible(true);
     }
-    
+
+    /**
+     * @author Patrick Munsey, z5020841
+     */
     public void displayAboutDialog() {
 	AboutDialog about = new AboutDialog(frame);
-    	about.setVisible(true);
+	about.setVisible(true);
     }
-    
+
+    /**
+     * @author Patrick Munsey, z5020841
+     * @param levelNumber
+     */
     public void changeLevel(int levelNumber) {
-        this.currentLevel = levelNumber;
-        board.changeLevel(levelNumber);
-        displayBoard();
+	this.currentLevel = levelNumber;
+	board.changeLevel(levelNumber);
+	displayBoard();
     }
-    
+
+    /**
+     * @author Patrick Munsey, z5020841
+     */
     public void restartLevel() {
 	board.restart(); 
 	gameTimer.restart();
     }
-        
+
     /**
      * @param args
      * @throws Exception 
      */
     public static void main(String[] args) throws Exception {
-	    PuzzleGame puzzlegame = new PuzzleGame();
-	    puzzlegame.setVisible(true);
+	PuzzleGame puzzlegame = new PuzzleGame();
+	puzzlegame.setVisible(true);
     }
 }

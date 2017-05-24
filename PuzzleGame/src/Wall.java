@@ -1,4 +1,5 @@
 import java.awt.Color;
+import java.awt.Image;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -16,7 +17,7 @@ public class Wall extends Tile {
      * @param y
      */
     public Wall(int x, int y) {
-    	super(x,y);
+	super(x,y);
     }
 
     /* (non-Javadoc)
@@ -24,16 +25,16 @@ public class Wall extends Tile {
      */
     @Override
     public void updateLabel() {
-    		ImageIcon icon = createImageIcon("images/wall.png");
-        	setIcon(icon);
+	ImageIcon image = new ImageIcon("src/images/wall.png");
+	setIcon(image);
     }
-    
+
     /* (non-Javadoc)
      * @see Tile#isMoveable()
      */
     @Override
     public boolean isMoveable() {
-		return false;
+	return false;
     }
-    
+
 }

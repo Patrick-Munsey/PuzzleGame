@@ -9,13 +9,13 @@ import javax.swing.JLabel;
  */
 public class Player extends GamePiece{
     private PlayerNumber playerNumber;
-    
+
 
     /**
      * @param playerNumber
      */
     public Player(PlayerNumber playerNumber) {
-		this.playerNumber = playerNumber;
+	this.playerNumber = playerNumber;
     }
 
     /* (non-Javadoc)
@@ -23,8 +23,8 @@ public class Player extends GamePiece{
      */
     @Override
     public void updateLabel(JLabel label) {
-    	ImageIcon icon = createImageIcon("images/player.png");
-    	label.setIcon(icon);
+	ImageIcon icon = createImageIcon("images/player.png");
+	label.setIcon(icon);
     }
     
 }
