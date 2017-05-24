@@ -1,6 +1,7 @@
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -10,11 +11,9 @@ import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-/**
- * 
- */
 
 /**
  * @author Patrick Munsey
@@ -37,7 +36,12 @@ public class LevelCompleteScreen extends JPanel{
     private void initUI() {
     	this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-    	//adds start button
+    	JLabel CompletionText = new JLabel ("LEVEL " + levelNum + " COMPLETE!!!\n" + time);
+    	CompletionText.setFont(new Font("serif", Font.BOLD, 16));
+    	CompletionText.setAlignmentX(Component.CENTER_ALIGNMENT);
+    	
+    	
+    	
     	JButton next_level_button = new JButton("Next Level");
     	next_level_button.setBackground(Color.white);
     	next_level_button.setOpaque(true);
@@ -63,6 +67,8 @@ public class LevelCompleteScreen extends JPanel{
 	
 
     	this.add(Box.createVerticalStrut(250));
+    	this.add(CompletionText);
+    	this.add(Box.createVerticalStrut(20));
     	this.add(next_level_button);
     	next_level_button.setAlignmentX(Component.CENTER_ALIGNMENT);
     	next_level_button.setMaximumSize(new Dimension(300, 100));

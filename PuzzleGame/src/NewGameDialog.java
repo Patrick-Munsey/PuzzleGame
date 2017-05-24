@@ -188,9 +188,15 @@ public class NewGameDialog extends JDialog {
 	cpane.setLayout(new BoxLayout(cpane, BoxLayout.Y_AXIS));
 	for(int i = 0; i < components.length; i++) {
 	    if(components[i] != null) {
-		if(i == components.length - 1) {
-		    //pad the cancel button
+		if(i == 0) {//pad the title
 		    cpane.add(components[i]);
+		    cpane.add(Box.createRigidArea(new Dimension(0,10)));
+		}
+		else if(i == components.length - 1) {// pad the cancel button
+		    //pad the cancel button
+		    cpane.add(Box.createRigidArea(new Dimension(0,10)));
+		    cpane.add(components[i]);
+		    cpane.add(Box.createRigidArea(new Dimension(0,10)));
 		}
 		else {
 		    cpane.add(components[i]);
