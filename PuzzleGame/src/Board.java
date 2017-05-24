@@ -471,39 +471,23 @@ public class Board extends JPanel  {
      * @author Patrick Munsey, z5020841
      */
     public void checkCompletion() {
-		for(Goal goal : goals) {
-		    if(!goal.isactivated()) {
-			return;
-		    }
-		}
-		
-		try {
-			puzzleGame.displayLevelCompleteScreen();
-			Level nextLevel = currLevel.loadNextLevel(this);
-			boardHeight = nextLevel.getHeight();
-			boardWidth = nextLevel.getWidth();
-			currLevel = nextLevel;
-			System.out.println(nextLevel.getlevelNum());
-			portals.clear();
-			portalLocs.clear();
-			restart();
-	    	
-		} catch (FileNotFoundException e) {
-			System.out.println("You've Won!! (maybe)");
-		}
+	for(Goal goal : goals) {
+	    if(!goal.isactivated()) {
+		return;
+	    }
+	}
+
+	puzzleGame.displayLevelCompleteScreen();
+
     }
     
     public void changeLevel(int levelNumber) {
-	//insert code for changing from any level to the specified one
-	
-	
-	
-	
-	
-	
-	
-	
-	//////////////////////////
+	currLevel = new Level(levelNumber);
+	boardHeight = currLevel.getHeight();
+	boardWidth = currLevel.getWidth();
+	portals.clear();
+	portalLocs.clear();
+	restart();
     }
     
     /**

@@ -23,12 +23,12 @@ import javax.swing.JPanel;
  */
 public class LevelCompleteScreen extends JPanel{
     private PuzzleGame puzzleGame;
-    private int level;
+    private int levelNum;
     private String time;
     
-    public LevelCompleteScreen(PuzzleGame puzzleGame, int Level, String time) {
+    public LevelCompleteScreen(PuzzleGame puzzleGame, int levelNum, String time) {
 	this.puzzleGame = puzzleGame;
-	this.level = level;
+	this.levelNum = levelNum;
 	this.time = time;
 	
 	initUI();
@@ -55,7 +55,8 @@ public class LevelCompleteScreen extends JPanel{
     	});
     	next_level_button.addActionListener(new ActionListener() {
     		public void actionPerformed(ActionEvent e) {
-    			puzzleGame.changeLevel(level + 1);
+    		levelNum = levelNum + 1;
+    		    puzzleGame.changeLevel(levelNum);
     		}
     	});
 	

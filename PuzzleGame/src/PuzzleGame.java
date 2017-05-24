@@ -30,11 +30,12 @@ public class PuzzleGame extends JFrame{
     private int numPlayers;
 
     public PuzzleGame() throws Exception {
-		this.board = new Board(this);
-		this.titleScreen = new TitleScreen(this);
-		this.gameTimer = new GameTimer();
-		initUI();
-		displayTitleScreen();
+	this.currentLevel = 1;
+	this.board = new Board(this);
+	this.titleScreen = new TitleScreen(this);
+	this.gameTimer = new GameTimer();
+	initUI();
+	displayTitleScreen();
     }
 
 
@@ -170,6 +171,7 @@ public class PuzzleGame extends JFrame{
     
     public void changeLevel(int levelNumber) {
         this.currentLevel = levelNumber;
+        board.changeLevel(levelNumber);
         displayBoard();
     }
     
