@@ -93,21 +93,17 @@ class Tile extends JLabel implements Piece{
      * @return
      */
     public ImageIcon createImageIcon(String path) {
-	java.net.URL imgURL = Wall.class.getResource(path);
-	if (imgURL != null) {
-	    return new ImageIcon(imgURL);
-	} else {
-	    System.err.println("Couldn't find file: " + path);
-	    return null;
-	}
-<<<<<<< HEAD
+    	java.net.URL imgURL = Wall.class.getResource(path);
+    	if (imgURL != null) {
+    		return new ImageIcon(imgURL);
+    	} else {
+    		System.err.println("Couldn't find file: " + path);
+    		return null;
+    	}
+    }
 
-    
 	public JLabel draw(JLabel Label) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-=======
-    }
->>>>>>> branch 'master' of https://github.com/Patrick-Munsey/PuzzleGame
 }
