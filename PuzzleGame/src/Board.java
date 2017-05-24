@@ -109,17 +109,16 @@ public class Board extends JPanel  {
      * @return true if player was moved successfully
      */
     public boolean MovePlayer(PlayerNumber playernumber, Direction direction) {
-	boolean moveCheck = players.get(playernumber).movePiece(this, direction, moves, false);
-	checkCompletion();
-	magicPortal(playernumber);
-	checkPortal();
-
-	if (moveCheck == true) {
-	    //moves.addMove(direction, false);
-	    return true;
-	} else {
-	    return false;
-	}
+		boolean moveCheck = players.get(playernumber).movePiece(this, direction, moves, false);
+		checkCompletion();
+		magicPortal(playernumber, false); //undo == false
+		checkPortal();
+		if (moveCheck == true) {
+			//moves.addMove(direction, false);
+			return true;
+		} else {
+			return false;
+		}
     }
 
     /**
@@ -129,58 +128,108 @@ public class Board extends JPanel  {
      * @return
      */
     public boolean undoMove(PlayerNumber playernumber) {
+    	
+    	Move undoMove = moves.undoMove(); 
+    	if (undoMove == null) { //early exit if no move to undo
+    		return false;
+    	}
+    	
+    	Direction undoDirection = undoMove.getDirection(); //get the direction of the undo
+    	boolean toMoveBox = undoMove.getBoxMoved(); //true if box must also move, false otherwise
+    	boolean toTeleport = undoMove.getTeleported(); //true if last move was a teleport
+    	
+    	/*
+    	 * If the last move was a teleport, find the direction of where the portal is
+    	 * Move in that direction, and call magicPortal to teleport back
+    	 */
+    	if (toTeleport == true) {
+    		Direction ofPortal = findPortal(playernumber);
+    		players.get(playernumber).movePiece(this, ofPortal, moves, true);
+    		magicPortal(playernumber, true);
+    		return true; // leave method
+    	}
+    	
+    	/*
+    	 * If the last move was NOT a teleport, move the player back in the opp. direction
+    	 */
+    	boolean moveCheck = players.get(playernumber).movePiece(this, undoDirection, moves, true);
 
-	Move undoMove = moves.undoMove(); 
-	if (undoMove == null) { //early exit if no move to undo
-	    return false;
-	}
-
-	Direction undoDirection = undoMove.getDirection(); //get the direction of the undo
-	boolean toMoveBox = undoMove.getBoxMoved(); //true if box must also move, false otherwise
-
-	//move the player back
-	boolean moveCheck = players.get(playernumber).movePiece(this, undoDirection, moves, true);
-	magicPortal(playernumber);
-
-	//move the box back
-	if (toMoveBox == true) { // If we moved a box when making the move
-
-	    //Get the location of the player
-	    Player player = players.get(playernumber);
-	    int tempX = player.getX();
-	    int tempY = player.getY();
-
-	    /*
-	     * Move the box back in the opposite direction
-	     * We use the coordinate of the player to find the coordinate of the box
-	     * We use +/- 2 because the player is moved before the box, so it isn't directly next to it
-	     */
-	    switch(undoDirection) {
-
-	    case UP: 
-		this.MovePiece(tempX, tempY -2, undoDirection);
-		break;
-
-	    case DOWN:
-		this.MovePiece(tempX, tempY +2, undoDirection);
-		break;
-
-	    case LEFT: 
-		this.MovePiece(tempX +2, tempY, undoDirection);
-		break;
-
-	    case RIGHT: 
-		this.MovePiece(tempX -2, tempY, undoDirection);
-		break;
-
-	    default:
-		break;
-
-	    }
-	}
-	return true;
+    	
+    	/*
+    	 * If the last move MOVED A BOX, we need to move it back as well
+    	 */
+    	if (toMoveBox == true) { // If we moved a box when making the move
+    	
+    		//Get the location of the player
+    		Player player = players.get(playernumber);
+        	int tempX = player.getX();
+        	int tempY = player.getY();
+        	
+        	/*
+        	 * Move the box back in the opposite direction
+        	 * We use the coordinate of the player to find the coordinate of the box
+        	 * We use +/- 2 because the player is moved before the box, so it isn't directly next to it
+        	 */
+        	switch(undoDirection) {
+        	
+        	case UP: 
+    			this.MovePiece(tempX, tempY -2, undoDirection);
+    			break;
+    		
+    		case DOWN:
+    			this.MovePiece(tempX, tempY +2, undoDirection);
+    			break;
+    			
+    		case LEFT: 
+    			this.MovePiece(tempX +2, tempY, undoDirection);
+    			break;
+    			
+    		case RIGHT: 
+    			this.MovePiece(tempX -2, tempY, undoDirection);
+    			break;
+    			
+    		default:
+    			break;
+        	
+        	}
+    	}
+		return true;
     }
 
+    /**
+     * Method to find portal
+     * @param playernumber
+     * @pre only used if there has been a teleport: i.e. portal always exists around player when method is called
+     */
+    public Direction findPortal (PlayerNumber playernumber) {
+    	
+    	// Due to precondition, we assume that the portal is around the player's current pos
+    	Player player = players.get(playernumber);
+    	int midX = player.getX();
+    	int midY = player.getY();
+    	
+    	// Find the direction of the portal relative to the player
+    	if (board[midX][midY+1].isPortal()) { // portal is above
+    		return Direction.UP;
+    	} else if (board[midX][midY-1].isPortal()) { // portal is below
+    		return Direction.DOWN;
+    	} else if (board[midX+1][midY].isPortal()) { // portal is on right
+    		return Direction.RIGHT;
+    	} else if (board[midX-1][midY].isPortal()) { // portal is on left
+    		return Direction.LEFT;
+    	} else {
+    		return null;
+    	}
+    }
+    
+    /**
+     * @author Patrick Munsey, z5020841
+     * @return true if a GamePiece can move to this tile
+     */
+    public boolean isMoveable() {
+    	return false;
+    }
+    
     /**
      * @author Patrick Munsey, z5020841
      * @param x
@@ -247,7 +296,7 @@ public class Board extends JPanel  {
      * @return true if the tile is able to be occupied by a GamePiece
      */
     public boolean isMoveable(int x, int y) {	
-	return board[x][y].isMoveable();
+    	return board[x][y].isMoveable();
     } 
 
     /**
@@ -257,9 +306,9 @@ public class Board extends JPanel  {
      * @param y
      */
     public void initPlayer(PlayerNumber playerNumber, int x, int y) {
-	Player newPlayer = new Player(playerNumber);
-	players.put(playerNumber, newPlayer);
-	placeGamePiece(newPlayer, x, y);
+		Player newPlayer = new Player(playerNumber);
+		players.put(playerNumber, newPlayer);
+		placeGamePiece(newPlayer, x, y);
     }
 
     /**
@@ -268,8 +317,8 @@ public class Board extends JPanel  {
      * @param y
      */
     public void initBox(int x, int y) {
-	Box newBox = new Box();
-	placeGamePiece(newBox, x, y);
+		Box newBox = new Box();
+		placeGamePiece(newBox, x, y);
     }
 
     /**
@@ -440,47 +489,62 @@ public class Board extends JPanel  {
 	revalidate();
 	repaint();
     }
-
+    
     /**
+     * Method which checks if magic portals are activated and tries to teleport player
+     * to the correct portal location
      * @param playernumber
+     * @param undo
      */
-    public void magicPortal(PlayerNumber playernumber) {
-
-	int endX;
-	int endY;
-
-	for (Portal portal: portals) {
-	    if(portal.isActivated()) {
-
-		//Get the teleport location portal
-		int index = portal.getIndex(); //get the portal # to move to the right portal location
-		for (Floor portalLocs: portalLocs) {
-
-		    if(portalLocs.getLocNum() == index) {
-			// Get the coordinates of the portal location
-			endX = portalLocs.getLocX();
-			endY = portalLocs.getLocY();
-			//Teleport
-			players.get(playernumber).teleport(this,endX,endY);
-			break;
-		    }
-
-		}
-		portal.deactivate();
-
-	    }
-	}
+    public void magicPortal(PlayerNumber playernumber, boolean undo) {
+    	
+    	int endX;
+    	int endY;
+    	
+    	for (Portal portal: portals) {
+    		if(portal.isActivated()) { // If portal is activated
+    			
+    			//Get the teleport location portal
+    			int index = portal.getIndex(); //get the portal # to move to the right portal location
+    			for (Floor portalLocs: portalLocs) {
+    				
+    				if(portalLocs.getLocNum() == index) {
+    					// Get the coordinates of the portal location
+    					endX = portalLocs.getLocX();
+    					endY = portalLocs.getLocY();
+    					
+    					//Teleport
+    	    			boolean result = players.get(playernumber).teleport(this,endX,endY);
+    	    			if (result == false) { // if cannot teleport, player would have moved into the portal
+    	    				MoveList.playerInPortal = false;
+    	    				this.undoMove(playernumber); // move the player out of the portal
+    	    				break;
+    	    			} else { // if teleport was a success, set player is not in portal
+    	    				MoveList.playerInPortal = false;
+    	    				if (undo == false) {
+    	    					moves.setTeleported(); // set last move: teleported
+    	    				} 
+    	    				break;
+    	    			}
+    				}
+    				
+    			}
+    			portal.deactivate();
+    			break;
+    			
+    		}
+    	}
     }
 
     /**
      */
     public void checkPortal(){
-
-	if (MoveList.boxInPortal == true) {
-	    this.undoMove(PlayerNumber.Player1);
-	    MoveList.boxInPortal = false;
-	}
-
+    
+    	if (MoveList.boxInPortal == true) {
+    		this.undoMove(PlayerNumber.Player1);
+    		MoveList.boxInPortal = false;
+		}
+    	
     }
 
 

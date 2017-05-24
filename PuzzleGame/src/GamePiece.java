@@ -99,7 +99,7 @@ public class GamePiece implements Piece{
     		board.MovePiece(this.x, this.y, endX, endY);
     		return true;
     	} else {
-    		System.out.println("Can't teleport");
+    		MoveList.playerInPortal = true;
     		return false;
     	}
     	

@@ -66,8 +66,9 @@ public class Floor extends Tile implements Piece{
 		if((goal != null) && gamepiece.isBox()) {
 		    goal.activate();
 		} else if (portal != null && !gamepiece.isBox()) {
+			MoveList.playerInPortal = true;
 			portal.activate();
-		} else if (portal != null && gamepiece.isBox()) { // If box is in portal
+		} else if (portal != null && gamepiece.isBox()) { 
 			//Box will go into portal: need to undo the move
 			MoveList.boxInPortal = true;
 		}
@@ -130,6 +131,14 @@ public class Floor extends Tile implements Piece{
     
     public int getLocY() {
     	return this.locY;
+    }
+    
+    public boolean isPortal() {
+    	if (portal != null) {
+    		return true;
+    	} else {
+    		return false;
+    	}
     }
     
 }
