@@ -96,14 +96,15 @@ public class GamePiece {
      * @return
      */
     public boolean teleport (Board board, int endX, int endY) {
-	if (board.isMoveable(endX, endY)) {
-	    board.MovePiece(this.x, this.y, endX, endY);
-	    return true;
-	} else {
-	    System.out.println("Can't teleport");
-	    return false;
-	}
-
+    	
+    	if (board.isMoveable(endX, endY)) {
+    		board.MovePiece(this.x, this.y, endX, endY);
+    		return true;
+    	} else {
+    		MoveList.playerInPortal = true;
+    		return false;
+    	}
+    	
     }
 
     /**

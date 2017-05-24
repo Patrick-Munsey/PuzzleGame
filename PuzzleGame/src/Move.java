@@ -6,6 +6,7 @@ public class Move {
 
     private Direction direction; 
     private boolean boxMoved;
+    private boolean teleported = false;
 
     /**
      * @param direction
@@ -36,5 +37,13 @@ public class Move {
     public boolean getBoxMoved() {
 	return this.boxMoved;
     }
+    
+    public void setTeleported() {
+		this.teleported = true;
+	}
+	
+	public boolean getTeleported() {
+		return this.teleported;
+	}
 
 }

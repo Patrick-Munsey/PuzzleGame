@@ -87,11 +87,11 @@ class Tile extends JLabel{
     public int getLocNum() {
 	return -1;
     }
-
-    /**
-     * @param path
-     * @return
-     */
+    
+    public boolean isPortal() {
+    	return false;
+    }
+    
     public ImageIcon createImageIcon(String path) {
 	java.net.URL imgURL = Wall.class.getResource(path);
 	if (imgURL != null) {
