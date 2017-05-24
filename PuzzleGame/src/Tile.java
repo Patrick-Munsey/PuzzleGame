@@ -7,7 +7,7 @@ import javax.swing.JLabel;
  * zID: z5020841
  * 
  */
-class Tile extends JLabel{
+class Tile extends JLabel implements Piece{
     protected int x;
     protected int y;
     
@@ -85,5 +85,11 @@ class Tile extends JLabel{
 			System.err.println("Couldn't find file: " + path);
 			return null;
 		}
+	}
+
+    
+	public JLabel draw(JLabel Label) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

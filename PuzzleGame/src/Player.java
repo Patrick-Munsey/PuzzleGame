@@ -7,7 +7,7 @@ import javax.swing.JLabel;
  * zID: z5020841
  * 
  */
-public class Player extends GamePiece implements intGamePiece{
+public class Player extends GamePiece implements Piece{
     private PlayerNumber playerNumber;
     
 

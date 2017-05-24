@@ -7,8 +7,8 @@ import javax.swing.JLabel;
  * zID: z5020841
  * 
  */
-public class Box extends GamePiece{
-
+public class Box extends GamePiece implements Piece{
+	private ImageIcon icon;
     /**
      * 
      */
@@ -20,15 +20,27 @@ public class Box extends GamePiece{
      */
     @Override
     public void updateLabel(JLabel label) {
-	    ImageIcon icon = createImageIcon("images/box.png");
-	    label.setIcon(icon);
+	    //ImageIcon icon = createImageIcon("images/box.png");
+    	
+    	JLabel newLabel = draw(label);
+	    newLabel.setIcon(icon);
     }
 
     @Override
     public boolean isBox() {
     	return true;
     }
+
+	@Override
+	public JLabel draw(JLabel Label) {
+		
+		return Label;
+		// TODO Auto-generated method stub
+		
+	}
     
     
-    
+    //check out updating labels
+	//check out stacking imageicons
+	
 }

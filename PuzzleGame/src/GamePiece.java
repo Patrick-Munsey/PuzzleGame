@@ -6,7 +6,7 @@ import javax.swing.JLabel;
  * zID: z5020841
  * 
  */
-public class GamePiece {
+public class GamePiece implements Piece{
     private int x;
     private int y;
     
@@ -139,4 +139,14 @@ public class GamePiece {
     public int getY() {
     	return this.y;
     }
+
+	@Override
+	public JLabel draw(JLabel Label) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+
+
+
 }

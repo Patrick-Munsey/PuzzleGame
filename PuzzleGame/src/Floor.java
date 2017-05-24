@@ -9,7 +9,7 @@ import javax.swing.JLabel;
  * zID: z5020841
  * 
  */
-public class Floor extends Tile{
+public class Floor extends Tile implements Piece{
     private GamePiece gamepiece;
     private Goal goal;
     
