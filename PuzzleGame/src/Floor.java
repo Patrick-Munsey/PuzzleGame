@@ -28,6 +28,9 @@ public class Floor extends Tile{
     	super(x,y);
     }
 
+    /* (non-Javadoc)
+     * @see Tile#isMoveable()
+     */
     @Override
     public boolean isMoveable() {
     	if (portal != null) {
@@ -38,27 +41,32 @@ public class Floor extends Tile{
 		return false;
     }
 
+    /* (non-Javadoc)
+     * @see Tile#updateLabel()
+     */
     @Override
     public void updateLabel() {
-	if(gamepiece != null) {
-	    gamepiece.updateLabel(this);
-	}
-
-	else {
-	    if(goal != null) {
-		ImageIcon icon = createImageIcon("images/goal.png");
-		setIcon(icon);
-	    } else if (portal != null) {
-		ImageIcon icon = createImageIcon("images/portal.png"); 
-		setIcon(icon);
-	    } else {
-		ImageIcon icon = createImageIcon("images/floor.png");
-		setIcon(icon);
-	    }  
-	}
+		if(gamepiece != null) {
+		    gamepiece.updateLabel(this);
+		}
+		
+		else {
+			if(goal != null) {
+				ImageIcon icon = createImageIcon("images/goal.png");
+		    	setIcon(icon);
+			} else if (portal != null) {
+				ImageIcon icon = createImageIcon("images/portal.png"); 
+	        	setIcon(icon);
+			} else {
+				ImageIcon icon = createImageIcon("images/floor.png");
+				setIcon(icon);
+			}  
+		}
     }
     
-
+    /* (non-Javadoc)
+     * @see Tile#placeGamePiece(GamePiece)
+     */
     public void placeGamePiece(GamePiece gamepiece) {
 		this.gamepiece = gamepiece;
 		gamepiece.placePiece(this.x, this.y);
@@ -66,8 +74,9 @@ public class Floor extends Tile{
 		if((goal != null) && gamepiece.isBox()) {
 		    goal.activate();
 		} else if (portal != null && !gamepiece.isBox()) {
+			MoveList.playerInPortal = true;
 			portal.activate();
-		} else if (portal != null && gamepiece.isBox()) { // If box is in portal
+		} else if (portal != null && gamepiece.isBox()) { 
 			//Box will go into portal: need to undo the move
 			MoveList.boxInPortal = true;
 		}
@@ -75,7 +84,9 @@ public class Floor extends Tile{
 		updateLabel();
     }
     
-
+    /* (non-Javadoc)
+     * @see Tile#removeGamePiece()
+     */
     public GamePiece removeGamePiece() {
 		GamePiece retGamePiece = this.gamepiece;
 		this.gamepiece = null;
@@ -86,19 +97,25 @@ public class Floor extends Tile{
 		return retGamePiece;
     }
     
-
+    /* (non-Javadoc)
+     * @see Tile#placeGoal(Goal)
+     */
     public void placeGoal(Goal goal) {
 		this.goal = goal;
 		updateLabel();
     }
     
-
+    /* (non-Javadoc)
+     * @see Tile#removeGoal()
+     */
     public void removeGoal() {
 		this.goal = null;
 		updateLabel();
     }
     
-
+    /* (non-Javadoc)
+     * @see Tile#placePortal(Portal)
+     */
     public void placePortal(Portal portal) {
 		this.portal = portal;
 		updateLabel();
@@ -130,6 +147,14 @@ public class Floor extends Tile{
     
     public int getLocY() {
     	return this.locY;
+    }
+    
+    public boolean isPortal() {
+    	if (portal != null) {
+    		return true;
+    	} else {
+    		return false;
+    	}
     }
     
 }
