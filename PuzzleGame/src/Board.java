@@ -1,7 +1,10 @@
 import java.awt.ComponentOrientation;
+import java.awt.Dimension;
+import java.awt.Graphics;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.io.FileNotFoundException;
@@ -9,6 +12,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
@@ -28,7 +32,8 @@ public class Board extends JPanel  {
     private LinkedList<Portal> portals;
     private LinkedList<Floor> portalLocs;
     private int box_size = 30;
-
+    private Image background_img;
+    
     public Level currLevel;
     private MoveList moves;
     private PuzzleGame puzzleGame;
@@ -48,6 +53,15 @@ public class Board extends JPanel  {
 		moves = new MoveList();
 		this.addKeyListener(new BoardAdapter());
 		initBoard(1);
+		
+		//setup background variables
+		this.background_img = new ImageIcon("src/images/cookie_background.png").getImage();
+		Dimension size = new Dimension(background_img.getWidth(null), background_img.getHeight(null));
+		setPreferredSize(size);
+		setMinimumSize(size);
+		setMaximumSize(size);
+		setSize(size);
+		
 		initUI();
     }
 
@@ -488,6 +502,11 @@ public class Board extends JPanel  {
 	portals.clear();
 	portalLocs.clear();
 	restart();
+    }
+    
+    protected void paintComponent(Graphics g) {
+    	super.paintComponent(g); // paint the background image and scale it to fill the entire space
+    	g.drawImage(this.background_img, 0, 0, this.getWidth(), this.getHeight(), null);
     }
     
     /**

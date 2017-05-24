@@ -2,6 +2,8 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -10,6 +12,7 @@ import java.awt.event.MouseEvent;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -24,12 +27,19 @@ public class LevelCompleteScreen extends JPanel{
     private PuzzleGame puzzleGame;
     private int levelNum;
     private String time;
+    private Image background_img;
     
     public LevelCompleteScreen(PuzzleGame puzzleGame, int levelNum, String time) {
 	this.puzzleGame = puzzleGame;
 	this.levelNum = levelNum;
 	this.time = time;
-	
+	this.background_img = new ImageIcon("src/images/level_complete_background.png").getImage();
+	Dimension size = new Dimension(background_img.getWidth(null), background_img.getHeight(null));
+	setPreferredSize(size);
+	setMinimumSize(size);
+	setMaximumSize(size);
+	setSize(size);
+	setLayout(null);
 	initUI();
     }
     
@@ -66,12 +76,17 @@ public class LevelCompleteScreen extends JPanel{
 	
 	
 
-    	this.add(Box.createVerticalStrut(250));
+    	this.add(Box.createVerticalStrut(100));
     	this.add(CompletionText);
     	this.add(Box.createVerticalStrut(20));
     	this.add(next_level_button);
     	next_level_button.setAlignmentX(Component.CENTER_ALIGNMENT);
     	next_level_button.setMaximumSize(new Dimension(300, 100));
+    }
+    
+    protected void paintComponent(Graphics g) {
+    	super.paintComponent(g); // paint the background image and scale it to fill the entire space
+    	g.drawImage(background_img, 0, 0, this.getWidth(), this.getHeight(), null);
     }
     
 }
