@@ -15,7 +15,7 @@ public abstract class PieceDecorator implements Piece{
 	 */
 	public JLabel draw(JLabel oldLabel){
 		JLabel newLabel = new JLabel(); //child/parent label
-		newLabel.setLayout(new OverlayLayout(oldLabel));
+		//newLabel.setLayout(new OverlayLayout(newLabel));
 		newLabel = decoratedPiece.draw(oldLabel);
 		return newLabel;
 	}

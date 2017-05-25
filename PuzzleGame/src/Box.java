@@ -1,5 +1,6 @@
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.OverlayLayout;
 
 
 /**
@@ -20,9 +21,9 @@ public class Box extends GamePiece implements Piece{
      */
     @Override
     public void updateLabel(JLabel label) {
-	    //ImageIcon icon = createImageIcon("images/box.png");
-    	
-    	JLabel newLabel = draw(label);
+	    ImageIcon icon = createImageIcon("images/box.png"); //to take in new image
+    	JLabel newLabel = draw(label); //send image to draw thing
+    	newLabel.getIcon(); //grabs the new icon at this label
 	    newLabel.setIcon(icon);
     }
 
@@ -34,7 +35,6 @@ public class Box extends GamePiece implements Piece{
 
 	@Override
 	public JLabel draw(JLabel Label) {
-		
 		return Label;
 		// TODO Auto-generated method stub
 		

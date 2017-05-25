@@ -2,6 +2,7 @@ import java.awt.Color;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.OverlayLayout;
 
 
 /**
@@ -40,22 +41,22 @@ public class Floor extends Tile implements Piece{
 
     @Override
     public void updateLabel() {
-	if(gamepiece != null) {
-	    gamepiece.updateLabel(this);
-	}
+    	if(gamepiece != null) {
+    		gamepiece.updateLabel(this);
+    	}
 
-	else {
-	    if(goal != null) {
-		ImageIcon icon = createImageIcon("images/goal.png");
-		setIcon(icon);
-	    } else if (portal != null) {
-		ImageIcon icon = createImageIcon("images/portal.png"); 
-		setIcon(icon);
-	    } else {
-		ImageIcon icon = createImageIcon("images/floor.png");
-		setIcon(icon);
-	    }  
-	}
+    	else {
+    		if(goal != null) {
+    			ImageIcon icon = createImageIcon("images/goal.png");
+    			setIcon(icon);
+    		} else if (portal != null) {
+    			ImageIcon icon = createImageIcon("images/portal.png"); 
+    			setIcon(icon);
+    		} else {
+    			ImageIcon icon = createImageIcon("images/floor.png");
+    			setIcon(icon);
+    		}  
+    	}
     }
     
 
@@ -141,6 +142,12 @@ public class Floor extends Tile implements Piece{
     	}
     }
     
+    public JLabel draw(JLabel label){
+		JLabel newLabel = new JLabel(); //child/parent label
+		newLabel.setLayout(new OverlayLayout(newLabel));
+		//newLabel = decoratedPiece.draw(oldLabel);
+		return newLabel;
+    }
 }
 
 
