@@ -29,6 +29,7 @@ public class NewGameDialog extends JDialog {
 	super();
 	this.puzzlegame = puzzlegame;
 	initUI();
+	setSize(200, 500);
 	setTitle("New Game");
 	setLocationRelativeTo(getParent());
     }
@@ -189,6 +190,7 @@ public class NewGameDialog extends JDialog {
     {
 	JPanel cpane = (JPanel) getContentPane();
 	cpane.setLayout(new BoxLayout(cpane, BoxLayout.Y_AXIS));
+	cpane.add(Box.createVerticalStrut(10));
 	for(int i = 0; i < components.length; i++) {
 	    if(components[i] != null) {
 		if(i == 0) {//pad the title

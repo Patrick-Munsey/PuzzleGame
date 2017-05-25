@@ -16,8 +16,8 @@ public class Wall extends Tile {
      * @param x
      * @param y
      */
-    public Wall(int x, int y) {
-	super(x,y);
+    public Wall(int x, int y, int lvNum) {
+	super(x,y, lvNum);
     }
 
     /* (non-Javadoc)
@@ -25,7 +25,7 @@ public class Wall extends Tile {
      */
     @Override
     public void updateLabel() {
-	ImageIcon image = new ImageIcon("src/images/wall.png");
+	ImageIcon image = new ImageIcon("src/images/" + lvNum + "/wall.png");
 	setIcon(image);
     }
 

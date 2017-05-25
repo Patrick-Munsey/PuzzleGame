@@ -10,15 +10,17 @@ import javax.swing.JLabel;
 class Tile extends JLabel implements Piece{
     protected int x;
     protected int y;
-
+    protected int lvNum;
+    
     /**
      * @param x
      * @param y
      */
-    public Tile(int x, int y) {
+    public Tile(int x, int y, int lvNum) {
 	super();
 	this.x = x;
 	this.y = y;
+	this.lvNum = lvNum;
 	updateLabel();
     }
 

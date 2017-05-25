@@ -20,8 +20,8 @@ public class Box extends GamePiece implements Piece{
      * @see GamePiece#updateLabel(javax.swing.JLabel)
      */
     @Override
-    public void updateLabel(JLabel label) {
-	    ImageIcon icon = createImageIcon("images/box.png"); //to take in new image
+    public void updateLabel(JLabel label, , int lvNum) {
+	    ImageIcon icon = createImageIcon("images/" + lvNum + "/box.png"); //to take in new image
     	JLabel newLabel = draw(label); //send image to draw thing
     	newLabel.getIcon(); //grabs the new icon at this label
 	    newLabel.setIcon(icon);

@@ -22,9 +22,9 @@ public class Player extends GamePiece implements Piece{
      * @see GamePiece#updateLabel(javax.swing.JLabel)
      */
     @Override
-    public void updateLabel(JLabel label) {
-    	ImageIcon icon = createImageIcon("images/player.png");
-    	label.setIcon(icon);
+    public void updateLabel(JLabel label, int lvNum) {
+		ImageIcon icon = createImageIcon("images/" + lvNum + "/player.png");
+		label.setIcon(icon);
     	//this.draw();
     }
     

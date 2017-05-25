@@ -55,38 +55,44 @@ public class LevelCompleteScreen extends JPanel{
 	CompletionText.setFont(new Font("serif", Font.BOLD, 16));
 	CompletionText.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-
-
-	JButton next_level_button = new JButton("Next Level");
-	next_level_button.setBackground(Color.white);
-	next_level_button.setOpaque(true);
-	next_level_button.setBorder(BorderFactory.createLineBorder(Color.gray,3));
-	next_level_button.addMouseListener(new MouseAdapter() {
-	    @Override
-	    public void mouseEntered(MouseEvent e) {
-		next_level_button.setBorder(BorderFactory.createLineBorder(Color.blue,3));
-	    }
-
-	    @Override
-	    public void mouseExited(MouseEvent e) {
-		next_level_button.setBorder(BorderFactory.createLineBorder(Color.gray,3));
-	    }
-	});
-	next_level_button.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent e) {
-		levelNum = levelNum + 1;
-		puzzleGame.changeLevel(levelNum);
-	    }
-	});
-
-
-
 	this.add(Box.createVerticalStrut(100));
 	this.add(CompletionText);
 	this.add(Box.createVerticalStrut(20));
-	this.add(next_level_button);
-	next_level_button.setAlignmentX(Component.CENTER_ALIGNMENT);
-	next_level_button.setMaximumSize(new Dimension(300, 100));
+	
+	if (levelNum != 13) {
+		// have an option to go to the next level
+		JButton next_level_button = new JButton("Next Level");
+		next_level_button.setBackground(Color.white);
+		next_level_button.setOpaque(true);
+		next_level_button.setBorder(BorderFactory.createLineBorder(Color.gray,3));
+		next_level_button.addMouseListener(new MouseAdapter() {
+		    @Override
+		    public void mouseEntered(MouseEvent e) {
+			next_level_button.setBorder(BorderFactory.createLineBorder(Color.blue,3));
+		    }
+	
+		    @Override
+		    public void mouseExited(MouseEvent e) {
+			next_level_button.setBorder(BorderFactory.createLineBorder(Color.gray,3));
+		    }
+		});
+		next_level_button.addActionListener(new ActionListener() {
+		    public void actionPerformed(ActionEvent e) {
+			levelNum = levelNum + 1;
+			puzzleGame.changeLevel(levelNum);
+		    }
+		});
+		
+		this.add(next_level_button);
+		next_level_button.setAlignmentX(Component.CENTER_ALIGNMENT);
+		next_level_button.setMaximumSize(new Dimension(300, 100));
+	} else {
+		// don't have an option to go next level, but congratulate them on completing the game
+		JLabel completion = new JLabel ("You've finished the whole game. Time for Cookies...");
+		completion.setFont(new Font("serif", Font.BOLD, 16));
+		this.add(completion);
+		completion.setAlignmentX(Component.CENTER_ALIGNMENT);
+	}
     }
 
     protected void paintComponent(Graphics g) {

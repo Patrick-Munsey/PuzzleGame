@@ -25,8 +25,8 @@ public class Floor extends Tile implements Piece{
      * @param x
      * @param y
      */
-    public Floor(int x, int y) {
-    	super(x,y);
+    public Floor(int x, int y, int lvNum) {
+    	super(x,y, lvNum);
     }
 
     @Override
