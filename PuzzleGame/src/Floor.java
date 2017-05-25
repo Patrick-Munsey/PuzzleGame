@@ -41,22 +41,20 @@ public class Floor extends Tile implements Piece{
 
     @Override
     public void updateLabel() {
-    	if(gamepiece != null) {
-    		gamepiece.updateLabel(this);
-    	}
-
-    	else {
-    		if(goal != null) {
-    			ImageIcon icon = createImageIcon("images/goal.png");
-    			setIcon(icon);
-    		} else if (portal != null) {
-    			ImageIcon icon = createImageIcon("images/portal.png"); 
-    			setIcon(icon);
-    		} else {
-    			ImageIcon icon = createImageIcon("images/floor.png");
-    			setIcon(icon);
-    		}  
-    	}
+		if(gamepiece != null) {
+	    	gamepiece.updateLabel(this, lvNum);
+		} else {
+	    	if(goal != null) {
+				ImageIcon icon = createImageIcon("images/" + lvNum + "/goal.png");
+				setIcon(icon);
+	    	} else if (portal != null) {
+				ImageIcon icon = createImageIcon("images/" + lvNum + "/portal.png"); 
+				setIcon(icon);
+	    	} else {
+				ImageIcon icon = createImageIcon("images/" + lvNum + "/floor.png");
+				setIcon(icon);
+	    	}  
+		}
     }
     
 
