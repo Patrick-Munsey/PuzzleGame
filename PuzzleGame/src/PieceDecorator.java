@@ -7,7 +7,7 @@ public abstract class PieceDecorator implements Piece{
 	protected Piece decoratedPiece;
 	
 	public PieceDecorator(Piece decoratedPiece){
-		this.decoratedPiece = decoratedPiece;
+		this.decoratedPiece = decoratedPiece; //looking at opening them for jlabel
 	}
 	
 	/**
