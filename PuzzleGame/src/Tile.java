@@ -24,13 +24,13 @@ class Tile extends JLabel{
 	updateLabel();
     }
 
-    /**
-     * 
-     */
-    // this.setIcon(Icon i)
-    public void updateLabel() {
-	this.setText("0");
-    }
+	/**
+	 * 
+	 */
+	// this.setIcon(Icon i)
+	public void updateLabel() {
+		this.setText("0");
+	}
 
     /**
      * @return true if the Tile is able to be occupied by a GamePiece
