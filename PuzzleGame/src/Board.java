@@ -52,7 +52,7 @@ public class Board extends JPanel  {
 	initBoard(1);
 
 	//setup background variables
-	this.background_img = new ImageIcon("src/images/cookie_background.png").getImage();
+	this.background_img = new ImageIcon("src/images/" + currLevel.getlevelNum() + "/back.png").getImage();
 	Dimension size = new Dimension(background_img.getWidth(null), background_img.getHeight(null));
 	setPreferredSize(size);
 	setMinimumSize(size);
@@ -483,6 +483,7 @@ public class Board extends JPanel  {
     {
 	this.removeAll();
 	this.setLayout(new GridBagLayout());
+	this.background_img = new ImageIcon("src/images/" + currLevel.getlevelNum() + "/back.png").getImage();
 	initBoard(currLevel.getlevelNum());
 	tilesToBoard();
 	moves.clear();
