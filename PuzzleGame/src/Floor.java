@@ -24,8 +24,8 @@ public class Floor extends Tile{
      * @param x
      * @param y
      */
-    public Floor(int x, int y) {
-    	super(x,y);
+    public Floor(int x, int y, int lvNum) {
+    	super(x,y, lvNum);
     }
 
     @Override
@@ -41,18 +41,18 @@ public class Floor extends Tile{
     @Override
     public void updateLabel() {
 	if(gamepiece != null) {
-	    gamepiece.updateLabel(this);
+	    gamepiece.updateLabel(this, lvNum);
 	}
 
 	else {
 	    if(goal != null) {
-		ImageIcon icon = createImageIcon("images/goal.png");
+		ImageIcon icon = createImageIcon("images/" + lvNum + "/goal.png");
 		setIcon(icon);
 	    } else if (portal != null) {
-		ImageIcon icon = createImageIcon("images/portal.png"); 
+		ImageIcon icon = createImageIcon("images/" + lvNum + "/portal.png"); 
 		setIcon(icon);
 	    } else {
-		ImageIcon icon = createImageIcon("images/floor.png");
+		ImageIcon icon = createImageIcon("images/" + lvNum + "/floor.png");
 		setIcon(icon);
 	    }  
 	}

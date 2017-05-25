@@ -119,7 +119,7 @@ public class GamePiece {
     /**
      * @param label
      */
-    public void updateLabel(JLabel label) {
+    public void updateLabel(JLabel label, int lvNum) {
 	label.setText("GP");
     }
 

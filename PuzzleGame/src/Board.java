@@ -348,9 +348,9 @@ public class Board extends JPanel  {
      * @param y
      * @param index
      */
-    public void initPortalLoc(int x, int y, int index) {
+    public void initPortalLoc(int x, int y, int index, int lvNum) {
 
-	Floor newPortalLoc = new Floor(x,y);
+	Floor newPortalLoc = new Floor(x,y,lvNum);
 	newPortalLoc.setLocNum(index);
 	newPortalLoc.setLocX(x);
 	newPortalLoc.setLocY(y);
@@ -363,8 +363,8 @@ public class Board extends JPanel  {
      * @param x
      * @param y
      */
-    public void initWall(int x, int y) {
-	board[x][y] = new Wall(x,y);
+    public void initWall(int x, int y, int lvNum) {
+	board[x][y] = new Wall(x,y, lvNum);
     }
 
     /**
@@ -372,8 +372,8 @@ public class Board extends JPanel  {
      * @param x
      * @param y
      */
-    public void initFloor(int x, int y) {
-	board[x][y] = new Floor(x,y);
+    public void initFloor(int x, int y, int lvNum) {
+	board[x][y] = new Floor(x,y, lvNum);
     }
 
     /**
@@ -426,7 +426,7 @@ public class Board extends JPanel  {
 	board = new Tile[boardWidth][boardHeight];
 	for(int y = 0; y < boardHeight; y++){
 	    for(int x = 0; x < boardWidth; x++){
-		initFloor(x,y);
+		initFloor(x,y, currLevel.getlevelNum());
 	    }
 	}
 
@@ -453,9 +453,9 @@ public class Board extends JPanel  {
      */
     public void createObject(char symbol, int row, int col) {
 	String objectType = TileID.getTileID(symbol);
-
+	int lvNum = currLevel.getlevelNum();
 	if (objectType.equals("Wall")) {
-	    this.initWall(row, col);
+	    this.initWall(row, col, lvNum);
 	    //} else if (objectType.equals("Floor")) {
 	    //this.initFloor(row, col);
 	} else if (objectType.equals("Box")) {
@@ -469,9 +469,9 @@ public class Board extends JPanel  {
 	} else if (objectType.equals("Portal2")) {
 	    this.initPortal(row, col, 2);
 	} else if (objectType.equals("PortalLoc1")) {
-	    this.initPortalLoc(row, col, 1);
+	    this.initPortalLoc(row, col, 1, lvNum);
 	} else if (objectType.equals("PortalLoc2")) {
-	    this.initPortalLoc(row, col, 2);
+	    this.initPortalLoc(row, col, 2, lvNum);
 	}
     }
 

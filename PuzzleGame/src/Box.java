@@ -19,8 +19,8 @@ public class Box extends GamePiece{
      * @see GamePiece#updateLabel(javax.swing.JLabel)
      */
     @Override
-    public void updateLabel(JLabel label) {
-	ImageIcon icon = createImageIcon("images/box.png");
+    public void updateLabel(JLabel label, int lvNum) {
+	ImageIcon icon = createImageIcon("images/" + lvNum + "/box.png");
 	label.setIcon(icon);
     }
 
