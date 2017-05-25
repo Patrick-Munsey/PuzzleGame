@@ -49,7 +49,8 @@ public class Board extends JPanel  {
 		 portalLocs = new LinkedList<Floor>();
 		 moves = new MoveList();
 		 this.addKeyListener(new BoardAdapter());
-		 initBoard(1);
+		 
+		 initBoard(5);
 
 	//setup background variables
 	this.background_img = new ImageIcon("src/images/" + currLevel.getlevelNum() + "/back.png").getImage();
@@ -319,6 +320,7 @@ public class Board extends JPanel  {
     public void initBox(int x, int y) {
 		Box newBox = new Box();
 		placeGamePiece(newBox, x, y);
+		//boxes.add(newBox);
     }
 
     /**

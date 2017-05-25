@@ -104,7 +104,6 @@ public class GamePiece {
     		MoveList.playerInPortal = true;
     		return false;
     	}
-    	
     }
 
     /**
@@ -156,4 +155,19 @@ public class GamePiece {
     public int getY() {
 	return this.y;
     }
+
+    /**
+     * to override as a box
+     */
+	public void updateBoxDeactiveate() {
+		// TODO Auto-generated method stub
+		
+	}
+
+
+	public void updateBoxActive() {
+		// TODO Auto-generated method stub
+		
+	}
+    
 }

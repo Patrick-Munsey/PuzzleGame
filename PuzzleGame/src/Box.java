@@ -16,6 +16,7 @@ import javax.swing.JLabel;
  */
 public class Box extends GamePiece{
 	int level;
+	private boolean boxActive = false;
 	/**
 	 * 
 	 */
@@ -29,6 +30,10 @@ public class Box extends GamePiece{
 	public void updateLabel(JLabel label, int lvNum) {
 		level = lvNum;
 		ImageIcon icon = createImageIcon("images/" + lvNum + "/box.png");
+		if (boxActive) {
+			icon = createImageIcon("images/" + lvNum + "/player.png");
+		}
+		
 		ImageIcon newIcon = applyLayer(icon);
 		label.setIcon(newIcon);
 		//label.setIcon(icon);
@@ -38,7 +43,18 @@ public class Box extends GamePiece{
 	public boolean isBox() {
 		return true;
 	}
+	
+	@Override
+	public void updateBoxActive() {
+		boxActive = true;
+	}
 
+	@Override
+	public void updateBoxDeactiveate() {
+		boxActive = false;
+		
+	}
+	
 	public ImageIcon applyLayer(ImageIcon oldIcon) {
 		JLabel newLabel = new JLabel();
 
@@ -59,7 +75,6 @@ public class Box extends GamePiece{
 		try {
 			newImg = ImageIO.read(new File("src/images/" + level + "/floor.png"));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}	
 		//BImage = newImg;
