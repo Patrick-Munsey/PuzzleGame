@@ -31,7 +31,7 @@ public class Box extends GamePiece{
 		level = lvNum;
 		ImageIcon icon = createImageIcon("images/" + lvNum + "/box.png");
 		if (boxActive) {
-			icon = createImageIcon("images/" + lvNum + "/player.png");
+			icon = createImageIcon("images/" + lvNum + "monsterGoal.png");
 		}
 		
 		ImageIcon newIcon = applyLayer(icon);
