@@ -106,4 +106,9 @@ class Tile extends JLabel implements Piece{
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	public boolean isPortal() {
+		// TODO Auto-generated method stub
+		return false;
+	}
 }
