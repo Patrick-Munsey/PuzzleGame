@@ -51,7 +51,7 @@ public class LevelCompleteScreen extends JPanel{
     private void initUI() {
 	this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-	JLabel CompletionText = new JLabel ("LEVEL " + levelNum + " COMPLETE!!!\n" + time);
+	JLabel CompletionText = new JLabel ("LEVEL " + levelNum + " COMPLETE!!\n" + time);
 	CompletionText.setFont(new Font("serif", Font.BOLD, 16));
 	CompletionText.setAlignmentX(Component.CENTER_ALIGNMENT);
 
