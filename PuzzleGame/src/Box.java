@@ -14,7 +14,7 @@ import javax.swing.JLabel;
  * zID: z5020841
  * 
  */
-public class Box extends GamePiece implements Piece{
+public class Box extends GamePiece{
 	int level;
 	/**
 	 * 
@@ -26,7 +26,7 @@ public class Box extends GamePiece implements Piece{
 	 * @see GamePiece#updateLabel(javax.swing.JLabel)
 	 */
 	@Override
-	public void updateLabel(JLabel label, int lvNum) throws IOException {
+	public void updateLabel(JLabel label, int lvNum) {
 		level = lvNum;
 		ImageIcon icon = createImageIcon("images/" + lvNum + "/box.png");
 		ImageIcon newIcon = applyLayer(icon);
@@ -39,7 +39,7 @@ public class Box extends GamePiece implements Piece{
 		return true;
 	}
 
-	public ImageIcon applyLayer(ImageIcon oldIcon) throws IOException {
+	public ImageIcon applyLayer(ImageIcon oldIcon) {
 		JLabel newLabel = new JLabel();
 
 		//ImageIcon oldIcon = (ImageIcon) oldLabel.getIcon();    
@@ -54,12 +54,18 @@ public class Box extends GamePiece implements Piece{
 		return newIcon;
 	}
 
-	private BufferedImage getImageOverlay(BufferedImage oldImg) throws IOException {
-		BufferedImage newImg = ImageIO.read(new File("src/images/" + level + "/floor.png"));	
+	private BufferedImage getImageOverlay(BufferedImage oldImg) {
+		BufferedImage newImg = null;
+		try {
+			newImg = ImageIO.read(new File("src/images/" + level + "/floor.png"));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
 		//BImage = newImg;
 
-		int w = newImg.getWidth();
-		int h = newImg.getHeight();
+		int w = oldImg.getWidth();
+		int h = oldImg.getHeight();
 
 		BufferedImage combined = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
 
@@ -73,12 +79,6 @@ public class Box extends GamePiece implements Piece{
 		
 		g2d.dispose();
 		return combined;
-	}
-
-	@Override
-	public JLabel applyLayer(JLabel Label) throws IOException {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 }
