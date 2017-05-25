@@ -52,7 +52,7 @@ public class Board extends JPanel  {
 		 initBoard(1);
 
 	//setup background variables
-	this.background_img = new ImageIcon("src/images/cookie_background.png").getImage();
+	this.background_img = new ImageIcon("src/images/" + currLevel.getlevelNum() + "/back.png").getImage();
 	Dimension size = new Dimension(background_img.getWidth(null), background_img.getHeight(null));
 	setPreferredSize(size);
 	setMinimumSize(size);
@@ -540,12 +540,79 @@ public class Board extends JPanel  {
 	  */
 	 public void checkPortal(){
 
-		 if (MoveList.boxInPortal == true) {
-			 this.undoMove(PlayerNumber.Player1);
-			 MoveList.boxInPortal = false;
-		 }
 
-	 }
+    /**
+     * @author James Doldissen
+     * Restart the current level
+     */
+    public void restart()
+    {
+	this.removeAll();
+	this.setLayout(new GridBagLayout());
+	this.background_img = new ImageIcon("src/images/" + currLevel.getlevelNum() + "/back.png").getImage();
+	initBoard(currLevel.getlevelNum());
+	tilesToBoard();
+	moves.clear();
+	revalidate();
+	repaint();
+    }
+    
+    /**
+     * Method which checks if magic portals are activated and tries to teleport player
+     * to the correct portal location
+     * @param playernumber
+     * @param undo
+     */
+    public void magicPortal(PlayerNumber playernumber, boolean undo) {
+    	
+    	int endX;
+    	int endY;
+    	
+    	for (Portal portal: portals) {
+    		if(portal.isActivated()) { // If portal is activated
+    			
+    			//Get the teleport location portal
+    			int index = portal.getIndex(); //get the portal # to move to the right portal location
+    			for (Floor portalLocs: portalLocs) {
+    				
+    				if(portalLocs.getLocNum() == index) {
+    					// Get the coordinates of the portal location
+    					endX = portalLocs.getLocX();
+    					endY = portalLocs.getLocY();
+    					
+    					//Teleport
+    	    			boolean result = players.get(playernumber).teleport(this,endX,endY);
+    	    			if (result == false) { // if cannot teleport, player would have moved into the portal
+    	    				MoveList.playerInPortal = false;
+    	    				this.undoMove(playernumber); // move the player out of the portal
+    	    				break;
+    	    			} else { // if teleport was a success, set player is not in portal
+    	    				MoveList.playerInPortal = false;
+    	    				if (undo == false) {
+    	    					moves.setTeleported(); // set last move: teleported
+    	    				} 
+    	    				break;
+    	    			}
+    				}
+    				
+    			}
+    			portal.deactivate();
+    			break;
+    			
+    		}
+    	}
+    }
+
+    /**
+     */
+    public void checkPortal(){
+    
+    	if (MoveList.boxInPortal == true) {
+    		this.undoMove(PlayerNumber.Player1);
+    		MoveList.boxInPortal = false;
+		}
+    	
+    }
 
 
 	 /**
