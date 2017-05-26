@@ -1,5 +1,9 @@
 import java.util.Stack;
 
+/**
+ * Used in the implementation of the undo command, maintains and manipulates the list of Moves when a move is performed or requested
+ * 
+ */
 public class MoveList {
 	
 	public static int moveCount = 0;

@@ -1,6 +1,6 @@
 
 /**
- * 
+ * Used in the implementation of the undo command by keeping a  history of a prior move
  */
 public class Move {
 
@@ -24,26 +24,23 @@ public class Move {
 	this.boxMoved = boxMoved;
     }
 
-    /**
-     * @return
-     */
     public Direction getDirection() {
 	return this.direction;
     }
 
     /**
-     * @return
+     * @return true is the object moved is a box
      */
     public boolean getBoxMoved() {
 	return this.boxMoved;
     }
-    
+
     public void setTeleported() {
-		this.teleported = true;
-	}
-	
-	public boolean getTeleported() {
-		return this.teleported;
-	}
+	this.teleported = true;
+    }
+
+    public boolean getTeleported() {
+	return this.teleported;
+    }
 
 }

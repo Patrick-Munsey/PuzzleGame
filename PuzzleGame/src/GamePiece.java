@@ -2,6 +2,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 /**
+ * The generic class that populates the board array
  * @author Patrick Munsey
  * zID: z5020841
  * 
@@ -18,12 +19,12 @@ public class GamePiece {
 
 
     /**
-     * @author Patrick Munsey, z5020841
+     * author Patrick Munsey, z5020841
      * @param board
      * @param direction
      * @param moves
      * @param undo
-     * @return
+     * @return true if the piece was able to be moved
      */
     public boolean movePiece(Board board, Direction direction, MoveList moves, boolean undo) {
 
@@ -93,7 +94,7 @@ public class GamePiece {
      * @param board
      * @param endX
      * @param endY
-     * @return
+     * @return true if the player is able to move through a portal at the provided coordinates
      */
     public boolean teleport (Board board, int endX, int endY) {
     	
@@ -124,7 +125,7 @@ public class GamePiece {
 
     /**
      * @param path
-     * @return
+     * @return returns an appropriate imageIcon dependant on the type of GamePiece
      */
     public ImageIcon createImageIcon(String path) {
 	java.net.URL imgURL = Wall.class.getResource(path);
@@ -135,23 +136,18 @@ public class GamePiece {
 	    return null;
 	}
     }
+    
     /**
-     * @return
+     * @return true if the Object is a Box
      */
     public boolean isBox() {
 	return false;
     }
 
-    /**
-     * @return
-     */
     public int getX() {
 	return this.x;
     }
 
-    /**
-     * @return
-     */
     public int getY() {
 	return this.y;
     }
@@ -159,15 +155,15 @@ public class GamePiece {
     /**
      * to override as a box
      */
-	public void updateBoxDeactivate() {
-		// TODO Auto-generated method stub
-		
-	}
+    public void updateBoxDeactivate() {
+	// TODO Auto-generated method stub
+
+    }
 
 
-	public void updateBoxActive() {
-		// TODO Auto-generated method stub
-		
-	}
-    
+    public void updateBoxActive() {
+	// TODO Auto-generated method stub
+
+    }
+
 }

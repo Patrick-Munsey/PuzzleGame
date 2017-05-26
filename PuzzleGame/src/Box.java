@@ -10,6 +10,7 @@ import javax.swing.JLabel;
 
 
 /**
+ * A GamePiece that can be placed on floor tiles
  * @author Patrick Munsey
  * zID: z5020841
  * 

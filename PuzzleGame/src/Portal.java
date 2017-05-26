@@ -1,6 +1,6 @@
 
 /**
- * 
+ * Can be added to the game Board in order to teleport the Player between portals when moved into
  */
 public class Portal{
 
@@ -30,44 +30,27 @@ public class Portal{
 	this.activated = false;
     }
 
-    /**
-     * @return
-     */
+
     public boolean isActivated() {
 	return this.activated;
     }
 
-    /**
-     * @return
-     */
     public int getLocX() {
 	return this.locX;
     }
 
-    /**
-     * @return
-     */
     public int getLocY() {
 	return this.locY;
     }
 
-    /**
-     * @param locX
-     */
     public void setLocX(int locX) {
 	this.locX = locX;
     }
 
-    /**
-     * @param locY
-     */
     public void setLocY(int locY) {
 	this.locY = locY;
     }
 
-    /**
-     * @return
-     */
     public int getIndex() {
 	return this.index;
     }

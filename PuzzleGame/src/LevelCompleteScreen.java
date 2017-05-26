@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 
 
 /**
+ * Displayed at the end of each completed level, giving information on the Players time and the level number
  * @author Patrick Munsey
  * zID: z5020841
  * 

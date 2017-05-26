@@ -17,6 +17,7 @@ import javax.swing.JComponent;
 
 
 /**
+ * The JFrame for the swing components and contains the main function
  * @author Patrick Munsey
  * zID: z5020841
  * 
@@ -125,7 +126,7 @@ public class PuzzleGame extends JFrame{
     }
 
     /**
-     * @author Patrick Munsey, z5020841
+     * author Patrick Munsey, z5020841
      */
     public void displayBoard() {
 	this.getContentPane().removeAll();
@@ -139,7 +140,7 @@ public class PuzzleGame extends JFrame{
     }
 
     /**
-     * @author Patrick Munsey, z5020841
+     * author Patrick Munsey, z5020841
      */
     public void displayTitleScreen() {
 	this.getContentPane().removeAll();
@@ -152,7 +153,7 @@ public class PuzzleGame extends JFrame{
     }
 
     /**
-     * @author Patrick Munsey, z5020841
+     * author Patrick Munsey, z5020841
      */
     public void displayLevelCompleteScreen() {
 	gameTimer.pause();
@@ -163,7 +164,7 @@ public class PuzzleGame extends JFrame{
     }
 
     /**
-     * @author Patrick Munsey, z5020841
+     * author Patrick Munsey, z5020841
      */
     public void displayInstructionsDialog() {
 	InstructionsDialog instructions = new InstructionsDialog(frame);
@@ -171,7 +172,7 @@ public class PuzzleGame extends JFrame{
     }
 
     /**
-     * @author Patrick Munsey, z5020841
+     * author Patrick Munsey, z5020841
      */
     public void displayOptionsDialog() {
 	OptionsDialog optionsDialog = new OptionsDialog(this);
@@ -179,7 +180,7 @@ public class PuzzleGame extends JFrame{
     }
 
     /**
-     * @author Patrick Munsey, z5020841
+     * author Patrick Munsey, z5020841
      */
     public void displayNewGameDialog() {
 	NewGameDialog newGameDialog = new NewGameDialog(this);
@@ -187,7 +188,7 @@ public class PuzzleGame extends JFrame{
     }
 
     /**
-     * @author Patrick Munsey, z5020841
+     * author Patrick Munsey, z5020841
      */
     public void displayAboutDialog() {
 	AboutDialog about = new AboutDialog(frame);
@@ -195,7 +196,7 @@ public class PuzzleGame extends JFrame{
     }
 
     /**
-     * @author Patrick Munsey, z5020841
+     * author Patrick Munsey, z5020841
      * @param levelNumber
      */
     public void changeLevel(int levelNumber) {
@@ -205,7 +206,7 @@ public class PuzzleGame extends JFrame{
     }
 
     /**
-     * @author Patrick Munsey, z5020841
+     * author Patrick Munsey, z5020841
      */
     public void restartLevel() {
 	board.restart(); 

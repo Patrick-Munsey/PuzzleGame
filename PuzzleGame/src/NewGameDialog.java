@@ -14,6 +14,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
+ * used to display the games level options and can be used to initiate a new level
  * @author Patrick Munsey
  * zID: z5020841
  * 

@@ -6,6 +6,7 @@ import javax.swing.JLabel;
 
 
 /**
+ * A type of Tile that can hold goals and be moved on by GamePieces
  * @author Patrick Munsey
  * zID: z5020841
  * 

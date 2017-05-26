@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * 
+ * Used to generate a new board array from selected text files
  */
 public class Level {
 
@@ -22,7 +22,7 @@ public class Level {
     }
 
     /**
-     * @return
+     * @return returns the level number as a String
      */
     public ArrayList<String> getLevel () {
 	return this.level;
@@ -36,14 +36,14 @@ public class Level {
     }
 
     /**
-     * @return
+     * @return returns the number of vertical elements in the generated board array
      */
     public int getHeight(){
 	return this.height;
     }
 
     /**
-     * @return
+     * @return returns the number of horizontal elements in the generated board array
      */
     public int getWidth(){
 	return this.width;
@@ -103,7 +103,7 @@ public class Level {
     }
 
     /**
-     * @return
+     * @return returns the current level number of the generated level
      */
     public int getlevelNum() {
 	return levelNum;
@@ -118,7 +118,7 @@ public class Level {
 
     /**
      * @param b
-     * @return
+     * @return returns the next level for the given board
      * @throws FileNotFoundException
      */
     public Level loadNextLevel(Board b) throws FileNotFoundException

@@ -6,6 +6,7 @@ import javax.swing.JLabel;
 
 
 /**
+ * A Type of Tile that the Player is not able to move on
  * @author Patrick Munsey
  * zID: z5020841
  * 

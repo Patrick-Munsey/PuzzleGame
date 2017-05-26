@@ -3,6 +3,7 @@ import javax.swing.JLabel;
 
 
 /**
+ * The parent class that populates the Board array
  * @author Patrick Munsey
  * zID: z5020841
  * 
@@ -83,17 +84,21 @@ class Tile extends JLabel{
     public void setLocNum(int num) {
     }
 
-    /**
-     * @return
-     */
     public int getLocNum() {
 	return -1;
     }
     
+    /**
+     * @return true if the Tile contains a portal
+     */
     public boolean isPortal() {
     	return false;
     }
     
+    /**
+     * @param path
+     * @return An appropriate Image Icon for the tile depending on Tpye and Level number
+     */
     public ImageIcon createImageIcon(String path) {
 	java.net.URL imgURL = Wall.class.getResource(path);
 	if (imgURL != null) {

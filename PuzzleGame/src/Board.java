@@ -106,7 +106,7 @@ public class Board extends JPanel  {
 
 
     /**
-     * @author Patrick Munsey, z5020841
+     * author Patrick Munsey, z5020841
      * @param playernumber
      * @param direction
      * @return true if player was moved successfully
@@ -126,9 +126,9 @@ public class Board extends JPanel  {
 
     /**
      * Method to undo moves
-     * @author dennydien
+     * author dennydien
      * @param playernumber
-     * @return
+     * @return Returns true if a move was undone
      */
     public boolean undoMove(PlayerNumber playernumber) {
     	
@@ -202,7 +202,7 @@ public class Board extends JPanel  {
     /**
      * Method to find portal
      * @param playernumber
-     * @pre only used if there has been a teleport: i.e. portal always exists around player when method is called
+     * only used if there has been a teleport: i.e. portal always exists around player when method is called
      */
     public Direction findPortal (PlayerNumber playernumber) {
     	
@@ -226,7 +226,7 @@ public class Board extends JPanel  {
     }
     
     /**
-     * @author Patrick Munsey, z5020841
+     * author Patrick Munsey, z5020841
      * @return true if a GamePiece can move to this tile
      */
     public boolean isMoveable() {
@@ -234,7 +234,7 @@ public class Board extends JPanel  {
     }
     
     /**
-     * @author Patrick Munsey, z5020841
+     * author Patrick Munsey, z5020841
      * @param x
      * @param y
      * @param direction
@@ -293,7 +293,7 @@ public class Board extends JPanel  {
     }
 
     /**
-     * @author Patrick Munsey, z5020841
+     * author Patrick Munsey, z5020841
      * @param x
      * @param y
      * @return true if the tile is able to be occupied by a GamePiece
@@ -303,7 +303,7 @@ public class Board extends JPanel  {
     } 
 
     /**
-     * @author Patrick Munsey, z5020841
+     * author Patrick Munsey, z5020841
      * @param playerNumber
      * @param x
      * @param y
@@ -315,7 +315,7 @@ public class Board extends JPanel  {
     }
 
     /**
-     * @author Patrick Munsey, z5020841
+     * author Patrick Munsey, z5020841
      * @param x
      * @param y
      */
@@ -326,7 +326,7 @@ public class Board extends JPanel  {
     }
 
     /**
-     * @author Patrick Munsey, z5020841
+     * author Patrick Munsey, z5020841
      * @param x
      * @param y
      */
@@ -363,7 +363,7 @@ public class Board extends JPanel  {
     }
 
     /**
-     * @author Patrick Munsey, z5020841
+     * author Patrick Munsey, z5020841
      * @param x
      * @param y
      */
@@ -372,7 +372,7 @@ public class Board extends JPanel  {
     }
 
     /**
-     * @author Patrick Munsey, z5020841
+     * author Patrick Munsey, z5020841
      * @param x
      * @param y
      */
@@ -381,7 +381,7 @@ public class Board extends JPanel  {
     }
 
 	 /**
-	  * @author Patrick Munsey, z5020841
+	  * author Patrick Munsey, z5020841
 	  * @param gamepiece
 	  * @param x
 	  * @param y
@@ -391,7 +391,7 @@ public class Board extends JPanel  {
 	 }
 
 	 /**
-	  * @author Patrick Munsey, z5020841
+	  * author Patrick Munsey, z5020841
 	  * @param x
 	  * @param y
 	  */
@@ -403,7 +403,7 @@ public class Board extends JPanel  {
 
 
 	 /**
-	  * @author Patrick Munsey, z5020841
+	  * author Patrick Munsey, z5020841
 	  * @param difficulty
 	  * @param levelNumber
 	  */
@@ -421,7 +421,7 @@ public class Board extends JPanel  {
 	  * Method which translates string representations of levels into the board
 	  * Starts by setting up the board with floors
 	  * Then updates the rest of the board based on the string inputs
-	  * @author Denny Dien
+	  * author Denny Dien
 	  * @param level
 	  */
 	 private void initLevel(Level level, int boardWidth, int boardHeight) {
@@ -450,7 +450,7 @@ public class Board extends JPanel  {
 
 	 /**
 	  * Method which initialises game objects based on their allocated symbol
-	  * @author Denny Dien
+	  * author Denny Dien
 	  * @param symbol
 	  * @param row
 	  * @param col
@@ -480,7 +480,7 @@ public class Board extends JPanel  {
 	 }
 
     /**
-     * @author James Doldissen
+     * author James Doldissen
      * Restart the current level
      */
     public void restart()
@@ -553,142 +553,150 @@ public class Board extends JPanel  {
     }
 
 
-	 /**
-	  * @author Patrick Munsey, z5020841
-	  */
-	 public void checkCompletion() {
-		 for(Goal goal : goals) {
-			 if(!goal.isactivated()) {
-				 return;
-			 }
-		 }
-
-		 puzzleGame.displayLevelCompleteScreen();
-
-	 }
-
-	 /**
-	  * @author Patrick Munsey, z5020841
-	  * @param levelNumber
-	  */
-	 public void changeLevel(int levelNumber) {
-		 currLevel = new Level(levelNumber);
-		 boardHeight = currLevel.getHeight();
-		 boardWidth = currLevel.getWidth();
-		 portals.clear();
-		 portalLocs.clear();
-		 restart();
-	 }
-
-	 /* (non-Javadoc)
-	  * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
-	  */
-	 protected void paintComponent(Graphics g) {
-		 super.paintComponent(g); // paint the background image and scale it to fill the entire space
-		 g.drawImage(this.background_img, 0, 0, this.getWidth(), this.getHeight(), null);
-	 }
-
-	 /**
-	  * @authors: 	Patrick Munsey
-	  * zID: 	z5020841
-	  * 
-	  */
-	 class ArrowInput extends KeyAdapter {
-
-		 @Override
-		 public void keyPressed(KeyEvent e) {
-
-			 int keycode = e.getKeyCode();
-
-			 switch (keycode) {
-
-			 case KeyEvent.VK_LEFT:
-				 MovePlayer(PlayerNumber.Player1, Direction.LEFT);
-				 break;
-
-			 case KeyEvent.VK_RIGHT:
-				 MovePlayer(PlayerNumber.Player1, Direction.RIGHT);
-				 break;
-
-			 case KeyEvent.VK_DOWN:
-				 MovePlayer(PlayerNumber.Player1, Direction.DOWN);
-				 break;
-
-			 case KeyEvent.VK_UP:
-				 MovePlayer(PlayerNumber.Player1, Direction.UP);
-				 break;
-
-			 case KeyEvent.VK_U:
-				 undoMove(PlayerNumber.Player1);
-				 break;
-
-			 case KeyEvent.VK_R:
-				 restart();
-				 break;
-
-			 case KeyEvent.VK_ESCAPE:
-				 System.exit(1);
-				 break;
-			 }
-		 }
-	 }
-	 
-	 class WASDInput extends KeyAdapter {
-
-		 @Override
-		 public void keyPressed(KeyEvent e) {
-
-			 int keycode = e.getKeyCode();
-
-			 switch (keycode) {
-
-			 case KeyEvent.VK_A:
-				 MovePlayer(PlayerNumber.Player1, Direction.LEFT);
-				 break;
-
-			 case KeyEvent.VK_D:
-				 MovePlayer(PlayerNumber.Player1, Direction.RIGHT);
-				 break;
-
-			 case KeyEvent.VK_S:
-				 MovePlayer(PlayerNumber.Player1, Direction.DOWN);
-				 break;
-
-			 case KeyEvent.VK_W:
-				 MovePlayer(PlayerNumber.Player1, Direction.UP);
-				 break;
-
-			 case KeyEvent.VK_U:
-				 undoMove(PlayerNumber.Player1);
-				 break;
-
-			 case KeyEvent.VK_R:
-				 restart();
-				 break;
-
-			 case KeyEvent.VK_ESCAPE:
-				 System.exit(1);
-				 break;
-			 }
-		 }
-	 }
-
-	public void changeKeyBindings(int presetNum) {
-	    this.removeKeyListener(keyBinding);
-	  switch(presetNum) {
-	  case 1:
-	      keyBinding = new ArrowInput();
-	      this.addKeyListener(keyBinding);
-	  	break;
-	  case 2:
-	      keyBinding = new WASDInput();
-	      this.addKeyListener(keyBinding);
-	      break;
-	  default:
-	      keyBinding = new ArrowInput();
-	      this.addKeyListener(keyBinding);
-	      break;  
-	  }
-	    
+    /**
+     * author Patrick Munsey, z5020841
+     */
+    public void checkCompletion() {
+	for(Goal goal : goals) {
+	    if(!goal.isactivated()) {
+		return;
+	    }
 	}
+
+	puzzleGame.displayLevelCompleteScreen();
+
+    }
+
+    /**
+     * author Patrick Munsey, z5020841
+     * @param levelNumber
+     */
+    public void changeLevel(int levelNumber) {
+	currLevel = new Level(levelNumber);
+	boardHeight = currLevel.getHeight();
+	boardWidth = currLevel.getWidth();
+	portals.clear();
+	portalLocs.clear();
+	restart();
+    }
+
+    /* (non-Javadoc)
+     * @see javax.swing.JComponent#paintComponent(java.awt.Graphics)
+     */
+    protected void paintComponent(Graphics g) {
+	super.paintComponent(g); // paint the background image and scale it to fill the entire space
+	g.drawImage(this.background_img, 0, 0, this.getWidth(), this.getHeight(), null);
+    }
+
+    /**
+     * @author: Patrick Munsey
+     * 
+     */
+    class ArrowInput extends KeyAdapter {
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+
+	    int keycode = e.getKeyCode();
+
+	    switch (keycode) {
+
+	    case KeyEvent.VK_LEFT:
+		MovePlayer(PlayerNumber.Player1, Direction.LEFT);
+		break;
+
+	    case KeyEvent.VK_RIGHT:
+		MovePlayer(PlayerNumber.Player1, Direction.RIGHT);
+		break;
+
+	    case KeyEvent.VK_DOWN:
+		MovePlayer(PlayerNumber.Player1, Direction.DOWN);
+		break;
+
+	    case KeyEvent.VK_UP:
+		MovePlayer(PlayerNumber.Player1, Direction.UP);
+		break;
+
+	    case KeyEvent.VK_U:
+		undoMove(PlayerNumber.Player1);
+		break;
+
+	    case KeyEvent.VK_R:
+		restart();
+		break;
+
+	    case KeyEvent.VK_ESCAPE:
+		System.exit(1);
+		break;
+	    }
+	}
+    }
+
+    /**
+     * @author Patrick Munsey
+     * zID: z5020841
+     * 
+     */
+    class WASDInput extends KeyAdapter {
+
+	@Override
+	public void keyPressed(KeyEvent e) {
+
+	    int keycode = e.getKeyCode();
+
+	    switch (keycode) {
+
+	    case KeyEvent.VK_A:
+		MovePlayer(PlayerNumber.Player1, Direction.LEFT);
+		break;
+
+	    case KeyEvent.VK_D:
+		MovePlayer(PlayerNumber.Player1, Direction.RIGHT);
+		break;
+
+	    case KeyEvent.VK_S:
+		MovePlayer(PlayerNumber.Player1, Direction.DOWN);
+		break;
+
+	    case KeyEvent.VK_W:
+		MovePlayer(PlayerNumber.Player1, Direction.UP);
+		break;
+
+	    case KeyEvent.VK_U:
+		undoMove(PlayerNumber.Player1);
+		break;
+
+	    case KeyEvent.VK_R:
+		restart();
+		break;
+
+	    case KeyEvent.VK_ESCAPE:
+		System.exit(1);
+		break;
+	    }
+	}
+    }
+
+    /**
+     * author Patrick Munsey, z5020841
+     * @param presetNum
+     */
+    public void changeKeyBindings(int presetNum) {
+	this.removeKeyListener(keyBinding);
+	switch(presetNum) {
+	case 1:
+	    keyBinding = new ArrowInput();
+	    this.addKeyListener(keyBinding);
+	    break;
+	case 2:
+	    keyBinding = new WASDInput();
+	    this.addKeyListener(keyBinding);
+	    break;
+	default:
+	    keyBinding = new ArrowInput();
+	    this.addKeyListener(keyBinding);
+	    break;  
+	}
+
+    }
 }

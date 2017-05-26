@@ -24,16 +24,13 @@ public enum TileID {
 	this.symbol = symbol;
     }
 
-    /**
-     * @return
-     */
     public char getSymbol() {
 	return this.symbol;
     }
 
     /**
      * @param symbol
-     * @return
+     * @return returns a string that represents a symbol enum
      */
     public static String getTileID (char symbol){
 	for (TileID tileName: TileID.values()) {

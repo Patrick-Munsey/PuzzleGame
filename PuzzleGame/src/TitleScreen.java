@@ -24,7 +24,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.Box;
 
-/**Home page
+/**The title screen displayed at the start of the game
  * @author lindatruong
  *
  */

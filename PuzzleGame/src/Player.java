@@ -3,6 +3,7 @@ import javax.swing.JLabel;
 
 
 /**
+ * A Type of GamePiece that can be moved around the board using player input
  * @author Patrick Munsey
  * zID: z5020841
  * 

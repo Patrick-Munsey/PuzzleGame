@@ -10,6 +10,7 @@ import javax.swing.Timer;
 
 
 /**
+ * The class that handles the calculation and display of the games timer implmenetation
  * @author Patrick Munsey
  * zID: z5020841
  * 
@@ -19,6 +20,9 @@ public class GameTimer extends JLabel implements ActionListener{
     private int sec;
     private int min;
 
+    /**
+     * 
+     */
     public GameTimer() {
 	this.sec = 0;
 	this.min = 0;
@@ -43,7 +47,8 @@ public class GameTimer extends JLabel implements ActionListener{
     }
 
     /**
-     * @author Patrick Munsey, z5020841
+     * author Patrick Munsey, z5020841
+     * restarts the game timer and resets the count to 0
      */
     public void restart() {
 	timer.stop();
@@ -53,14 +58,16 @@ public class GameTimer extends JLabel implements ActionListener{
     }
 
     /**
-     * @author Patrick Munsey, z5020841
+     * author Patrick Munsey, z5020841
+     * pauses the game timer and maintins count
      */
     public void pause() {
 	timer.stop();
     }
 
     /**
-     * @author Patrick Munsey, z5020841
+     * author Patrick Munsey, z5020841
+     * starts the game timer from the last count
      */
     public void start() {
 	timer.start();

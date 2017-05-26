@@ -14,16 +14,18 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+
 /**
- * A class for the Options dialog box which is accessed from the menu
- * @author jamesdoldissen
- *
+ * Used ton select Key binding options
+ * @author Patrick Munsey
+ * zID: z5020841
+ * 
  */
 public class OptionsDialog extends JDialog {
     PuzzleGame PuzzleGame;
 
     /**
-     * @param parent
+     * @param PuzzleGame
      */
     public OptionsDialog (PuzzleGame PuzzleGame)
     {
