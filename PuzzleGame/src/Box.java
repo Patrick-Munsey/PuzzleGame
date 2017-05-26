@@ -29,7 +29,7 @@ public class Box extends GamePiece{
 	@Override
 	public void updateLabel(JLabel label, int lvNum) {
 		level = lvNum;
-		ImageIcon icon = createImageIcon("images/" + lvNum + "/box.png");
+		ImageIcon icon = createImageIcon("images/box.png");
 		if (boxActive) {
 			icon = createImageIcon("images/monsterGoal2.png");
 		}
@@ -73,7 +73,7 @@ public class Box extends GamePiece{
 	private BufferedImage getImageOverlay(BufferedImage oldImg) {
 		BufferedImage newImg = null;
 		try {
-			newImg = ImageIO.read(new File("src/images/" + level + "/floor.png"));
+			newImg = ImageIO.read(new File("src/images/floor.png"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}	
