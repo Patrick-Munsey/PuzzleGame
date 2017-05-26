@@ -50,7 +50,7 @@ public class Board extends JPanel  {
 		 moves = new MoveList();
 		 this.addKeyListener(new BoardAdapter());
 		 
-		 initBoard(5);
+		 initBoard(1);
 
 	//setup background variables
 	this.background_img = new ImageIcon("src/images/" + currLevel.getlevelNum() + "/back.png").getImage();
