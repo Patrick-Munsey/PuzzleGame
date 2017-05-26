@@ -38,9 +38,11 @@ public class InstructionsDialog extends JDialog {
 	title_text.setAlignmentX(Component.CENTER_ALIGNMENT);
 
 	JLabel instruction_text = new JLabel (
-		"<html>Your are a warehouse boss.<br>" +
-			"Your objective is to push all of the boxes so that the <br>" +
-			"goal locations are all filled at the same time<br><br>" +
+		"<html>Hey Elmo! Thanks for coming!<br><br>" +
+			"Your job today is to feed the Cookie Monster <br>" +
+			"He won't be full until you've given him all the cookies<br><br>" +
+			"Oh and Elmo, if you've ever wanted to teleport, you're in for a treat!<br>" +
+			"Jump into the portals and you'll see what I mean<br><br>" +
 			"<div style='text-align: center;'><strong>CONTROLS: </strong></div><br>" +
 			"    UP:&emsp UP_ARROW<br>" +
 			"  DOWN:&emsp DOWN_ARROW<br>" +

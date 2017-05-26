@@ -6,6 +6,9 @@ FILES=$(find src -iname "*.java")
 rm -rf bin
 mkdir -p bin
 
+# copy images into bin directory
+cp -r src/images bin
+
 # compile each source file into bin directory, exiting on compilation failure
 for file in $FILES
 do
