@@ -211,6 +211,10 @@ public class PuzzleGame extends JFrame{
 	board.restart(); 
 	gameTimer.restart();
     }
+    
+    public void changeKeyBindings(int presetNum) {
+	board.changeKeyBindings(presetNum);
+    }
 
     /**
      * @param args
