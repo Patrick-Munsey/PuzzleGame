@@ -159,7 +159,7 @@ public class GamePiece {
     /**
      * to override as a box
      */
-	public void updateBoxDeactiveate() {
+	public void updateBoxDeactivate() {
 		// TODO Auto-generated method stub
 		
 	}

@@ -52,7 +52,7 @@ public class Floor extends Tile{
 				setIcon(icon);
 			} else if (portal != null) {
 				//ImageIcon icon = createImageIcon("images/" + lvNum + "/portal.png"); 
-				ImageIcon icon = createImageIcon("images/magic.png");
+				ImageIcon icon = createImageIcon("images/magic1.png");
 				setIcon(icon);
 			} else {
 				ImageIcon icon = createImageIcon("images/" + lvNum + "/floor.png");
@@ -86,7 +86,7 @@ public class Floor extends Tile{
 		this.gamepiece = null;
 		if(goal != null) {
 			goal.deactivate();
-			retGamePiece.updateBoxDeactiveate();
+			retGamePiece.updateBoxDeactivate();
 		}
 		updateLabel();
 		return retGamePiece;

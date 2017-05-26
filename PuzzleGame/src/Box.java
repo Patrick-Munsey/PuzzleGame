@@ -15,7 +15,7 @@ import javax.swing.JLabel;
  * 
  */
 public class Box extends GamePiece{
-	int level;
+	private int level;
 	private boolean boxActive = false;
 	/**
 	 * 
@@ -50,7 +50,7 @@ public class Box extends GamePiece{
 	}
 
 	@Override
-	public void updateBoxDeactiveate() {
+	public void updateBoxDeactivate() {
 		boxActive = false;
 		
 	}
