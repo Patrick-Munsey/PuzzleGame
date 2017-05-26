@@ -7,6 +7,7 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -31,7 +32,7 @@ public class Board extends JPanel  {
     private LinkedList<Floor> portalLocs;
     private int box_size = 30;
     private Image background_img;
-
+    private KeyListener keyBinding;
     public Level currLevel;
     private MoveList moves;
     private PuzzleGame puzzleGame;
@@ -48,7 +49,8 @@ public class Board extends JPanel  {
 		 portals = new LinkedList<Portal>();
 		 portalLocs = new LinkedList<Floor>();
 		 moves = new MoveList();
-		 this.addKeyListener(new BoardAdapter());
+		 keyBinding = new ArrowInput();
+		 this.addKeyListener(keyBinding);
 		 
 		 initBoard(1);
 
@@ -591,7 +593,7 @@ public class Board extends JPanel  {
 	  * zID: 	z5020841
 	  * 
 	  */
-	 class BoardAdapter extends KeyAdapter {
+	 class ArrowInput extends KeyAdapter {
 
 		 @Override
 		 public void keyPressed(KeyEvent e) {
@@ -630,4 +632,63 @@ public class Board extends JPanel  {
 			 }
 		 }
 	 }
+	 
+	 class WASDInput extends KeyAdapter {
+
+		 @Override
+		 public void keyPressed(KeyEvent e) {
+
+			 int keycode = e.getKeyCode();
+
+			 switch (keycode) {
+
+			 case KeyEvent.VK_A:
+				 MovePlayer(PlayerNumber.Player1, Direction.LEFT);
+				 break;
+
+			 case KeyEvent.VK_D:
+				 MovePlayer(PlayerNumber.Player1, Direction.RIGHT);
+				 break;
+
+			 case KeyEvent.VK_S:
+				 MovePlayer(PlayerNumber.Player1, Direction.DOWN);
+				 break;
+
+			 case KeyEvent.VK_W:
+				 MovePlayer(PlayerNumber.Player1, Direction.UP);
+				 break;
+
+			 case KeyEvent.VK_U:
+				 undoMove(PlayerNumber.Player1);
+				 break;
+
+			 case KeyEvent.VK_R:
+				 restart();
+				 break;
+
+			 case KeyEvent.VK_ESCAPE:
+				 System.exit(1);
+				 break;
+			 }
+		 }
+	 }
+
+	public void changeKeyBindings(int presetNum) {
+	    this.removeKeyListener(keyBinding);
+	  switch(presetNum) {
+	  case 1:
+	      keyBinding = new ArrowInput();
+	      this.addKeyListener(keyBinding);
+	  	break;
+	  case 2:
+	      keyBinding = new WASDInput();
+	      this.addKeyListener(keyBinding);
+	      break;
+	  default:
+	      keyBinding = new ArrowInput();
+	      this.addKeyListener(keyBinding);
+	      break;  
+	  }
+	    
+	}
 }
