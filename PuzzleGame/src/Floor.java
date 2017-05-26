@@ -51,7 +51,8 @@ public class Floor extends Tile{
 				ImageIcon icon = createImageIcon("images/goal.png");
 				setIcon(icon);
 			} else if (portal != null) {
-				ImageIcon icon = createImageIcon("images/" + lvNum + "/portal.png"); 
+				//ImageIcon icon = createImageIcon("images/" + lvNum + "/portal.png"); 
+				ImageIcon icon = createImageIcon("images/magic.png");
 				setIcon(icon);
 			} else {
 				ImageIcon icon = createImageIcon("images/" + lvNum + "/floor.png");

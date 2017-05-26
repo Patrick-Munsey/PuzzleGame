@@ -23,7 +23,8 @@ public class Player extends GamePiece{
      */
     @Override
     public void updateLabel(JLabel label, int lvNum) {
-	ImageIcon icon = createImageIcon("images/" + lvNum + "/player.png");
+	//ImageIcon icon = createImageIcon("images/" + lvNum + "/player.png");
+	ImageIcon icon = createImageIcon("images/elmo.png");
 	label.setIcon(icon);
     }
     
