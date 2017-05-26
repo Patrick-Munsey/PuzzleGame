@@ -29,93 +29,93 @@ import javax.swing.Box;
  *
  */
 public class TitleScreen extends JPanel{
-    private PuzzleGame puzzleGame;
-    private BufferedImage image = null;
+	private PuzzleGame puzzleGame;
+	private BufferedImage image = null;
 
-    /**
-     * @param puzzleGame
-     * @throws Exception
-     */
-    TitleScreen(PuzzleGame puzzleGame) throws Exception {
-	super();
-	this.puzzleGame = puzzleGame;
+	/**
+	 * @param puzzleGame
+	 * @throws Exception
+	 */
+	TitleScreen(PuzzleGame puzzleGame) throws Exception {
+		super();
+		this.puzzleGame = puzzleGame;
 
-	try {
-	    image = ImageIO.read(new File("src/images/menuBackground.png"));	
-	} catch (IOException e) {
-	    e.printStackTrace();
+		try {
+			image = ImageIO.read(new File("src/images/menuBackground.png"));	
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		initUI();
+
 	}
 
-	initUI();
+	private void initUI() throws Exception{
+		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
-    }
-
-    private void initUI() throws Exception{
-	this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-
-	//adds start button
-	JButton start_button = new JButton("Start");
-	start_button.setBackground(Color.white);
-	start_button.setOpaque(true);
-	start_button.setBorder(BorderFactory.createLineBorder(Color.gray,3));
-	start_button.addMouseListener(new MouseAdapter() {
-	    @Override
-	    public void mouseEntered(MouseEvent e) {
-		start_button.setBorder(BorderFactory.createLineBorder(Color.blue,3));
-	    }
-
-	    @Override
-	    public void mouseExited(MouseEvent e) {
+		//adds start button
+		JButton start_button = new JButton("Start");
+		start_button.setBackground(Color.white);
+		start_button.setOpaque(true);
 		start_button.setBorder(BorderFactory.createLineBorder(Color.gray,3));
-	    }
-	});
+		start_button.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				start_button.setBorder(BorderFactory.createLineBorder(Color.blue,3));
+			}
 
-	start_button.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent e) {
-		System.out.println("Displaying Board");
-		puzzleGame.displayBoard();
-	    }
-	});
+			@Override
+			public void mouseExited(MouseEvent e) {
+				start_button.setBorder(BorderFactory.createLineBorder(Color.gray,3));
+			}
+		});
+
+		start_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("Displaying Board");
+				puzzleGame.displayBoard();
+			}
+		});
 
 
-	//adds JButton
-	JButton instructions_button = new JButton("Instructions");
-	instructions_button.setBackground(Color.white);
-	instructions_button.setOpaque(true);
-	instructions_button.setBorder(BorderFactory.createLineBorder(Color.gray,3));
-	instructions_button.addMouseListener(new MouseAdapter() {
-	    @Override
-	    public void mouseEntered(MouseEvent e) {
-		instructions_button.setBorder(BorderFactory.createLineBorder(Color.blue,3));
-	    }
-
-	    @Override
-	    public void mouseExited(MouseEvent e) {
+		//adds JButton
+		JButton instructions_button = new JButton("Instructions");
+		instructions_button.setBackground(Color.white);
+		instructions_button.setOpaque(true);
 		instructions_button.setBorder(BorderFactory.createLineBorder(Color.gray,3));
-	    }
-	});
+		instructions_button.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseEntered(MouseEvent e) {
+				instructions_button.setBorder(BorderFactory.createLineBorder(Color.blue,3));
+			}
 
-	instructions_button.addActionListener(new ActionListener() {
-	    public void actionPerformed(ActionEvent e) {
-		puzzleGame.displayInstructionsDialog();
-	    }
-	});
+			@Override
+			public void mouseExited(MouseEvent e) {
+				instructions_button.setBorder(BorderFactory.createLineBorder(Color.gray,3));
+			}
+		});
 
-	this.add(Box.createVerticalStrut(250));
-	this.add(start_button);
-	this.add(Box.createRigidArea(new Dimension(0, 50)));
-	this.add(instructions_button);
+		instructions_button.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				puzzleGame.displayInstructionsDialog();
+			}
+		});
 
-	start_button.setAlignmentX(Component.CENTER_ALIGNMENT);
-	instructions_button.setAlignmentX(Component.CENTER_ALIGNMENT);
+		this.add(Box.createVerticalStrut(250));
+		this.add(start_button);
+		this.add(Box.createRigidArea(new Dimension(0, 50)));
+		this.add(instructions_button);
 
-	start_button.setMaximumSize(new Dimension(300, 100));
-	instructions_button.setMaximumSize(new Dimension(300, 100));
-    }
+		start_button.setAlignmentX(Component.CENTER_ALIGNMENT);
+		instructions_button.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-    protected void paintComponent(Graphics g) {
-	super.paintComponent(g); // paint the background image and scale it to fill the entire space
-	g.drawImage(image, 0, 0, this.getWidth(), this.getHeight(), null);
-    }
+		start_button.setMaximumSize(new Dimension(300, 100));
+		instructions_button.setMaximumSize(new Dimension(300, 100));
+	}
+
+	protected void paintComponent(Graphics g) {
+		super.paintComponent(g); // paint the background image and scale it to fill the entire space
+		g.drawImage(image, 0, 0, this.getWidth(), this.getHeight(), null);
+	}
 
 }

@@ -34,7 +34,7 @@ public class Box extends GamePiece{
 		if (boxActive) {
 			icon = createImageIcon("images/monsterGoal2.png");
 		}
-		
+
 		ImageIcon newIcon = applyLayer(icon);
 		label.setIcon(newIcon);
 		//label.setIcon(icon);
@@ -44,7 +44,7 @@ public class Box extends GamePiece{
 	public boolean isBox() {
 		return true;
 	}
-	
+
 	@Override
 	public void updateBoxActive() {
 		boxActive = true;
@@ -53,9 +53,9 @@ public class Box extends GamePiece{
 	@Override
 	public void updateBoxDeactivate() {
 		boxActive = false;
-		
+
 	}
-	
+
 	public ImageIcon applyLayer(ImageIcon oldIcon) {
 		JLabel newLabel = new JLabel();
 
@@ -86,13 +86,13 @@ public class Box extends GamePiece{
 		BufferedImage combined = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
 
 		Graphics2D g2d = combined.createGraphics();
-		
+
 		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 1.0F));
 		//g2d.drawImage(oldImg, null, 0, 0);
 		g2d.drawImage(newImg, 0, 0, null);
 		g2d.drawImage(oldImg, 0, 0, null);
-		
-		
+
+
 		g2d.dispose();
 		return combined;
 	}

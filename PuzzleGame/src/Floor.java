@@ -24,6 +24,7 @@ public class Floor extends Tile{
 	private int locY;
 
 	/**
+	 * Constructor for Floor
 	 * @param x
 	 * @param y
 	 */
@@ -31,6 +32,9 @@ public class Floor extends Tile{
 		super(x,y, lvNum);
 	}
 
+	/**
+	 * Check if floor can be moved into
+	 */
 	@Override
 	public boolean isMoveable() {
 		if (portal != null) {
@@ -40,7 +44,10 @@ public class Floor extends Tile{
 		} 
 		return false;
 	}
-
+	
+	/**
+	 * Update the image icon of the floor
+	 */
 	@Override
 	public void updateLabel() {
 		if(gamepiece != null) {
@@ -62,7 +69,9 @@ public class Floor extends Tile{
 		}
 	}
 
-
+	/**
+	 * Method to place game pieces onto this floor
+	 */
 	public void placeGamePiece(GamePiece gamepiece) {
 		this.gamepiece = gamepiece;
 		gamepiece.placePiece(this.x, this.y);
@@ -82,6 +91,9 @@ public class Floor extends Tile{
 	}
 
 
+	/**
+	 * Method to remove game pieces from this floor piece
+	 */
 	public GamePiece removeGamePiece() {
 		GamePiece retGamePiece = this.gamepiece;
 		this.gamepiece = null;
@@ -94,51 +106,87 @@ public class Floor extends Tile{
 	}
 
 
+	/**
+	 * Method to place goals onto this floor piece
+	 */
 	public void placeGoal(Goal goal) {
 		this.goal = goal;
 		updateLabel();
 	}
 
 
+	/**
+	 * Method to remove goals from this floor
+	 */
 	public void removeGoal() {
 		this.goal = null;
 		updateLabel();
 	}
 
-
+	/**
+	 * Method to place portal on this floor
+	 */
 	public void placePortal(Portal portal) {
 		this.portal = portal;
 		updateLabel();
 	}
 
+	/**
+	 * Method to set this floor as the location of a portal teleport
+	 */
 	public void setPortalLoc() {
 		this.portalLoc = true;
 	}
 
+	/**
+	 * Method to set the location number of this floor for teleports
+	 */
 	public void setLocNum(int num) {
 		this.locNum = num;
 	}
 
+	/**
+	 * Method to get the location number of this floor for teleports
+	 */
 	public int getLocNum() {
 		return this.locNum;
 	}
 
+	/**
+	 * Method to set the X ordinate of this floor
+	 * @param locX
+	 */
 	public void setLocX(int locX) {
 		this.locX = locX;
 	}
 
+	/**
+	 * Method to set the Y ordinate of this floor
+	 * @param locY
+	 */
 	public void setLocY(int locY) {
 		this.locY = locY;
 	}
 
+	/**
+	 * Method to get the X ordinate of this floor
+	 * @return
+	 */
 	public int getLocX() {
 		return this.locX;
 	}
 
+	/**
+	 * Method to get the Y ordinate of this floor
+	 * @return
+	 */
 	public int getLocY() {
 		return this.locY;
 	}
 
+	/**
+	 * Method to check if this floor is a portal
+	 */
 	public boolean isPortal() {
 		if (portal != null) {
 			return true;

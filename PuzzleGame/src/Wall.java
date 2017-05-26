@@ -13,29 +13,30 @@ import javax.swing.JLabel;
  */
 public class Wall extends Tile {
 
-    /**
-     * @param x
-     * @param y
-     */
-    public Wall(int x, int y, int lvNum) {
-	super(x,y, lvNum);
-    }
+	/**
+	 * Constructor for the Wall, changes depending on level
+	 * @param x
+	 * @param y
+	 */
+	public Wall(int x, int y, int lvNum) {
+		super(x,y, lvNum);
+	}
 
-    /* (non-Javadoc)
-     * @see Tile#updateLabel()
-     */
-    @Override
-    public void updateLabel() {
-	ImageIcon image = new ImageIcon("src/images/" + lvNum + "/wall.png");
-	setIcon(image);
-    }
+	/* (non-Javadoc)
+	 * @see Tile#updateLabel()
+	 */
+	@Override
+	public void updateLabel() {
+		ImageIcon image = new ImageIcon("src/images/" + lvNum + "/wall.png");
+		setIcon(image);
+	}
 
-    /* (non-Javadoc)
-     * @see Tile#isMoveable()
-     */
-    @Override
-    public boolean isMoveable() {
-	return false;
-    }
+	/* (non-Javadoc)
+	 * @see Tile#isMoveable()
+	 */
+	@Override
+	public boolean isMoveable() {
+		return false;
+	}
 
 }

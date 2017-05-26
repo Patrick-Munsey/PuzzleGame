@@ -4,55 +4,77 @@
  */
 public class Portal{
 
-    private boolean activated;
-    private int locX;
-    private int locY;
-    private Tile toTile;
-    private int index;
+	private boolean activated;
+	private int locX;
+	private int locY;
+	private int index;
 
-    /**
-     * @param index
-     */
-    public Portal(int index) {
-	this.activated = false;
-	this.index = index;
-    }
+	/**
+	 * Constructor for Portal
+	 * @param index
+	 */
+	public Portal(int index) {
+		this.activated = false;
+		this.index = index;
+	}
 
-    /**
-     */
-    public void activate(){
-	this.activated = true;
-    }
+	/**
+	 * Method to activate portal
+	 */
+	public void activate(){
+		this.activated = true;
+	}
 
-    /**
-     */
-    public void deactivate(){
-	this.activated = false;
-    }
+	/**
+	 * Method to deactivate portal
+	 */
+	public void deactivate(){
+		this.activated = false;
+	}
 
+	/**
+	 * Method to check if portal is activated
+	 * @return whether the portal is activated
+	 */
+	public boolean isActivated() {
+		return this.activated;
+	}
 
-    public boolean isActivated() {
-	return this.activated;
-    }
+	/**
+	 * @return the x ordinate of the portal location
+	 */
+	public int getLocX() {
+		return this.locX;
+	}
 
-    public int getLocX() {
-	return this.locX;
-    }
+	/**
+	 * @return the y ordinate of the portal location
+	 */
+	public int getLocY() {
+		return this.locY;
+	}
 
-    public int getLocY() {
-	return this.locY;
-    }
+	/**
+	 * Method to set the X ordinate of the portal location
+	 * @param locX
+	 */
+	public void setLocX(int locX) {
+		this.locX = locX;
+	}
 
-    public void setLocX(int locX) {
-	this.locX = locX;
-    }
+	/**
+	 * Method to set the Y ordinate of the portal location
+	 * @param locY
+	 */
+	public void setLocY(int locY) {
+		this.locY = locY;
+	}
 
-    public void setLocY(int locY) {
-	this.locY = locY;
-    }
-
-    public int getIndex() {
-	return this.index;
-    }
+	/**
+	 * @return the index of the portal: used to match portal with portal location
+	 */
+	public int getIndex() {
+		return this.index;
+	}
 
 }

@@ -9,24 +9,24 @@ import javax.swing.JLabel;
  * 
  */
 public class Player extends GamePiece{
-    private PlayerNumber playerNumber;
+	private PlayerNumber playerNumber;
 
 
-    /**
-     * @param playerNumber
-     */
-    public Player(PlayerNumber playerNumber) {
-	this.playerNumber = playerNumber;
-    }
+	/**
+	 * Constructor for Player
+	 * @param playerNumber
+	 */
+	public Player(PlayerNumber playerNumber) {
+		this.playerNumber = playerNumber;
+	}
 
-    /* (non-Javadoc)
-     * @see GamePiece#updateLabel(javax.swing.JLabel)
-     */
-    @Override
-    public void updateLabel(JLabel label, int lvNum) {
-	//ImageIcon icon = createImageIcon("images/" + lvNum + "/player.png");
-	ImageIcon icon = createImageIcon("images/elmo.png");
-	label.setIcon(icon);
-    }
-    
+	/* (non-Javadoc)
+	 * @see GamePiece#updateLabel(javax.swing.JLabel)
+	 */
+	@Override
+	public void updateLabel(JLabel label, int lvNum) {
+		ImageIcon icon = createImageIcon("images/elmo.png");
+		label.setIcon(icon);
+	}
+
 }
